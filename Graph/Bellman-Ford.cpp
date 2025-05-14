@@ -1,4 +1,4 @@
-bool bellman_ford(Edges &edges, vector<ll> &dist ll V, ll s) {
+bool bellman_ford(Edges &edges, vector<ll> &dist, ll V, ll s) {
     dist = vector<ll>(V, INF);
     dist[s] = 0;
     for (ll i = 0; i < V; i++) {

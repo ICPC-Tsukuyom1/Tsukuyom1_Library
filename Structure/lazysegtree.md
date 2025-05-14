@@ -1,3 +1,11 @@
+#Lazy Segment Tree
+
+## なにこれ
+
+## 使い方
+### 宣言
+## 実装
+```cpp
 long long bit_width(long long x) {
   if (x == 0) {
     return 0;
@@ -107,4 +115,30 @@ public:
   }
 
 };
+```
 
+## Verify
+[AOJ_DSL_2_E](https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_E)
+```cpp
+int main() {
+  int n, q;
+  cin >> n >> q;
+  LazySegmentTree<int, int> seg(n, [](int a, int b) { return a + b; }, [](int a, int b) { return a + b; }, [](int f, int g, size_t len) { return f + g; }, 0, 0);
+  for(int i=0; i<q; i++) {
+    int t;
+    cin >> t;
+    if(t == 0) {
+      int s, t, x;
+      cin >> s >> t >> x;
+      s--;
+      t--;
+      seg.apply(s, t + 1, x);
+    } else {
+      int i;
+      cin >> i;
+      i--;
+      cout << seg.get(i) << endl;
+    }
+  }
+}
+```

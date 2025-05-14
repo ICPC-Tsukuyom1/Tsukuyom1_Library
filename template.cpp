@@ -27,10 +27,3 @@ bool chmin(T &a, const T& b) {
   if (a > b) { a = b; return true; }
   return false;
 }
-bool islower(char c) { return 'a' <= c && c <= 'z'; }
-bool isupper(char c) { return 'A' <= c && c <= 'Z'; }
-bool isletter(char c) { return islower(c) || isupper(c); }
-template <class T>
-bool chmax(T &a, const T &b) { return a < b ? a = b, true : false; }
-template <class T>
-bool chmin(T &a, const T &b) { return a > b ? a = b, true : false; }

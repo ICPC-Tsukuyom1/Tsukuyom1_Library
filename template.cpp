@@ -17,8 +17,16 @@ const ll mod2 = 998244353;
 const ld pi = 3.1415926535897;
 ll dx[4] = {1, 0, -1, 0};
 ll dy[4] = {0, -1, 0, 1};
-void chmin(ll& a, ll b){ if(a > b) a = b; }
-void chmax(ll& a, ll b){ if(a < b) a = b; }
+template <typename T>
+bool chmax(T &a, const T& b) {
+  if (a < b) { a = b; return true; }
+  return false;
+}
+template <typename T>
+bool chmin(T &a, const T& b) {
+  if (a > b) { a = b; return true; }
+  return false;
+}
 bool islower(char c) { return 'a' <= c && c <= 'z'; }
 bool isupper(char c) { return 'A' <= c && c <= 'Z'; }
 bool isletter(char c) { return islower(c) || isupper(c); }

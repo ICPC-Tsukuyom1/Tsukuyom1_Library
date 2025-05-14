@@ -15,8 +15,8 @@ const ld inf = numeric_limits<long double>::max() / (ld)4;
 const ll mod1 = 1000000007;
 const ll mod2 = 998244353;
 const ld pi = 3.1415926535897;
-ll dx[4] = {1, 0, -1, 0};
-ll dy[4] = {0, -1, 0, 1};
+ll dx[8] = {1, 1, 0, -1, -1, -1, 0, 1};
+ll dy[8] = {0, -1, -1, -1, 0, 1, 1, 1};
 template <typename T>
 bool chmax(T &a, const T& b) {
   if (a < b) { a = b; return true; }

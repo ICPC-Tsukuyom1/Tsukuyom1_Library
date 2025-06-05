@@ -1,16 +1,17 @@
 bool bellman_ford(Edges &edges, vector<ll> &dist, ll V, ll s) {
     dist = vector<ll>(V, INF);
     dist[s] = 0;
-    for (ll i = 0; i < V; i++) {
-        if(i == V-1) return false;
-        bool load = false;
+    rep(i, V - 1) {
         for (auto e : edges) {
             if (dist[e.from] == INF) continue;
-            if(chmin(dist[e.to], dist[e.from] + e.cost)){
-                 load = true;
-            }
+            chmin(dist[e.to], dist[e.from] + e.cost);
         }
-        if(!load) break;
+    }
+    for (auto e : edges) {
+    	if (dist[e.from] == INF) continue;
+    	if (dist[e.to] > dist[e.from] + e.cost) {
+    		return false;
+    	}
     }
     return true;
 }

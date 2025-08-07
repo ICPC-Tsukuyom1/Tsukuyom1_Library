@@ -1,4 +1,4 @@
-#Lazy Segment Tree
+# Lazy Segment Tree
 
 ## なにこれ
 

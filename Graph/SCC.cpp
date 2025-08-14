@@ -27,7 +27,7 @@ struct SCC {
 		for (auto e : rg[p]) rdfs(e.to, cnt);
 	}
 
-	void build(Graph &t) {
+	Graph build() {
 		rep(i, gg.size()) {
 			dfs(i);
 		}
@@ -37,7 +37,7 @@ struct SCC {
 			if (cmp[i] == -1) rdfs(i, ptr), ptr++;
 		}
 
-		t = Graph(ptr);
+		Graph t(ptr);
 		rep(i, g.size()) {
 			for (auto &e : g[i]) {
 				ll x = cmp[i], y = cmp[e.to];
@@ -45,5 +45,6 @@ struct SCC {
 				t.add(x, y, 1, 1);
 			}
 		}
+		return t;
 	}
 };

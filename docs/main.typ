@@ -53,8 +53,8 @@
 
 == Template
 
-#sourcefile(read("../geometry/template.cpp"), lang: "cpp")
+#sourcefile(read("../Geometry/template.cpp"), lang: "cpp")
 
-#include "../geometry/area.typ"
+#include "../Geometry/area.typ"
 
 #include "../Geometry/ccw.typ"

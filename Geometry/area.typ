@@ -18,7 +18,7 @@ s = Area(S);
 
 *実装*
 
-#sourcefile(read("../geometry/area.cpp"), lang: "cpp")
+#sourcefile(read("../Geometry/area.cpp"), lang: "cpp")
 
 *Verify*
 

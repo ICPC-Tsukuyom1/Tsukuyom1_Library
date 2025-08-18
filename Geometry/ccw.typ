@@ -27,5 +27,5 @@ check = ccw(a, b, c);
 
 *実装*
 
-#sourcefile(read("../geometry/ccw.cpp"), lang: "cpp")
+#sourcefile(read("../Geometry/ccw.cpp"), lang: "cpp")
 

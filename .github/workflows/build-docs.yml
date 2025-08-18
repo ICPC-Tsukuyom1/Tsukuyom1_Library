@@ -1,0 +1,25 @@
+name: Build Docs and Export PDF
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: typst-community/setup-typst@v4
+
+      - name: Run build script
+        run: ./docs/build.sh
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Library PDF
+          path: docs/main.pdf

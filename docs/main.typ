@@ -51,10 +51,14 @@
 
 = Geometry
 
-== Template
+// == Template
 
-#sourcefile(read("../Geometry/template.cpp"), lang: "cpp")
+// #sourcefile(read("../Geometry/template.cpp"), lang: "cpp")
 
-#include "../Geometry/area.typ"
+// #include "../Geometry/area.typ"
 
-#include "../Geometry/ccw.typ"
+// #include "../Geometry/ccw.typ"
+
+= Structure
+
+#include "../Structure/segtree.typ"

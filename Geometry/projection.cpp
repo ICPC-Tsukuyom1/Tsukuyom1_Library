@@ -1,4 +1,3 @@
-// need: Point.cpp
 Point Projection(Segment S, Point p, bool reflect) {
     Vector base = S.B - S.A;
     ld r = (p - S.A).dot(base) / base.norm();

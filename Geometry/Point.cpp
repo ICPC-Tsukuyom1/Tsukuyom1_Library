@@ -17,8 +17,8 @@ public:
 
     bool operator<(const P& p) const { return tie(x, y) < tie(p.x, p.y); }
     bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
-	ld dot(P& p) const { return x * p.x + y * p.y; }
-	ld cross(P& p) const { return x * p.y - y * p.x; }
+	ld dot(P p) const { return x * p.x + y * p.y; }
+	ld cross(P p) const { return x * p.y - y * p.x; }
 
 };
 typedef Point Vector;

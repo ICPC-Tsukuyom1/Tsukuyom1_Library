@@ -1,0 +1,13 @@
+{
+	"name": "competitive-devcontainer",
+	"dockerFile": "Dockerfile",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"formulahendry.code-runner",
+				"ms-vscode.cpptools-extension-pack"
+			]
+		}
+	}
+}

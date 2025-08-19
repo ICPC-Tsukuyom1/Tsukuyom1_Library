@@ -2,14 +2,5 @@
 
 
 == Projection
-#table(
-  columns: (auto, auto),
-  inset: 6pt,
-  align: horizon,
-  table.header(
-    [reflect], [返り値],
-  ),
-  "true", "p から S へ下した垂線の足",
-  "false", "S に関して p と対称な点",
-)
+`reflect` が `true` なら点から直線へ下した垂線の足、`false` なら直線に関して対称な点を返す。
 #sourcefile(read("../Geometry/projection.cpp"), lang: "cpp")

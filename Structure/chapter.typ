@@ -3,3 +3,5 @@
 = Structure
 
 #include "segtree.typ"
+
+#include "lazysegtree.typ"

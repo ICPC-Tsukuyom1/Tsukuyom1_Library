@@ -14,7 +14,10 @@ struct LazySeg {
   T v=e;
   F m=id;
   LazySeg(ll L, ll R): l(L), r(R) {}
+
+  // 要素数から構築 O(1)
   LazySeg(ll n) : LazySeg(0, n) {}
+
   void _() {
     if (!lc) {
       ll m = l + (r-l)/2;
@@ -23,6 +26,8 @@ struct LazySeg {
     if (m != id)
       lc->effect(l,r,m), rc->effect(l,r,m), m = id;
   }
+
+  // 区間への作用 O(log N)
   void effect(ll L, ll R, F f) {
     if (R <= l || r <= L) return;
     if (L <= l && r <= R) {
@@ -33,6 +38,8 @@ struct LazySeg {
       v = op(lc->v, rc->v);
     }
   }
+
+  // 区間総積取得 O(log N)
   T query(ll L, ll R) {
     if (R <= l || r <= L) return e;
     if (L <= l && r <= R) return v;

@@ -23,20 +23,25 @@
 
 #set text(
   size: 9pt,
+  weight: "thin",
   font: "Noto Sans CJK JP",
 )
 
 #show heading.where(level: 1): text.with(fill: white)
 
 #show heading.where(level: 1): block.with(
+  above: 8pt,
+  below: 4pt,
   fill: luma(0%),
   inset: 4pt
 )
-#show heading: set block(above: 8pt, below: 8pt)
 
+#show heading.where(level: 2): underline
+#show heading.where(level: 2): text.with(
+  weight: "semibold"
+)
 #show heading.where(level: 2): block.with(
-  stroke: black,
-  inset: 2pt
+  above: 8pt
 )
 
 // 内容
@@ -45,16 +50,8 @@
   title: "TOC",
 )
 
-= Template
-
-#sourcefile(read("../template.cpp"), lang: "cpp")
-
-= Geometry
-
-== Template
-
-#sourcefile(read("../Geometry/template.cpp"), lang: "cpp")
-
-#include "../Geometry/area.typ"
-
-#include "../Geometry/ccw.typ"
+#include "../chapter.typ"
+#include "../Geometry/chapter.typ"
+#include "../Graph/chapter.typ"
+#include "../Math/chapter.typ"
+#include "../Structure/chapter.typ"

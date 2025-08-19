@@ -1,7 +1,8 @@
 Polygon convex_hull(Polygon &p, bool strict = true) {
+    sort(all(p));
+    p.erase(unique(all(p)), p.end());
     ll n = sz(p), k = 0;
     if (n <= 2) return p;
-    sort(all(p));
     vector<Point> ch(2 * n);
     auto check = [&](ll i) {
         Point a = ch[k - 1] - ch[k - 2], b = p[i] - ch[k - 1];

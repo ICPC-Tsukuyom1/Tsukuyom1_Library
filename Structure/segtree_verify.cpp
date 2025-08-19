@@ -1,4 +1,7 @@
 #include "../template.cpp"
+
+const ll INF = 4e18;
+
 #include "segtree.cpp"
 
 // Library Checker - Static RMQ

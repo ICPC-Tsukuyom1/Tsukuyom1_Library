@@ -1,5 +1,3 @@
-const ll INF = 4e18;
-
 #define T ll
 #define e INF
 #define op(a, b) min(a, b)

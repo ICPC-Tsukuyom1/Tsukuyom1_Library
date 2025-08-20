@@ -9,3 +9,4 @@
 #include "isinPolygon.typ"
 #include "convex_hull.typ"
 #include "isconvex.typ"
+#include "closest_pair.typ"

@@ -2,4 +2,4 @@
 
 == lineDistance
 直線と点の距離を求める。
-#sourcefile(read("../Geometry/lineDistance.cpp"), lang: "cpp")
+#sourcefile(read("../Geometry/LineDistance.cpp"), lang: "cpp")

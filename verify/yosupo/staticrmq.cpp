@@ -1,10 +1,11 @@
-#include "../template.cpp"
+//@yosupo staticrmq
+
+#include "../../template.cpp"
 
 const ll INF = 4e18;
 
-#include "segtree.cpp"
+#include "../../Structure/segtree.cpp"
 
-// Library Checker - Static RMQ
 int main()
 {
   int n, q;

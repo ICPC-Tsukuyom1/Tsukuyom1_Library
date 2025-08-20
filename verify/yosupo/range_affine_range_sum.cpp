@@ -1,14 +1,15 @@
-#include "../template.cpp"
+//@yosupo range_affine_range_sum
+
+#include "../../template.cpp"
 
 const ll mod = 998244353;
 
-#include "lazysegtree.cpp"
+#include "../../Structure/lazysegtree.cpp"
 
-// Library Checker - Range Affine Range Sum
 int main() {
   int n, q;
   cin >> n >> q;
-  LazySeg *seg = new LazySeg(n);
+  auto *seg = new LazySeg(n);
   rep(i, n) {
     ll x;
     cin >> x;

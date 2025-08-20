@@ -1,0 +1,53 @@
+name: Verify C++ Files
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Find yosupo files
+        id: set-matrix
+        run: |
+          problems=$(grep -r -E '^//@yosupo' --include='*.cpp' ./verify | sed -E 's|^(.*)://@yosupo (.*)$|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
+          echo "matrix=$problems" >> $GITHUB_OUTPUT
+
+  yosupo-verify:
+    needs: prepare-matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        problem: ${{ fromJson(needs.prepare-matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Extract matrix info
+        run: |
+          echo "PROBLEM=`echo "${{ matrix.problem }}" | cut -d'$' -f1`" >> $GITHUB_ENV
+          echo "FILE=`echo "${{ matrix.problem }}" | cut -d'$' -f2-`" >> $GITHUB_ENV
+      - name: Echo filename
+        run: echo problem:$PROBLEM,file:$FILE,dir:$DIR
+      - name: Clone problems
+        run: git clone https://github.com/yosupo06/library-checker-problems.git
+      - name: Prepare input files
+        run: cd library-checker-problems && ./generate.py -p $PROBLEM
+      - name: Find problem dir
+        run: echo DIR=`find . -path "*/$PROBLEM" -type d` >> $GITHUB_ENV
+      - name: Compile target
+        run: |
+          g++ -std=c++17 -O2 -I `dirname $FILE` $FILE
+      - name: Execute
+        run: |
+          mkdir -p ./out
+          find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
+          find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'

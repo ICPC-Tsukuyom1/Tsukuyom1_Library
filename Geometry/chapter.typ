@@ -10,3 +10,5 @@
 #include "convex_hull.typ"
 #include "isconvex.typ"
 #include "closest_pair.typ"
+#include "lineDistance.typ"
+#include "onSegment.typ"

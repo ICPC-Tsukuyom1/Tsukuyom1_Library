@@ -1,5 +1,6 @@
 #define EPS (1e-10)
 #define eq(a, b) (fabs((a) - (b)) < EPS)
+#define sign(x) (x > 0) - (x < 0)
 class Point {
 	typedef Point P;
 public:
@@ -19,7 +20,6 @@ public:
     bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
 	ld dot(P p) const { return x * p.x + y * p.y; }
 	ld cross(P p) const { return x * p.y - y * p.x; }
-
 };
 typedef Point Vector;
 struct Segment {

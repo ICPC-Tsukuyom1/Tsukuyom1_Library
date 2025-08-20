@@ -23,14 +23,14 @@ public:
 };
 typedef Point Vector;
 struct Segment {
-    Point A;
-    Point B;
+    Point s;
+    Point e;
 };
 typedef Segment Line;
 class Circle {
 public:
-    Point C;
+    Point c;
     ld r;
-    Circle(Point C = Point(), ld r = 0.0) : C(C), r(r) {}
+    Circle(Point c = Point(), ld r = 0.0) : c(c), r(r) {}
 };
 typedef vector<Point> Polygon;

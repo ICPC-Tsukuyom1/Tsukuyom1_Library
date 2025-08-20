@@ -2,4 +2,6 @@
 
 = Mathematics
 
-#include "bitwise_convolution.typ"
+#include "bitwise_or_convolution.typ"
+#include "bitwise_and_convolution.typ"
+#include "bitwise_xor_convolution.typ"

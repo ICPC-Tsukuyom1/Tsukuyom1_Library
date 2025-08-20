@@ -1,8 +1,8 @@
-// Subset Zeta Transform
-// assert : popcount(sz(v)) == 1
+// Subset Zeta Transform (下位集合)
+// assert: |v|は二冪
 #define szt(v, op) \
-  for(int i=1; i<sz(v); i<<=1) \
-  for(int j=0; j<sz(v); j += i<<1) \
+  for(int i=1; i<sz(v); i*=2) \
+  for(int j=0; j<sz(v); j += i*2) \
   rep(k, i) v[i+j+k] op v[j+k];
 
 template <class T>

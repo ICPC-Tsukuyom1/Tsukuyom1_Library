@@ -1,3 +1,4 @@
+//need: prime_factorization.cpp
 ll Euler_phi(ll N) {
     vector<pair<ll, ll>>A = prime_factorization(N);
     for (ll i = 0; i < A.size(); i++) {

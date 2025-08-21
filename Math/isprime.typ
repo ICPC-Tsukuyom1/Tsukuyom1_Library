@@ -2,18 +2,6 @@
 
 == 素数判定
 
-*なにこれ*
-
-素数判定を $O(sqrt(N))$ でやる
-
-*使い方*
-
-#sourcecode(```cpp
-check = isprime(n)
-```)
-
-n : 判定する整数
-
-返り値：素数ならtrue, 素数でなければfalse
+素数判定を $O(sqrt(N))$ で行う。
 
 #sourcefile(read("../Math/isprime.cpp"), lang: "cpp")

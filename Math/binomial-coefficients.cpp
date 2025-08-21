@@ -37,7 +37,7 @@ modint<mod1> com(int n, int k){
 const int MAX_C = 2010;
 long long C[MAX_C][MAX_C];
 void calc() {
-    memset(Com, 0, sizeof(Com));
+    memset(C, 0, sizeof(C));
     C[0][0] = 1;
     for (int i = 1; i < MAX_C; ++i) {
         C[i][0] = 1;

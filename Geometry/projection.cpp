@@ -1,5 +1,9 @@
-Point Projection(Segment S, Point p) {
-    Vector base = S.B - S.A;
-    ld r = dot(p - S.A, base) / base.norm();
-    return S.A + base * r;
+//need: Point.cpp
+Point Projection(Segment S, Point p, bool reflect) {
+    Vector base = S.e - S.s;
+    ld r = (p - S.s).dot(base) / base.norm();
+    if (reflect) {
+        return p + (S.s + base * r - p) * 2.0;
+    }
+    else return S.s + base * r;
 }

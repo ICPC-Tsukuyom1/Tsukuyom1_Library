@@ -44,6 +44,8 @@
   above: 8pt
 )
 
+#show raw: set text(font: ("Fira Code", "Noto Sans CJK JP"))
+
 // 内容
 
 #outline(

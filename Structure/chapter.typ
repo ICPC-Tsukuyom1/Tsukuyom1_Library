@@ -2,6 +2,10 @@
 
 = Structure
 
+#include "bit.typ"
 #include "segtree.typ"
-
 #include "lazysegtree.typ"
+#include "rollinghash.typ"
+#include "sparsetable.typ"
+#include "unionfind.typ"
+#include "weightedunionfind.typ"

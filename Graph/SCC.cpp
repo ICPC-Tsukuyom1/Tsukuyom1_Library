@@ -1,3 +1,4 @@
+//need: Graph.cp
 struct SCC {
 	Graph &g;
 	Graph gg, rg;
@@ -27,7 +28,7 @@ struct SCC {
 		for (auto e : rg[p]) rdfs(e.to, cnt);
 	}
 
-	Graph build() {
+	Graph build() { // build SCC
 		rep(i, gg.size()) {
 			dfs(i);
 		}

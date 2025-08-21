@@ -4,18 +4,6 @@
 
 *なにこれ*
 
-最小全域木を構築する。たぶん計算量は $O(E + V log V)$ かも
-
-*必要なライブラリ*
-
-- Graph
-
-*つかいかた*
-
-#sourcecode(```cpp
-MST T = Prim(G)
-```)
-
-合計コストと、最小全域木をなす辺集合が返ってくる
+最小全域木を構築する。計算量は $O(E log V)$。
 
 #sourcefile(read("../Graph/Prim.cpp"), lang: "cpp")

@@ -1,3 +1,4 @@
+//need: Graph.cpp
 struct LCA {
     ll Log;
     vector<ll> dep;
@@ -12,7 +13,7 @@ struct LCA {
             if (to.to != par) dfs(to.to, idx, d + 1);
         }
     }
-    void build() {
+    void build() { //initialize (you must run it before accept some queries)
         dfs(0, -1, 0);
         for (ll k = 0; k + 1 < Log; k++) {
             for (ll i = 0; i < table[k].size(); i++) {

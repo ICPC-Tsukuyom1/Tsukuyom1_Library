@@ -9,6 +9,7 @@ void solve() {
 	ll N, Q; cin >> N >> Q;
 	vl x;
 	ll Max = 1000000007;
+	const ll INF = numeric_limits<ll>::max() / 4;
 	v(query) q;
 	rep(i, N) {
 		ll l, r, a, b;

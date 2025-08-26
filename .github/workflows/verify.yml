@@ -45,7 +45,7 @@ jobs:
         run: echo DIR=`find . -path "*/$PROBLEM" -type d` >> $GITHUB_ENV
       - name: Compile target
         run: |
-          g++ -std=c++17 -O2 -I `dirname $FILE` $FILE
+          g++ -std=c++20 -O2 -I `dirname $FILE` $FILE
       - name: Execute
         run: |
           mkdir -p ./out

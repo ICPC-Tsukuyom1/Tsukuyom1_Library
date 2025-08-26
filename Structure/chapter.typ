@@ -9,3 +9,4 @@
 #include "sparsetable.typ"
 #include "unionfind.typ"
 #include "weightedunionfind.typ"
+#include "LiChaoTree.typ"

@@ -12,3 +12,4 @@
 #include "closest_pair.typ"
 #include "lineDistance.typ"
 #include "onSegment.typ"
+#include "circumcircle.typ"

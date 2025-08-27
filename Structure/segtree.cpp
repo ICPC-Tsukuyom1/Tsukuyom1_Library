@@ -1,13 +1,14 @@
-#define T ll
-#define e INF
-#define op(a, b) min(a, b)
-
+template<class T>
 struct SegTree {
+  using F = function<T(T, T)>;
+
   int n = 1;
   vector<T> v;
+  F op;
+  T e;
 
   // 構築 O(N log N)
-  SegTree(int N) {
+  SegTree(int N, F op, T e): op(op), e(e) {
     while(n < N) n *= 2;
     v.assign(n * 2, e);
   }
@@ -39,7 +40,3 @@ struct SegTree {
     return _(l, r, 1, 0, n);
   }
 };
-
-#undef T
-#undef e
-#undef op

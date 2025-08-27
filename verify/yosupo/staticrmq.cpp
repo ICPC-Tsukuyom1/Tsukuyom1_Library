@@ -10,7 +10,11 @@ int main()
 {
   int n, q;
   cin >> n >> q;
-  SegTree st(n);
+  SegTree<ll> st(
+    n,
+    [](ll a, ll b) { return min(a, b); },
+    INF
+  );
   rep(i, n)
   {
     int x;

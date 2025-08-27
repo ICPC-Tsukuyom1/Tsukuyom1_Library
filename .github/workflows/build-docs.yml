@@ -16,7 +16,7 @@ jobs:
       - uses: typst-community/setup-typst@v4
 
       - name: Install Font
-        run: sudo apt update && sudo apt install -y fonts-noto-cjk
+        run: sudo apt update && sudo apt install -y fonts-noto-cjk fonts-firacode
 
       - name: Run build script
         run: ./docs/build.sh

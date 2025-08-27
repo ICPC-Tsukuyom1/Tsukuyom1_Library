@@ -21,11 +21,14 @@ public:
 	ld dot(P p) const { return x * p.x + y * p.y; }
 	ld cross(P p) const { return x * p.y - y * p.x; }
 	ld angle() const { return atan2(y, x); }
-	P unit() const { return *this/abs(); }
+	P unit() const { return *this / abs(); }
 	P perp() const { return P(-y, x); }
-	P normal() const { return perp().unit(); }
-	P rotate(ld theta) {
-		return P(x*cosl(a)-y*sinl(a), x*sinl(a)+y*cosl(a));
+	P normal() const { return perp()/abs(); }
+	P rotate(ld theta) const {
+		return P(x*cosl(theta)-y*sinl(theta), x*sinl(theta)+y*cosl(theta));
+	}
+	P rotate(ld theta, Point &p) const {
+		return (*this - p).rotate(theta) + p;
 	}
 };
 typedef Point Vector;

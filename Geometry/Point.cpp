@@ -4,20 +4,20 @@
 class Point {
 	typedef Point P;
 public:
-    ld x, y;
+	ld x, y;
 
-    Point(ld _x = 0, ld _y = 0) : x(_x), y(_y) {}
+	Point(ld _x = 0, ld _y = 0) : x(_x), y(_y) {}
 
-    P operator+(Point p) { return P(x + p.x, y + p.y); }
-    P operator-(Point p) { return P(x - p.x, y - p.y); }
-    P operator*(ld a) { return P(a * x, a * y); }
-    P operator/(ld a) { return P(x / a, y / a); }
+	P operator+(Point p) const { return P(x + p.x, y + p.y); }
+	P operator-(Point p) const { return P(x - p.x, y - p.y); }
+	P operator*(ld a) const { return P(a * x, a * y); }
+	P operator/(ld a) const { return P(x / a, y / a); }
 
-    ld abs() { return sqrtl(norm()); }
-    ld norm() { return x * x + y * y; }
+	ld abs() const { return sqrtl(norm()); }
+	ld norm() const { return x * x + y * y; }
 
-    bool operator<(const P& p) const { return tie(x, y) < tie(p.x, p.y); }
-    bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
+	bool operator<(const P& p) const { return tie(x, y) < tie(p.x, p.y); }
+	bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
 	ld dot(P p) const { return x * p.x + y * p.y; }
 	ld cross(P p) const { return x * p.y - y * p.x; }
 	ld angle() const { return atan2(y, x); }

@@ -2,17 +2,17 @@
 
 #include "../../template.cpp"
 
+#define T ll
+#define e 0
+#define op(a, b) a+b
+
 #include "../../Structure/segtree.cpp"
 
 int main()
 {
   ll n, q;
   cin >> n >> q;
-  SegTree<ll> seg(
-    n,
-    [](ll a, ll b) { return a + b; },
-    0
-  );
+  SegTree seg(n);
   rep(i, n)
   {
     ll a;

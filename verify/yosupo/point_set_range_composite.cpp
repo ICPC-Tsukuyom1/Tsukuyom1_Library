@@ -5,20 +5,18 @@
 
 using mint = modint<998244353>;
 
-#include "../../Structure/segtree.cpp"
+#define T pair<mint, mint>
+#define e {1, 0}
+#define op(a, b) {a.first * b.first, a.second * b.first + b.second}
 
+#include "../../Structure/segtree.cpp"
 
 int main()
 {
   ll n, q;
   cin >> n >> q;
 
-  using T = pair<mint, mint>;
-  SegTree<T> seg(
-    n,
-    [](T a, T b) { return T{a.first * b.first, a.second * b.first + b.second}; },
-    T{1, 0}
-  );
+  SegTree seg(n);
   rep(i, n)
   {
     mint a, b;

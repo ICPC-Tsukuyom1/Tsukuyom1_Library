@@ -1,43 +1,35 @@
 template <class Type = ll>
 struct WeightedUnionFind {
-  WeightedUnionFind() = default;
-  explicit WeightedUnionFind(size_t n)
-      : m_parentsOrSize(n, -1), m_diffWeights(n) {}
-  int find(int i) {
-    if (m_parentsOrSize[i] < 0)
-      return i;
-    const int root = find(m_parentsOrSize[i]);
-    m_diffWeights[i] += m_diffWeights[m_parentsOrSize[i]];
-    return (m_parentsOrSize[i] = root);
-  }
-  void merge(int a, int b, Type w) {
-    w += weight(a);
-    w -= weight(b);
-    a = find(a);
-    b = find(b);
-    if (a != b) {
-      if (-m_parentsOrSize[a] < -m_parentsOrSize[b]) {
-        swap(a, b);
-        w = -w;
-      }
-      m_parentsOrSize[a] += m_parentsOrSize[b];
-      m_parentsOrSize[b] = a;
-      m_diffWeights[b] = w;
-    }
-  }
-  Type diff(int a, int b) {
-    return (weight(b) - weight(a));
-  }
-  bool connected(int a, int b) {
-    return (find(a) == find(b));
-  }
-  int size(int i) {
-    return -m_parentsOrSize[find(i)];
-  }
-  vector<int> m_parentsOrSize;
-  vector<Type> m_diffWeights;
-  Type weight(int i) {
-    find(i);
-    return m_diffWeights[i];
-  }
+	vl par; v(Type) wd;
+	WeightedUnionFind() = default;
+	explicit WeightedUnionFind(size_t n)
+    : par(n, -1), wd(n) {}
+	ll find(int i) {
+		if (par[i] < 0) return i;
+		const ll root = find(par[i]);
+		wd[i] += wd[par[i]];
+		return (par[i] = root);
+	}
+	void merge(int a, int b, Type w) {
+		w += weight(a), w -= weight(b);
+		a = find(a), b = find(b);
+		if (a == b) return;
+		if (-par[a] < -par[b]) { swap(a, b); w = -w; }
+		par[a] += par[b];
+		par[b] = a;
+		wd[b] = w;
+	}
+	Type diff(int a, int b) {
+		return (weight(b) - weight(a));
+	}
+	bool same(int a, int b) {
+		return (find(a) == find(b));
+	}
+	int size(int i) {
+		return -par[find(i)];
+	}
+	Type weight(int i) {
+		find(i);
+		return wd[i];
+	}
 };

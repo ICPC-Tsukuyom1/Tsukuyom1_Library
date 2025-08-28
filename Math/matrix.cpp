@@ -1,6 +1,6 @@
 template <typename T>
 class Matrix {
-	typedef Matrix M;
+	typedef Matrix<T> M;
 public:
 	vv<T> a;
 	ll n, m;
@@ -66,5 +66,35 @@ public:
 			}
 		}
 		return ret;
+	}
+    M inv() {
+		M b = I(n);
+		rep(x, n) {
+			ll my = -1;
+			reps(y, x, n) {
+				if ((*this)[y][x] != T(0)) {
+					my = y;
+					break;
+				}
+			}
+			if (my == -1) return M(0);
+			if (x != my) {
+				swap((*this)[x], (*this)[my]);
+				swap(b[x], b[my]);
+			}
+			auto freq = (*this)[x][x];
+			rep(j, n) {
+				(*this)[x][j] /= freq;
+				b[x][j] /= freq;
+			}
+			rep(y, n) {
+				if (x == y) continue;
+				if ((*this)[y][x] == T(0)) continue;
+				freq = (*this)[y][x];
+				rep(k, n) (*this)[y][k] -= freq * (*this)[x][k];
+				rep(k, n) b[y][k] -= freq * b[x][k];
+			}
+		}
+		return b;
 	}
 };

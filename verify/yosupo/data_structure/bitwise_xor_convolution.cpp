@@ -1,10 +1,9 @@
 //@yosupo bitwise_xor_convolution
 
 #include "../../../template.cpp"
+const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 #include "../../../Math/bitwise_xor_convolution.cpp"
-
-using mint = modint<998244353>;
 
 int main() {
   int n;

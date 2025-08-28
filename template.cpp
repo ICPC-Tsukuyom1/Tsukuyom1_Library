@@ -4,9 +4,9 @@ using ll = long long;
 using ld = long double;
 using pll = pair<ll, ll>;
 using vl = vector<ll>;
-#define v(type) vector<type>
-#define vv(type) v(v(type))
-#define vvv(type) v(vv(type))
+template <class T> using vec = vector<T>;
+template <class T> using vv = vec<vec<T>>;
+template <class T> using vvv = vv<vec<T>>;
 template <class T> using minpq = priority_queue<T, vector<T>, greater<T>>;
 #define rep(i, r) for(ll i = 0; i < (r); i++)
 #define reps(i, l, r) for(ll i = (l); i < (r); i++)

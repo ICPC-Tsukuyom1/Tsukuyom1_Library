@@ -1,9 +1,9 @@
 //@yosupo pow_of_matrix
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 const ll mod = 998244353;
-#include "../../Math/modint.cpp"
-#include "../../Math/matrix.cpp"
+#include "../../../Math/modint.cpp"
+#include "../../../Math/matrix.cpp"
 
 int main() {
     ll N, K; cin >> N >> K;

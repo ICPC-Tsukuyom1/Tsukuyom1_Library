@@ -1,10 +1,10 @@
 //@yosupo staticrmq
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 
 const ll INF = 4e18;
 
-#include "../../Structure/segtree.cpp"
+#include "../../../Structure/segtree.cpp"
 
 int main()
 {

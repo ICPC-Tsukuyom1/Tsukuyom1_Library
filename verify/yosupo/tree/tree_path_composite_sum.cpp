@@ -1,9 +1,10 @@
 //@yosupo tree_path_composite_sum
 
 #include "../../../template.cpp"
-#include "../../../Math/modint.cpp"
 
-using mint = modint<998244353>;
+const ll mod = 998244353;
+
+#include "../../../Math/modint.cpp"
 
 // "../../../Graph/Graph.cpp" を、ll以外の重みを許容するように改変
 
@@ -45,7 +46,7 @@ struct Graph
   }
 };
 
-v(mint) a;
+vec<mint> a;
 
 #define V pair<mint, ll>
 #define E pair<mint, ll>

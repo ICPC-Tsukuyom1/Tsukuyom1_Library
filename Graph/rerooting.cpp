@@ -1,12 +1,12 @@
 template <class T>
-v(V) rerooting(Graph<T>& G)
+vec<V> rerooting(Graph<T>& G)
 {
   ll n = G.size();
-  v(V) ans0(n);
-  vector<v(E)> l_acc(n), r_acc(n);
+  vec<V> ans0(n);
+  vv<E> l_acc(n), r_acc(n);
   auto dfs0 = [&](auto&& f, ll i, ll p) -> void
   {
-    v(E) cache;
+    vec<E> cache;
     for (auto& c : G[i])
     {
       if (c.to == p) continue;
@@ -21,7 +21,7 @@ v(V) rerooting(Graph<T>& G)
     ans0[i] = put_vert(r_acc[i][0], i);
   };
   dfs0(dfs0, 0, -1);
-  v(V) ans(n);
+  vec<V> ans(n);
   ans[0] = ans0[0];
   auto dfs = [&](auto&& f, ll i, ll p, E rev) -> void
   {

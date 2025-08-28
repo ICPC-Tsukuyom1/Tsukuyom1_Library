@@ -2,6 +2,4 @@
 
 == 二項係数
 
-二項係数 $binom(n, k) "mod" p$
-
-#sourcefile(read("../Math/binomial-coefficients.cpp"), lang: "cpp")
+#sourcefile(read("binomial-coefficients.cpp"), lang: "cpp")

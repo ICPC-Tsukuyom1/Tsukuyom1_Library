@@ -1,9 +1,9 @@
 //@yosupo matrix_product
 
-#include "template.cpp"
+#include "../../template.cpp"
 const ll mod = 998244353;
-#include "Math/modint.cpp"
-#include "Math/matrix.cpp"
+#include "../../Math/modint.cpp"
+#include "../../Math/matrix.cpp"
 
 int main() {
     ll N, M, K; cin >> N >> M >> K;

@@ -7,7 +7,7 @@ struct LCTree {
 		inline bool over(line r, ll x) { return get(x) < r.get(x); }
 	};
 	vl x;
-	v(line) seg;
+	vec<line> seg;
 	ll n;
 	LCTree() {}
 	LCTree(const vector<ll>&_x) : x(_x) {
@@ -15,7 +15,7 @@ struct LCTree {
 		n = 1;
 		while (n < sz(x)) n <<= 1;
 		while (sz(x) < n) x.push_back(x.back());
-		seg = v(line)(2 * n);
+		seg = vec<line>(2 * n);
 	}
 	void update(line L, ll i, ll l, ll r) {
 		while (1) {

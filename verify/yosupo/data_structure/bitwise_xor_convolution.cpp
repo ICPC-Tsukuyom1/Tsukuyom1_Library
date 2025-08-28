@@ -8,7 +8,7 @@ const ll mod = 998244353;
 int main() {
   int n;
   cin >> n;
-  vector<mint> a(1<<n), b(1<<n);
+  vec<mint> a(1<<n), b(1<<n);
   rep(i, 1<<n) cin >> a[i];
   rep(i, 1<<n) cin >> b[i];
   auto c = xor_conv(a, b);

@@ -13,3 +13,4 @@
 #include "isprime.typ"
 #include "power.typ"
 #include "prime_factorization.typ"
+#include "matrix.typ"

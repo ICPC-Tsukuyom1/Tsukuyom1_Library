@@ -1,14 +1,14 @@
 //@yosupo bitwise_and_convolution
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 const ll mod = 998244353;
-#include "../../Math/modint.cpp"
-#include "../../Math/bitwise_or_convolution.cpp"
+#include "../../../Math/modint.cpp"
+#include "../../../Math/bitwise_or_convolution.cpp"
 
 int main() {
   int n;
   cin >> n;
-  vector<mint> a(1<<n), b(1<<n);
+  vec<mint> a(1<<n), b(1<<n);
   rep(i, 1<<n) cin >> a[i];
   rep(i, 1<<n) cin >> b[i];
   reverse(all(a)); reverse(all(b));

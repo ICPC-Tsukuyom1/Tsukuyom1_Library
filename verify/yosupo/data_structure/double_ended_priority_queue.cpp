@@ -1,7 +1,7 @@
 //@yosupo double_ended_priority_queue
 
-#include "../../template.cpp"
-#include "../../Structure/pbds.cpp"
+#include "../../../template.cpp"
+#include "../../../Structure/pbds.cpp"
 
 int main()
 {

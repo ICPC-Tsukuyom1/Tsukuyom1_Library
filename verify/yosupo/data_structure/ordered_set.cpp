@@ -1,12 +1,12 @@
 //@yosupo ordered_set
 
-#include "../../template.cpp"
-#include "../../Structure/pbds.cpp"
+#include "../../../template.cpp"
+#include "../../../Structure/pbds.cpp"
 
 int main() {
     ll n, q;
     cin >> n >> q;
-    v(ll) a(n);
+    vl a(n);
     rep(i, n) cin >> a[i];
     Tree<ll> tree(all(a));
     rep(Q, q)

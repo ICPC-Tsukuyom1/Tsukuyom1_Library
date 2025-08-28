@@ -1,6 +1,6 @@
 template <class Type = ll>
 struct WeightedUnionFind {
-	vl par; v(Type) wd;
+	vl par; vec<Type> wd;
 	WeightedUnionFind() = default;
 	explicit WeightedUnionFind(size_t n)
     : par(n, -1), wd(n) {}

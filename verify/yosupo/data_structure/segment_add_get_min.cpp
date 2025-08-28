@@ -10,7 +10,7 @@ void solve() {
 	vl x;
 	ll Max = 1000000007;
 	const ll INF = numeric_limits<ll>::max() / 4;
-	v(query) q;
+	vec<query> q;
 	rep(i, N) {
 		ll l, r, a, b;
 		cin >> l >> r >> a >> b;

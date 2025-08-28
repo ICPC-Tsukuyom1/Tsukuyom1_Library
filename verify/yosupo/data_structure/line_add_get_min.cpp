@@ -8,7 +8,7 @@ struct query {
 void solve() {
 	ll N, Q; cin >> N >> Q;
 	vl x;
-	v(query) q;
+	vec<query> q;
 	rep(i, N) {
 		ll a, b;
 		cin >> a >> b;

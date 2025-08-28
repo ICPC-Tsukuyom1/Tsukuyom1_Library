@@ -1,7 +1,7 @@
 //@yosupo range_affine_range_sum
 
-#include "../../template.cpp"
-#include "../../Math/modint.cpp"
+#include "../../../template.cpp"
+#include "../../../Math/modint.cpp"
 
 using mint = modint<998244353>;
 
@@ -13,7 +13,7 @@ using mint = modint<998244353>;
 #define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
 #define apply(f, x, l) f.first * x + f.second * l
 
-#include "../../Structure/lazysegtree.cpp"
+#include "../../../Structure/lazysegtree.cpp"
 
 int main()
 {

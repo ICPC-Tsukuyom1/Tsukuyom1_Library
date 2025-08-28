@@ -1,6 +1,6 @@
 //@yosupo staticrmq
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 
 const ll INF = 4e18;
 
@@ -8,7 +8,7 @@ const ll INF = 4e18;
 #define e INF
 #define op(a, b) min(a, b)
 
-#include "../../Structure/segtree.cpp"
+#include "../../../Structure/segtree.cpp"
 
 int main()
 {

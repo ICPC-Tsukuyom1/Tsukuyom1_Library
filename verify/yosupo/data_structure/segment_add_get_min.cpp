@@ -1,6 +1,6 @@
 //@yosupo segment_add_get_min
-#include "../../template.cpp"
-#include "../../Structure/LiChaoTree.cpp"
+#include "../../../template.cpp"
+#include "../../../Structure/LiChaoTree.cpp"
 struct query {
 	ll t;
 	ll l, r, a, b;

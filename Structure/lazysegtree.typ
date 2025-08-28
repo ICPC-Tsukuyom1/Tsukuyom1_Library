@@ -21,8 +21,8 @@
 #define F pair<mint, mint>
 #define id F{1, 0}
 #define op(a, b) a+b
-#define merge(a, b) F{a.first * b.first, a.second * b.first + b.second};
-#define apply(f, x, l) f.first * x + f.second * l;
+#define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
+#define apply(f, x, l) f.first * x + f.second * l
 ```)
 
 なおDynamic Lazy Segment Treeとして実装されているので、構築 $O(1)$ 、クエリ $O(log N)$ です。( $N = 10^18$ でも動作します)

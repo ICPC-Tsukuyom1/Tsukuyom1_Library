@@ -1,4 +1,4 @@
-//@yosupo range_affine_range_sum
+//@yosupo range_affine_range_sum_large_array
 
 #include "../../template.cpp"
 #include "../../Math/modint.cpp"
@@ -17,15 +17,9 @@ using mint = modint<998244353>;
 
 int main()
 {
-  int n, q;
+  ll n, q;
   cin >> n >> q;
   auto* seg = new LazySeg(n);
-  rep(i, n)
-  {
-    ll x;
-    cin >> x;
-    seg->effect(i, i + 1, {0, x});
-  }
   while (q--)
   {
     int type;

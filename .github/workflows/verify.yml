@@ -49,5 +49,5 @@ jobs:
       - name: Execute
         run: |
           mkdir -p ./out
-          find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
+          find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'ulimit -s unlimited && echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'

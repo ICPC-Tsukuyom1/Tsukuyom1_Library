@@ -2,6 +2,4 @@
 
 == 素因数分解
 
-素因数分解をする。
-
 #sourcefile(read("../Math/prime-factorization.cpp"), lang: "cpp")

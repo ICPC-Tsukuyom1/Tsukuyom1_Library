@@ -1,10 +1,10 @@
 //@yosupo range_affine_range_sum
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 
 const ll mod = 998244353;
 
-#include "../../Structure/lazysegtree.cpp"
+#include "../../../Structure/lazysegtree.cpp"
 
 int main() {
   int n, q;

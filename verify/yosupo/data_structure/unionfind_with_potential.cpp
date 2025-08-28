@@ -1,10 +1,11 @@
 //@yosupo unionfind_with_potential
 
-#include "../../template.cpp"
-#include "../../Math/modint.cpp"
-#include "../../Structure/weightedunionfind.cpp"
+#include "../../../template.cpp"
 
-using mint = modint<998244353>;
+const ll mod = 998244353;
+
+#include "../../../Math/modint.cpp"
+#include "../../../Structure/weightedunionfind.cpp"
 
 int main()
 {

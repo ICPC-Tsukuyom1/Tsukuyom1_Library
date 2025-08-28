@@ -1,7 +1,7 @@
 //@yosupo static_range_sum
 
-#include "../../template.cpp"
-#include "../../Structure/BIT.cpp"
+#include "../../../template.cpp"
+#include "../../../Structure/BIT.cpp"
 
 int main()
 {

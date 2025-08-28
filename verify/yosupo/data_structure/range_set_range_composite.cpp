@@ -1,9 +1,10 @@
 //@yosupo range_set_range_composite
 
-#include "../../template.cpp"
-#include "../../Math/modint.cpp"
+#include "../../../template.cpp"
 
-using mint = modint<998244353>;
+const ll mod = 998244353;
+
+#include "../../../Math/modint.cpp"
 
 #define T pair<mint, mint>
 #define e T{1, 0}
@@ -25,7 +26,7 @@ T pow_fn(T fn, ll n)
 #define merge(a, b) b.first == 0 ? a : b
 #define apply(f, x, l) f.first == 0 ? x : pow_fn(f, l)
 
-#include "../../Structure/lazysegtree.cpp"
+#include "../../../Structure/lazysegtree.cpp"
 
 int main()
 {

@@ -1,9 +1,10 @@
 //@yosupo range_affine_range_sum_large_array
 
-#include "../../template.cpp"
-#include "../../Math/modint.cpp"
+#include "../../../template.cpp"
 
-using mint = modint<998244353>;
+const ll mod = 998244353;
+
+#include "../../../Math/modint.cpp"
 
 #define T mint
 #define e 0
@@ -13,7 +14,7 @@ using mint = modint<998244353>;
 #define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
 #define apply(f, x, l) f.first * x + f.second * l
 
-#include "../../Structure/lazysegtree.cpp"
+#include "../../../Structure/lazysegtree.cpp"
 
 int main()
 {

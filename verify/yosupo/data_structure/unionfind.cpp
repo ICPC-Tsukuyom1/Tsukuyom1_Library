@@ -1,7 +1,7 @@
 //@yosupo unionfind
 
-#include "../../template.cpp"
-#include "../../Structure/unionfind.cpp"
+#include "../../../template.cpp"
+#include "../../../Structure/unionfind.cpp"
 
 int main()
 {

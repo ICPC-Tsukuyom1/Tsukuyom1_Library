@@ -1,12 +1,12 @@
 //@yosupo point_add_range_sum
 
-#include "../../template.cpp"
+#include "../../../template.cpp"
 
 #define T ll
 #define e 0
 #define op(a, b) a+b
 
-#include "../../Structure/segtree.cpp"
+#include "../../../Structure/segtree.cpp"
 
 int main()
 {

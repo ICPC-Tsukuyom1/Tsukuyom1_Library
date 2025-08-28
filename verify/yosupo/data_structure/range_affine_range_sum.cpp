@@ -1,9 +1,10 @@
 //@yosupo range_affine_range_sum
 
 #include "../../../template.cpp"
-#include "../../../Math/modint.cpp"
 
-using mint = modint<998244353>;
+const ll mod = 998244353;
+
+#include "../../../Math/modint.cpp"
 
 #define T mint
 #define e 0

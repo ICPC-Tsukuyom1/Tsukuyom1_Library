@@ -1,56 +1,37 @@
-template <ll mod>
-struct modint {
+const ll mod = 1000000007; //change
+struct mint {
 	ll x;
-	modint() : x(0) {}
-
-	modint(ll y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}
-
-	modint &operator+=(const modint &p) {
-		if ((x += p.x) >= mod) {
-			x -= mod;
-		}
+	mint(ll y = 0) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}
+	mint &operator+=(const mint &p) {
+		if ((x += p.x) >= mod) x -= mod;
 		return *this;
 	}
-	modint &operator-=(const modint &p) {
-		if ((x += mod - p.x) >= mod) {
-			x -= mod;
-		}
+	mint &operator-=(const mint &p) {
+		if ((x += mod - p.x) >= mod) x -= mod;
 		return *this;
 	}
-	modint &operator*=(const modint &p) {
+	mint &operator*=(const mint &p) {
 		x = (ll)(1ll * x * p.x % mod);
 		return *this;
 	}
-	modint &operator/=(const modint &p) {
-		*this *= p.inverse();
+	mint &operator/=(const mint &p) {
+		*this *= p.inv();
 		return *this;
 	}
-
-	modint operator-() const { return modint(-x); }
-	modint operator+(const modint &p) const { return modint(*this) += p; }
-	modint operator-(const modint &p) const { return modint(*this) -= p; }
-	modint operator*(const modint &p) const { return modint(*this) *= p; }
-	modint operator/(const modint &p) const { return modint(*this) /= p; }
-	bool operator==(const modint &p) const { return x == p.x; }
-	bool operator!=(const modint &p) const { return x != p.x; }
-	friend ostream &operator<<(ostream &os, const modint &p) { return os << p.x; }
-	friend istream &operator>>(istream &is, modint &a) {
-		ll t; is >> t;
-		a = modint<mod>(t);
-		return (is);
+	mint operator-() const { return mint(-x); }
+	mint operator+(const mint &p) const { return mint(*this) += p; }
+	mint operator-(const mint &p) const { return mint(*this) -= p; }
+	mint operator*(const mint &p) const { return mint(*this) *= p; }
+	mint operator/(const mint &p) const { return mint(*this) /= p; }
+	bool operator==(const mint &p) const { return x == p.x; }
+	bool operator!=(const mint &p) const { return x != p.x; }
+	friend ostream &operator<<(ostream &os, const mint &p) { return os << p.x; }
+	friend istream &operator>>(istream &is, mint &a) {
+		ll t; is >> t; a = mint(t); return (is);
 	}
-
-	modint inverse() const {
-		int a = x, b = mod, u = 1, v = 0, t;
-		while (b > 0) {
-			t = a / b;
-			swap(a -= t * b, b);
-			swap(u -= t * v, v);
-		}
-		return modint(u);
-	}
-	modint pow(ll n) const {
-		modint ret(1), mul(x);
+	mint inv() const { return pow(mod - 2); }
+	mint pow(ll n) const {
+		mint ret(1), mul(x);
 		while (n > 0) {
 			if (n & 1) ret *= mul;
 			mul *= mul;
@@ -58,6 +39,4 @@ struct modint {
 		}
 		return ret;
 	}
-
-	static ll get_mod() { return mod; }
 };

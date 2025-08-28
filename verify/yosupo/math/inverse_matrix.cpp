@@ -11,7 +11,7 @@ int main() {
 	rep(i, N) rep(j, N) cin >> a[i][j];
 	if (a.det() == mint(0)) {
 		cout << -1 << endl;
-		return;
+		return 0;
 	}
 	Matrix<mint> b = a.inv();
 	rep(i, N) {

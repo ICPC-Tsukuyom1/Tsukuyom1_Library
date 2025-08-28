@@ -8,7 +8,6 @@
 #include "bitwise_and_convolution.typ"
 #include "bitwise_xor_convolution.typ"
 #include "convolution_mod.typ"
-#include "eratosthenes.typ"
 #include "euler_phi.typ"
 #include "extgcd.typ"
 #include "invmod.typ"

@@ -10,7 +10,6 @@
 #include "convolution_mod.typ"
 #include "euler_phi.typ"
 #include "extgcd.typ"
-#include "invmod.typ"
 #include "isprime.typ"
 #include "power.typ"
 #include "prime_factorization.typ"

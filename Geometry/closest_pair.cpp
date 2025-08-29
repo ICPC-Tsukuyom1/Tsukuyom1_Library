@@ -1,4 +1,4 @@
-//need: Point.cpp
+#include "./Point.cpp"
 #define P Point
 pair<P, P> closest (Polygon &v) {
 	set<P> s;

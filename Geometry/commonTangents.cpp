@@ -1,4 +1,5 @@
-v(Line) commonTangents(Circle c1, Circle c2) {
+#include "./Point.cpp"
+vec<Line> commonTangents(Circle c1, Circle c2) {
 	bool s = false;
 	if (c1.r < c2.r) {
 		s = true;
@@ -6,7 +7,7 @@ v(Line) commonTangents(Circle c1, Circle c2) {
 	}
 	typedef Point P;
 	ld d = (c1.c - c2.c).abs();
-	v(Line) L;
+	vec<Line> L;
 	if (c1.r - c2.r <= d + EPS) {
 		if (c1.r - c2.r <= EPS) {
 			P D = (c2.c - c1.c).perp() / d * c1.r;

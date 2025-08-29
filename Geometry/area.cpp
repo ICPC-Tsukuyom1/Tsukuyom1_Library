@@ -1,3 +1,5 @@
+#include "./Point.cpp"
+
 ld Area(Polygon S) {
     ld ans = 0;
     rep(i, sz(S) - 2) {

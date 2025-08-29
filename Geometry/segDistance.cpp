@@ -1,4 +1,4 @@
-// need: Point.cpp
+#include "./Point.cpp"
 // dist between a *line* and a point -> lineDistance.cpp
 ld segDist(Segment S, Point p) {
 	if (S.A == S.B) return (p-S.A).abs();

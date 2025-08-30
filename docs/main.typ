@@ -57,3 +57,4 @@
 #include "../Graph/chapter.typ"
 #include "../Math/chapter.typ"
 #include "../Structure/chapter.typ"
+#include "../Documents/chapter.typ"

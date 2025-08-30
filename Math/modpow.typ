@@ -2,4 +2,4 @@
 
 == modpow
 
-#sourcefile(read("../Math/power.cpp"), lang: "cpp")
+#sourcefile(read("../Math/modpow.cpp"), lang: "cpp")

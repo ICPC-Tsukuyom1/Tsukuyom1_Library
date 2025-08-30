@@ -14,13 +14,13 @@ const ll mod = 998244353;
 #define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
 #define apply(f, x, l) f.first * x + f.second * l
 
-#include "../../../Structure/lazysegtree.cpp"
+#include "../../../Structure/dynamic-lazysegtree.cpp"
 
 int main()
 {
   ll n, q;
   cin >> n >> q;
-  auto* seg = new LazySeg(n);
+  DynamicLazySeg seg(n);
   while (q--)
   {
     int type;
@@ -29,13 +29,13 @@ int main()
     {
       ll l, r, b, c;
       cin >> l >> r >> b >> c;
-      seg->effect(l, r, {b, c});
+      seg.effect(l, r, {b, c});
     }
     else
     {
       int l, r;
       cin >> l >> r;
-      cout << seg->query(l, r) << endl;
+      cout << seg.query(l, r) << endl;
     }
   }
 }

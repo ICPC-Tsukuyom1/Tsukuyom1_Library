@@ -10,7 +10,7 @@ ll pollard(ll n) {
 	}
 	return gcd(prd, n);
 }
-vec<ll> fac(ll n) {
+vl fac(ll n) {
 	if (n == 1) return {};
 	if (isprime(n)) return {n};
 	ll x = pollard(n);

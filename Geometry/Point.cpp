@@ -20,6 +20,7 @@ public:
 	bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
 	ld dot(P p) const { return x * p.x + y * p.y; }
 	ld cross(P p) const { return x * p.y - y * p.x; }
+	ld cross(P a, P b) const { return (a-*this).cross(b-*this); }
 	ld angle() const { return atan2(y, x); }
 	P unit() const { return *this / abs(); }
 	P perp() const { return P(-y, x); }

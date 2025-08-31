@@ -17,3 +17,4 @@
 #include "segDistance.typ"
 #include "segInter.typ"
 #include "ssDist.typ"
+#include "diamConvex.typ"

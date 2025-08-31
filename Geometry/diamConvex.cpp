@@ -1,4 +1,3 @@
-#include "Point.cpp"
 #include "convex_hull.cpp"
 pair<Point, Point> diamConvex(Polygon S) {
 	Polygon Q = convex_hull(S);

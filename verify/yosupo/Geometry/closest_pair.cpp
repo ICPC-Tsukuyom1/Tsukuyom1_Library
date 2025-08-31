@@ -1,7 +1,7 @@
 //@yosupo closest_pair
 
-#include "../../template.cpp"
-#include "../../Geometry/closest_pair.cpp"
+#include "../../../template.cpp"
+#include "../../../Geometry/closest_pair.cpp"
 
 void solve() {
 	ll N; cin >> N;

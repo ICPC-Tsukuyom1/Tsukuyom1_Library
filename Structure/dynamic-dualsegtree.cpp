@@ -30,7 +30,7 @@ struct DynamicDualSeg {
   }
 
   // 点取得 O(log N)
-  F get(int i) {
+  F get(ll i) {
     if (i < l || r <= i) return id;
     if (i <= l && r <= i+1) return v;
     _();

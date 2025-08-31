@@ -18,12 +18,12 @@ struct DualSeg {
   // 区間への作用 O(log N)
   void effect(ll L, ll R, F f, int x = 1, int lx = 0, int rx = -1) {
     if (rx < 0) rx = n;
-    _(x);
     if (R <= lx || rx <= L) return;
     if (L <= lx && rx <= R) {
       m[x] = merge(m[x], f);
       _(x);
     } else {
+      _(x);
       int mid = (lx + rx) / 2;
       effect(L, R, f, x * 2, lx, mid);
       effect(L, R, f, x * 2 + 1, mid, rx);

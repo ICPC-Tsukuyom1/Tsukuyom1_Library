@@ -1,6 +1,6 @@
 struct SegTree {
   int n = 1;
-  vector<T> v;
+  vec<T> v;
 
   // 構築 O(N log N)
   SegTree(int N) {
@@ -19,16 +19,15 @@ struct SegTree {
     }
   }
 
-  T _(int l, int r, int x, int lx, int rx) {
+  // 区間総積取得 O(log N)
+  // l : [0, n), r : [1, n], l < r
+  T query(int l, int r, int x = 1, int lx = 0, int rx = -1) {
+    if (rx < 0) rx = n;
     if (rx <= l || r <= lx) return e;
     if (l <= lx && rx <= r) return v[x];
     int m = (lx + rx) / 2;
-    auto lv = _(l, r, x * 2, lx, m),
-         rv = _(l, r, x * 2 + 1, m, rx);
+    T lv = query(l, r, x * 2, lx, m),
+      rv = query(l, r, x * 2 + 1, m, rx);
     return op(lv, rv);
   }
-
-  // 区間総積取得 O(log N)
-  // l : [0, n), r : [1, n], l < r
-  T query(int l, int r) { return _(l, r, 1, 0, n); }
 };

@@ -1,11 +1,11 @@
-//need: power.cpp
+#include "modpow.cpp"
 const ll mod = 998244353, root = 62;
 void ntt(vl &a){
     ll n = sz(a), L = 31 - __builtin_clz(n);
     static vl rt(2, 1);
     for(static int k = 2, s = 2; k < n; k *= 2, s++){
         rt.resize(n);
-        ll z[] = {1, power(root, mod>>s, mod)};
+        ll z[] = {1, modpow(root, mod>>s, mod)};
         reps(i, k, 2*k) rt[i] = rt[i / 2] * z[i & 1] % mod;
     }
     vl rev(n);
@@ -26,7 +26,7 @@ vl conv9(const vl &a, const vl &b) {
 	if (a.empty() || b.empty()) return {};
 	int s = sz(a) + sz(b) - 1, B = 32 - __builtin_clz(s),
 	    n = 1 << B;
-	int inv = power(n, mod - 2, mod);
+	int inv = modpow(n, mod - 2, mod);
 	vl L(a), R(b), out(n);
 	L.resize(n), R.resize(n);
 	ntt(L), ntt(R);

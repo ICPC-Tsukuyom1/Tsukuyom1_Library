@@ -1,6 +1,6 @@
 #define EPS (1e-10)
 #define eq(a, b) (fabs((a) - (b)) < EPS)
-#define sign(x) (x > 0) - (x < 0)
+ll sign(ld x) { return (x >= EPS) - (x <= -EPS); }
 class Point {
 	typedef Point P;
 public:

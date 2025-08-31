@@ -2,7 +2,7 @@
 #include "onSegment.cpp"
 vec<Point> segInter(Point a, Point b, Point c, Point d) {
 	ld oa = c.cross(d, a), ob = c.cross(d, b), oc = a.cross(b, c), od = a.cross(b, d);
-	if (sign(oa) * sign(ob) < EPS && sign(oc) * sign(od) < EPS) {
+	if (sign(oa) * sign(ob) < 0 && sign(oc) * sign(od) < 0) {
 		return { (a * ob - b * oa) / (ob - oa) };
 	}
 	set<Point> s;
@@ -15,5 +15,4 @@ vec<Point> segInter(Point a, Point b, Point c, Point d) {
 vec<Point> segInter(Segment a, Segment b) {
 	return segInter(a.s, a.e, b.s, b.e);
 }
-
 // check sz(segInter) > 0

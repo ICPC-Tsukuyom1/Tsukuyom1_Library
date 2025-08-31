@@ -14,3 +14,6 @@
 #include "onSegment.typ"
 #include "circumcircle.typ"
 #include "commonTangents.typ"
+#include "segDistance.typ"
+#include "segInter.typ"
+#include "ssDist.typ"

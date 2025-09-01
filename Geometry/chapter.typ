@@ -22,3 +22,5 @@
 #include "Polygon_cut.typ"
 #include "trincircle.typ"
 #include "clInter.typ"
+#include "ccInter.typ"
+#include "minEncloseCirc.typ"

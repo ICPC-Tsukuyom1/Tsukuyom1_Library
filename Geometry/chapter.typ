@@ -20,3 +20,5 @@
 #include "diamConvex.typ"
 #include "lineInter.typ"
 #include "Polygon_cut.typ"
+#include "trincircle.typ"
+#include "clInter.typ"

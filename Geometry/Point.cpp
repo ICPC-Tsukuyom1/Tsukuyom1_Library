@@ -1,6 +1,7 @@
 #define EPS (1e-10)
 #define eq(a, b) (fabs((a) - (b)) < EPS)
 ll sign(ld x) { return (x >= EPS) - (x <= -EPS); }
+const ld pi = 3.141592653589793238;
 class Point {
 	typedef Point P;
 public:
@@ -21,7 +22,11 @@ public:
 	ld dot(P p) const { return x * p.x + y * p.y; }
 	ld cross(P p) const { return x * p.y - y * p.x; }
 	ld cross(P a, P b) const { return (a-*this).cross(b-*this); }
-	ld angle() const { return atan2(y, x); }
+	ld angle() const {
+		if (x < 0 && y == 0) return pi;
+		if (x == 0 && y == 0) return ld(0);
+		return atan2(y, x);
+	}
 	P unit() const { return *this / abs(); }
 	P perp() const { return P(-y, x); }
 	P normal() const { return perp()/abs(); }

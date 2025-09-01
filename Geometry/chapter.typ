@@ -18,3 +18,5 @@
 #include "segInter.typ"
 #include "ssDist.typ"
 #include "diamConvex.typ"
+#include "lineInter.typ"
+#include "Polygon_cut.typ"

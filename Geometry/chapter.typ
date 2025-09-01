@@ -24,3 +24,4 @@
 #include "clInter.typ"
 #include "ccInter.typ"
 #include "minEncloseCirc.typ"
+#include "circleTangents.typ"

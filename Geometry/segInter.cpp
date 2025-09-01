@@ -1,4 +1,3 @@
-#include "Point.cpp"
 #include "onSegment.cpp"
 vec<Point> segInter(Point a, Point b, Point c, Point d) {
 	ld oa = c.cross(d, a), ob = c.cross(d, b), oc = a.cross(b, c), od = a.cross(b, d);

@@ -1,4 +1,4 @@
-#include "./Point.cpp"
+#include "Point.cpp"
 Circle ccCicle(Point &A, Point &B, Point &C) {
     Point b = C - A, c = B - A;
     Point center = A + (b * c.norm() - c * b.norm()).perp() / b.cross(c) / 2;

@@ -27,3 +27,4 @@
 #include "circleTangents.typ"
 #include "CircPolyInter.typ"
 #include "CircCircInter.typ"
+#include "Point3D.typ"

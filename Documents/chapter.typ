@@ -4,3 +4,6 @@
 
 #include "Trigonometry.typ"
 #include "Geometry.typ"
+#include "hash.typ"
+#include "io.typ"
+#include "parallel-binsearch.typ"

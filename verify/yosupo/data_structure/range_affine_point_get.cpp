@@ -1,4 +1,4 @@
-//@yosupo range_affine_range_sum
+//@yosupo range_affine_point_get
 
 #include "../../../template.cpp"
 
@@ -6,24 +6,18 @@ const ll mod = 998244353;
 
 #include "../../../Math/modint.cpp"
 
-#define T mint
-#define e 0
 #define F pair<mint, mint>
 #define id F{1, 0}
-#define op(a, b) a+b
 #define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
-#define apply(f, x, l) f.first * x + f.second * l
 
-#include "../../../Structure/lazysegtree.cpp"
-
+#include "../../../Structure/dualsegtree.cpp"
 int main() {
   int n, q;
   cin >> n >> q;
-  LazySeg seg(n);
+  DualSeg seg(n);
+  vec<mint> a(n);
   rep(i, n) {
-    ll x;
-    cin >> x;
-    seg.effect(i, i + 1, {0, x});
+    cin >> a[i];
   }
   while (q--) {
     int type;
@@ -33,9 +27,10 @@ int main() {
       cin >> l >> r >> b >> c;
       seg.effect(l, r, {b, c});
     } else {
-      int l, r;
-      cin >> l >> r;
-      cout << seg.query(l, r) << endl;
+      int i;
+      cin >> i;
+      auto [p, q] = seg.get(i);
+      cout << a[i] * p + q << endl;
     }
   }
 }

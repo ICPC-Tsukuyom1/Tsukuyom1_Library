@@ -25,6 +25,4 @@
 #define apply(f, x, l) f.first * x + f.second * l
 ```)
 
-なおDynamic Lazy Segment Treeとして実装されているので、構築 $O(1)$ 、クエリ $O(log N)$ です。( $N = 10^18$ でも動作します)
-
 #sourcefile(read("../Structure/lazysegtree.cpp"), lang: "cpp")

@@ -2,6 +2,7 @@
 
 = Strings
 
+#include "./KMP.typ"
 #include "./Manacher.typ"
 #include "./SuffixArray.typ"
 #include "./ZAlgorithm.typ"

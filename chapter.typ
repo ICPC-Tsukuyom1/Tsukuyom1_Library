@@ -5,4 +5,7 @@
 == template
 #sourcefile(read("./template.cpp"), lang: "cpp")
 
+== run.sh
+#sourcefile(read("./run.sh"), lang: "sh")
+
 #include "./Math/modint.typ"

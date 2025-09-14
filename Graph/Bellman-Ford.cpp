@@ -1,6 +1,8 @@
-//need: Graph.cpp
-bool bellman_ford(Edges &edges, vector<ll> &dist, ll V, ll s) {
-    dist = vector<ll>(V, INF);
+struct Edge {
+    ll from, to, cost;
+};
+bool bellman_ford(vec<Edge> &edges, vl &dist, ll V, ll s) {
+    dist = vl(V, INF);
     dist[s] = 0;
     rep(i, V - 1) {
         for (auto e : edges) {

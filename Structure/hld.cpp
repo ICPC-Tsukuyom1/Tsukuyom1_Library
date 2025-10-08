@@ -31,7 +31,7 @@ struct HLD {
   ll dist(ll u, ll v) { return dep[u] + dep[v] - 2 * dep[lca(u, v)]; }
 
   template <class E>
-  E query(ll u, ll v, E& ti, auto&& q, auto&& f, auto&& s, bool edge = false) {
+  E query(ll u, ll v, E& ti, auto&& q, auto&& f, auto&& s, bool edge = 0) {
     E l = ti, r = ti;
     for (;; v = par[head[v]]) {
       if (in[u] > in[v]) swap(u, v), swap(l, r);
@@ -44,7 +44,7 @@ struct HLD {
   // E ti : モノイドの単位元
   // q(ll l, ll r) : [l, r)に対する区間クエリの結果を得る
   // f(E a, E b) : モノイドの演算
-  auto query(ll u, ll v, auto&& ti, auto&& q, auto&& f, bool edge = false) {
+  auto query(ll u, ll v, auto&& ti, auto&& q, auto&& f, bool edge = 0) {
     return query(u, v, ti, q, f, f, edge);
   }
 

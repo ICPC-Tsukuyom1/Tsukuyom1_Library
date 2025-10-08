@@ -16,7 +16,7 @@ int main(){
     auto ans = ts.satisfy();
     if(!sz(ans)){
         cout << "s " << "UNSATISFIABLE" << endl;
-        return;
+        return 0;
     }
     cout << "s " << "SATISFIABLE" << endl;
     cout << "v ";
@@ -24,5 +24,5 @@ int main(){
         cout << (i+1) * ((ans[i]) ? 1 : -1) << " ";
     }
     cout << 0 << endl;
-    return;
+    return 0;
 }

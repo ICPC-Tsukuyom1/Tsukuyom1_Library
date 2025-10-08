@@ -40,7 +40,7 @@ jobs:
       - name: Clone problems
         run: git clone https://github.com/yosupo06/library-checker-problems.git
       - name: Prepare input files
-        run: cd library-checker-problems && ./generate.py -p $PROBLEM
+        run: cd library-checker-problems && ulimit -s unlimited && ./generate.py -p $PROBLEM
       - name: Find problem dir
         run: echo DIR=`find . -path "*/$PROBLEM" -type d` >> $GITHUB_ENV
       - name: Compile target

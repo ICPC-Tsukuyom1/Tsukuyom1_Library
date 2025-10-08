@@ -1,103 +1,51 @@
-template <class T>
+template <class T, bool onEdge = false>
 struct HLD {
-  vv<pair<T, ll>> g;
-  ll n;
-  vl siz, in, out, head, rev, par, dep;
+  vv<ll> g;
+  ll n, tim = 0;
+  vl par, siz, rt, pos;
 
-  HLD(vv<pair<T, ll>> g, ll root = 0) : g(g), n(sz(g)), siz(n, 0), in(n, 0), out(n, 0), head(n, 0), rev(n, 0), par(n, 0), dep(n, 0) {
-    dfs_siz(root, -1, 0);
-    ll t = 0;
-    head[root] = root;
-    dfs_hld(root, -1, t);
+  // gは親→子の辺のみをもつグラフ
+  HLD(vv<ll> g) : g(g), n(sz(g)), par(n, -1), siz(n, 1), rt(n), pos(n) {
+    dfs_siz(0);
+    dfs_hld(0);
   }
 
-  // vのk個前の祖先を得る O(log N)
-  ll last(ll v, ll k) {
-    while (1) {
-      ll u = head[v];
-      if (in[v] - k >= in[u]) return rev[in[v] - k];
-      k -= in[v] - in[u] + 1;
-      v = par[u];
+  void dfs_siz(ll v) {
+    if (par[v] != -1) g[v].erase(find(all(g[v]), par[v]));
+    for (ll& u : g[v]) {
+      par[u] = v;
+      dfs_siz(u);
+      siz[v] += siz[u];
+      if (siz[u] > siz[g[v][0]]) swap(u, g[v][0]);
     }
   }
 
-  ll lca(ll u, ll v) {
-    for (;; v = par[head[v]]) {
-      if (in[u] > in[v]) swap(u, v);
-      if (head[u] == head[v]) return u;
+  void dfs_hld(ll v) {
+    pos[v] = tim++;
+    for (ll u : g[v]) {
+      rt[u] = (u == g[v][0] ? rt[v] : u);
+      dfs_hld(u);
     }
   }
 
-  ll dist(ll u, ll v) { return dep[u] + dep[v] - 2 * dep[lca(u, v)]; }
-
-  template <class E>
-  E query(ll u, ll v, E& ti, auto&& q, auto&& f, auto&& s, bool edge = 0) {
-    E l = ti, r = ti;
-    for (;; v = par[head[v]]) {
-      if (in[u] > in[v]) swap(u, v), swap(l, r);
-      if (head[u] == head[v]) break;
-      l = f(q(in[head[v]], in[v] + 1), l);
+  void process(ll u, ll v, auto&& op) {
+    for (; rt[u] != rt[v]; v = par[rt[v]]) {
+      if (pos[rt[u]] > pos[rt[v]]) swap(u, v);
+      op(pos[rt[v]], pos[v] + 1);
     }
-    return s(f(q(in[u] + edge, in[v] + 1), l), r);
+    if (pos[u] > pos[v]) swap(u, v);
+    op(pos[u] + onEdge, pos[v] + 1);
   }
 
-  // E ti : モノイドの単位元
-  // q(ll l, ll r) : [l, r)に対する区間クエリの結果を得る
-  // f(E a, E b) : モノイドの演算
-  auto query(ll u, ll v, auto&& ti, auto&& q, auto&& f, bool edge = 0) {
-    return query(u, v, ti, q, f, f, edge);
+  T queryPath(ll u, ll v, T e, auto&& get, auto&& op) {
+    T res = e;
+    process(u, v, [&](ll l, ll r) {
+      res = op(res, get(l, r));
+    } );
+    return res;
   }
-
-  void add(ll u, ll v, auto&& q, bool edge = false) {
-    for (;; v = par[head[v]]) {
-      if (in[u] > in[v]) swap(u, v);
-      if (head[u] == head[v]) break;
-      q(in[head[v]], in[v] + 1);
-    }
-    q(in[u] + edge, in[v] + 1);
-  }
-
-  /* {parent, child} */
-  vec<pll> compress(vl& remark) {
-    auto cmp = [&](ll a, ll b) { return in[a] < in[b]; };
-    sort(all(remark), cmp);
-    remark.erase(unique(all(remark)), end(remark));
-    ll K = sz(remark);
-    for (ll k = 1; k < K; k++)
-      remark.emplace_back(lca(remark[k - 1], remark[k]));
-    sort(all(remark), cmp);
-    remark.erase(unique(all(remark)), end(remark));
-    vec<pll> es;
-    stack<ll> st;
-    for (auto& k : remark) {
-      while (!st.empty() && out[st.top()] <= in[k]) st.pop();
-      if (!st.empty()) es.emplace_back(st.top(), k);
-      st.emplace(k);
-    }
-    return es;
-  }
-
-  void dfs_siz(ll idx, ll p, ll d) {
-    dep[idx] = d;
-    par[idx] = p;
-    siz[idx] = 1;
-    if (g[idx].size() && g[idx][0].second == p) swap(g[idx][0], g[idx].back());
-    for (auto& e : g[idx]) {
-      if (e.second == p) continue;
-      dfs_siz(e.second, idx, d + 1);
-      siz[idx] += siz[e.second];
-      if (siz[g[idx][0].second] < siz[e.second]) swap(g[idx][0], e);
-    }
-  }
-
-  void dfs_hld(ll idx, ll p, ll& times) {
-    in[idx] = times++;
-    rev[in[idx]] = idx;
-    for (auto& [_, to] : g[idx]) {
-      if (to == p) continue;
-      head[to] = (g[idx][0].second == to ? head[idx] : to);
-      dfs_hld(to, idx, times);
-    }
-    out[idx] = times;
+  
+  T querySubtree(ll v, auto&& get) {
+    return get(pos[v] + onEdge, pos[v] + siz[v]);
   }
 };

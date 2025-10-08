@@ -8,7 +8,7 @@
 
 #include "../../../Structure/BIT.cpp"
 
-using Graph = vv<pair<ll, ll>>;
+using Graph = vv<ll>;
 
 int main() {
   ll n, q;
@@ -19,16 +19,16 @@ int main() {
   rep(i, n - 1) {
     ll u, v;
     cin >> u >> v;
-    g[u].emplace_back(1, v);
-    g[v].emplace_back(1, u);
+    g[u].emplace_back(v);
+    g[v].emplace_back(u);
   }
 
-  HLD hld(g);
+  HLD<ll> hld(g);
 
   BIT bit(n);
 
   rep(i, n) {
-    hld.add(i, i, [&](int l, int r) { bit.apply(l, a[i]); });
+    hld.process(i, i, [&](int l, int r) { bit.apply(l, a[i]); });
   }
 
   rep(i, q) {
@@ -37,11 +37,11 @@ int main() {
     if (t == 0) {
       ll p, x;
       cin >> p >> x;
-      hld.add(p, p, [&](int l, int r) { bit.apply(l, x); });
+      hld.process(p, p, [&](int l, int r) { bit.apply(l, x); });
     } else {
       ll u, v;
       cin >> u >> v;
-      cout << hld.query(
+      cout << hld.queryPath(
                   u, v, 0LL, [&](ll l, ll r) { return bit.prod(l, r); },
                   [](ll a, ll b) { return a + b; })
            << endl;

@@ -8,15 +8,16 @@ SegTreeなどの区間操作が可能なデータ構造と合わせて使うこ�
 例えば、パス上の頂点 (両端含む) の値の総和を求めるためには、
 
 #sourcecode(```cpp
-HLD hld(g);
+HLD<ll> hld(g);
 BIT bit(n);
 
 // 頂点 p に値 x をセット
-hld.add(p, p, [&](int l, int r) { bit.apply(l, x); });
+hld.process(i, i, [&](int l, int r) { bit.apply(l, a[i]); });
 
 // パスuv上の頂点の値の総和を取得
-hld.query(
-  u, v, 0LL, [&](ll l, ll r) { return bit.prod(l, r); },
+hld.queryPath(
+  u, v, 0LL,
+  [&](ll l, ll r) { return bit.prod(l, r); },
   [](ll a, ll b) { return a + b; }
 )
 ```)

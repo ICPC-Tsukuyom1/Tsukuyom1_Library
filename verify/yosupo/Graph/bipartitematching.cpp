@@ -14,7 +14,7 @@ void solve() {
 	cout << hopcroftKarp(g, btoa) / 2 << endl;
 	rep(i, L) {
 		if (btoa[i] != -1) {
-			cout << i MM btoa[i] - L << endl;
+			cout << i << ' ' << btoa[i] - L << endl;
 		}
 	}
 }

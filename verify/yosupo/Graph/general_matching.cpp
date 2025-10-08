@@ -14,7 +14,7 @@ void solve() {
 	auto ans = a.max_match();
 	cout << sz(ans) << endl;
 	rep(i, sz(ans)) {
-		cout << ans[i] << endl;
+		cout << ans[i].first << ' ' << ans[i].second << endl;
 	}
 }
 int main() {

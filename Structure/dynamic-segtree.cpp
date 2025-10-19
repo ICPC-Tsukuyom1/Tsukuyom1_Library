@@ -1,5 +1,7 @@
 struct DynamicSeg {
-  DynamicSeg *lc = 0, *rc = 0;
+  static deque<DynamicSeg> alloc;
+  // DynamicSeg *lc = 0, *rc = 0;
+  int lc = -1, rc = -1;
   ll l, r;
   T v;
 
@@ -9,10 +11,10 @@ struct DynamicSeg {
   DynamicSeg(ll n) : DynamicSeg(0, n) {}
 
   void _() {
-    if (!lc) {
+    if (lc < 0) {
       ll m = (l + r) / 2;
-      lc = new DynamicSeg(l, m);
-      rc = new DynamicSeg(m, r);
+      lc = alloc.size(), alloc.emplace_back(l, m);
+      rc = alloc.size(), alloc.emplace_back(m, r);
     }
   }
 
@@ -23,9 +25,9 @@ struct DynamicSeg {
       v = a;
     else if (l <= i && i < r) {
       _();
-      lc->update(i, a);
-      rc->update(i, a);
-      auto lv = lc->v, rv = rc->v;
+      alloc[lc].update(i, a);
+      alloc[rc].update(i, a);
+      auto lv = alloc[lc].v, rv = alloc[rc].v;
       v = op(lv, rv);
     }
   }
@@ -36,7 +38,9 @@ struct DynamicSeg {
     if (L <= l && r <= R)
       return v;
     _();
-    auto lv = lc->query(L, R), rv = rc->query(L, R);
+    auto lv = alloc[lc].query(L, R), rv = alloc[rc].query(L, R);
     return op(lv, rv);
   }
 };
+
+deque<DynamicSeg> DynamicSeg::alloc = {};

@@ -1,3 +1,7 @@
+struct DynamicLazySeg;
+// 必ず vec でなく deque で
+deque<DynamicLazySeg> alloc;
+
 struct DynamicLazySeg {
   DynamicLazySeg *lc = 0, *rc = 0;
   ll l, r;
@@ -12,8 +16,8 @@ struct DynamicLazySeg {
   void _() {
     if (!lc) {
       ll m = l + (r - l) / 2;
-      lc = new DynamicLazySeg(l, m);
-      rc = new DynamicLazySeg(m, r);
+      alloc.emplace_back(l, m); lc = &alloc.back();
+      alloc.emplace_back(m, r); rc = &alloc.back();
     }
     if (m != id)
       lc->effect(l, r, m), rc->effect(l, r, m), m = id;

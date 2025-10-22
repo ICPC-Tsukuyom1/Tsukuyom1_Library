@@ -19,8 +19,7 @@ struct DynamicLazySeg {
       alloc.emplace_back(l, m); lc = &alloc.back();
       alloc.emplace_back(m, r); rc = &alloc.back();
     }
-    if (m != id)
-      lc->effect(l, r, m), rc->effect(l, r, m), m = id;
+    if (m != id) lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }
 
   // 区間への作用 O(log N)

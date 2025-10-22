@@ -26,8 +26,7 @@ struct SegTree {
     if (rx <= l || r <= lx) return e;
     if (l <= lx && rx <= r) return v[x];
     int m = (lx + rx) / 2;
-    T lv = query(l, r, x * 2, lx, m),
-      rv = query(l, r, x * 2 + 1, m, rx);
+    T lv = query(l, r, x * 2, lx, m), rv = query(l, r, x * 2 + 1, m, rx);
     return op(lv, rv);
   }
 };

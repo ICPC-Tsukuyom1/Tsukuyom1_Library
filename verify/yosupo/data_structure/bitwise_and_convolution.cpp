@@ -8,9 +8,9 @@ const ll mod = 998244353;
 int main() {
   int n;
   cin >> n;
-  vec<mint> a(1<<n), b(1<<n);
-  rep(i, 1<<n) cin >> a[i];
-  rep(i, 1<<n) cin >> b[i];
+  vec<mint> a(1 << n), b(1 << n);
+  rep(i, 1 << n) cin >> a[i];
+  rep(i, 1 << n) cin >> b[i];
   auto c = and_conv(a, b);
-  rep(i, 1<<n) cout << c[i] << " \n"[i == (1<<n)-1];
+  rep(i, 1 << n) cout << c[i] << " \n"[i == (1 << n) - 1];
 }

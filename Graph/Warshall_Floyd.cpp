@@ -1,4 +1,4 @@
-void Warshall_Floyd(vector<vector<ll>>&dist, ll N) {
+void Warshall_Floyd(vector<vector<ll>>& dist, ll N) {
   rep(k, N) {
     rep(i, N) {
       rep(j, N) {

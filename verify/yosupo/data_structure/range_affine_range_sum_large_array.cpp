@@ -9,30 +9,27 @@ const ll mod = 998244353;
 #define T mint
 #define e 0
 #define F pair<mint, mint>
-#define id F{1, 0}
-#define op(a, b) a+b
-#define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
-#define apply(f, x, l) f.first * x + f.second * l
+#define id \
+  F { 1, 0 }
+#define op(a, b) a + b
+#define merge(a, b) \
+  F { a.first *b.first, a.second *b.first + b.second }
+#define apply(f, x, l) f.first* x + f.second* l
 
 #include "../../../Structure/dynamic-lazysegtree.cpp"
 
-int main()
-{
+int main() {
   ll n, q;
   cin >> n >> q;
   DynamicLazySeg seg(n);
-  while (q--)
-  {
+  while (q--) {
     int type;
     cin >> type;
-    if (type == 0)
-    {
+    if (type == 0) {
       ll l, r, b, c;
       cin >> l >> r >> b >> c;
       seg.effect(l, r, {b, c});
-    }
-    else
-    {
+    } else {
       int l, r;
       cin >> l >> r;
       cout << seg.query(l, r) << endl;

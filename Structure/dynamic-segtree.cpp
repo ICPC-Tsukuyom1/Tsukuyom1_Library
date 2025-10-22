@@ -21,8 +21,7 @@ struct DynamicSeg {
   // 一点更新 O(log N)
   // i : [0, n)
   void update(ll i, T a) {
-    if (l == i && r == i + 1)
-      v = a;
+    if (l == i && r == i + 1) v = a;
     else if (l <= i && i < r) {
       _();
       lc->update(i, a);

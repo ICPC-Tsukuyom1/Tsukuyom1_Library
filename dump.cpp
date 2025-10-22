@@ -5,4 +5,3 @@ template <typename T>
 void dump(const T &val) {
   cerr << TERM_RED << "[[ DEBUG ]] " << val << TERM_RESET << std::endl;
 }
-

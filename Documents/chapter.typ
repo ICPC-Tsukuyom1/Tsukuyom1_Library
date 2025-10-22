@@ -2,6 +2,7 @@
 
 = Documents
 
+#include "env.typ"
 #include "Trigonometry.typ"
 #include "Geometry.typ"
 #include "hash.typ"

@@ -1,2 +1,5 @@
 BasedOnStyle: Google
 AllowShortBlocksOnASingleLine: Always
+AllowShortFunctionsOnASingleLine: All
+BreakBeforeBraces: Attach
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse

@@ -2,11 +2,9 @@
 
 // TODO: HLDはもっとまともな問題でVerifyする (Vertex Set Path Composite など?)
 
-#include "../../../template.cpp"
-
-#include "../../../Structure/hld.cpp"
-
 #include "../../../Structure/BIT.cpp"
+#include "../../../Structure/hld.cpp"
+#include "../../../template.cpp"
 
 using Graph = vv<ll>;
 

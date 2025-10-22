@@ -32,7 +32,7 @@ struct DynamicDualSeg {
   // 点取得 O(log N)
   F get(ll i) {
     if (i < l || r <= i) return id;
-    if (i <= l && r <= i + 1) return v;
+    if (i <= l && r <= i+1) return v;
     _();
     F lv = lc->get(i), rv = rc->get(i);
     return merge(lv, rv);

@@ -19,7 +19,8 @@ struct DynamicSeg {
   // 一点更新 O(log N)
   // i : [0, n)
   void update(ll i, T a) {
-    if (l == i && r == i + 1) v = a;
+    if (l == i && r == i + 1)
+      v = a;
     else if (l <= i && i < r) {
       _();
       lc->update(i, a);
@@ -30,8 +31,10 @@ struct DynamicSeg {
   }
 
   T query(ll L, ll R) {
-    if (R <= l || r <= L) return e;
-    if (L <= l && r <= R) return v;
+    if (R <= l || r <= L)
+      return e;
+    if (L <= l && r <= R)
+      return v;
     _();
     auto lv = lc->query(L, R), rv = rc->query(L, R);
     return op(lv, rv);

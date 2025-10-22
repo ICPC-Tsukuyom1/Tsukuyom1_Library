@@ -9,12 +9,10 @@ const ll mod = 998244353;
 #define T mint
 #define e 0
 #define F pair<mint, mint>
-#define id \
-  F { 1, 0 }
-#define op(a, b) a + b
-#define merge(a, b) \
-  F { a.first *b.first, a.second *b.first + b.second }
-#define apply(f, x, l) f.first* x + f.second* l
+#define id F{1, 0}
+#define op(a, b) a+b
+#define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
+#define apply(f, x, l) f.first * x + f.second * l
 
 #include "../../../Structure/lazysegtree.cpp"
 

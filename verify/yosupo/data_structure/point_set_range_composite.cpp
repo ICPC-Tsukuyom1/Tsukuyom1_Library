@@ -7,10 +7,8 @@ const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 
 #define T pair<mint, mint>
-#define e \
-  { 1, 0 }
-#define op(a, b) \
-  { a.first *b.first, a.second *b.first + b.second }
+#define e {1, 0}
+#define op(a, b) {a.first * b.first, a.second * b.first + b.second}
 
 #include "../../../Structure/segtree.cpp"
 

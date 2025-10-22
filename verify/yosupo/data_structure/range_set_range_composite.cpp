@@ -7,15 +7,13 @@ const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 
 #define T pair<mint, mint>
-#define e \
-  T { 1, 0 }
+#define e T{1, 0}
 #define F pair<mint, mint>
-#define id \
-  F { 0, 0 }
-#define op(a, b) \
-  T { a.first *b.first, a.second *b.first + b.second }
+#define id F{0, 0}
+#define op(a, b) T{a.first * b.first, a.second * b.first + b.second}
 
-T pow_fn(T fn, ll n) {
+T pow_fn(T fn, ll n)
+{
   T ans = e;
   while (n > 0) {
     if (n & 1) ans = op(ans, fn);
@@ -30,23 +28,29 @@ T pow_fn(T fn, ll n) {
 
 #include "../../../Structure/lazysegtree.cpp"
 
-int main() {
+int main()
+{
   int n, q;
   cin >> n >> q;
   auto* seg = new LazySeg(n);
-  rep(i, n) {
+  rep(i, n)
+  {
     ll a, b;
     cin >> a >> b;
     seg->effect(i, i + 1, {a, b});
   }
-  while (q--) {
+  while (q--)
+  {
     int type;
     cin >> type;
-    if (type == 0) {
+    if (type == 0)
+    {
       ll l, r, c, d;
       cin >> l >> r >> c >> d;
       seg->effect(l, r, {c, d});
-    } else {
+    }
+    else
+    {
       int l, r, x;
       cin >> l >> r >> x;
       auto [a, b] = seg->query(l, r);

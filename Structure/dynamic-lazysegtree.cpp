@@ -15,7 +15,8 @@ struct DynamicLazySeg {
       lc = new DynamicLazySeg(l, m);
       rc = new DynamicLazySeg(m, r);
     }
-    if (m != id) lc->effect(l, r, m), rc->effect(l, r, m), m = id;
+    if (m != id)
+      lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }
 
   // 区間への作用 O(log N)

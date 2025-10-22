@@ -7,14 +7,13 @@ const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 
 #define T pair<mint, mint>
-#define e \
-  { 1, 0 }
-#define op(a, b) \
-  { a.first *b.first, a.second *b.first + b.second }
+#define e {1, 0}
+#define op(a, b) {a.first * b.first, a.second * b.first + b.second}
 
 #include "../../../Structure/dynamic-segtree.cpp"
 
-int main() {
+int main()
+{
   ll n, q;
   cin >> n >> q;
 
@@ -27,17 +26,20 @@ int main() {
   // }
   // rep(i, n)
   // {
-  //   cout << seg.query(i, i+1).first << " " << seg.query(i, i+1).second <<
-  //   endl;
+  //   cout << seg.query(i, i+1).first << " " << seg.query(i, i+1).second << endl;
   // }
-  while (q--) {
+  while (q--)
+  {
     ll t;
     cin >> t;
-    if (t == 0) {
+    if (t == 0)
+    {
       ll p, c, d;
       cin >> p >> c >> d;
       seg.update(p, {c, d});
-    } else {
+    }
+    else
+    {
       ll l, r, x;
       cin >> l >> r >> x;
       auto&& [a, b] = seg.query(l, r);

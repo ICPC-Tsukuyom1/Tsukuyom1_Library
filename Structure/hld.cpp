@@ -39,10 +39,12 @@ struct HLD {
 
   T queryPath(ll u, ll v, T e, auto&& get, auto&& op) {
     T res = e;
-    process(u, v, [&](ll l, ll r) { res = op(res, get(l, r)); });
+    process(u, v, [&](ll l, ll r) {
+      res = op(res, get(l, r));
+    } );
     return res;
   }
-
+  
   T querySubtree(ll v, auto&& get) {
     return get(pos[v] + onEdge, pos[v] + siz[v]);
   }

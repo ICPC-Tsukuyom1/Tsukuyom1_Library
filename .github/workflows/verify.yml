@@ -84,19 +84,21 @@ jobs:
       - name: Echo filename
         run: echo problem:$PROBLEM,file:$FILE,url:$URL
       - name: Download yukicoder IO files via API
+        env:
+          YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         run: |
           set -eu
           mkdir -p testcases/in testcases/out testcases/actual
           API_BASE="https://yukicoder.me/api/v1/problems/${PROBLEM}/file"
           echo "Listing inputs from ${API_BASE}/in/"
-          curl -sL "${API_BASE}/in/" | jq -r '.[]' | while read -r name; do
+          curl -sL -H "Authorization: Bearer ${YUKICODER_TOKEN}" "${API_BASE}/in/" | jq -r '.[]' | while read -r name; do
             echo "Downloading in/$name"
-            curl -sL "${API_BASE}/in/${name}" -o "testcases/in/${name}"
+            curl -sL -H "Authorization: Bearer ${YUKICODER_TOKEN}" "${API_BASE}/in/${name}" -o "testcases/in/${name}"
           done
           echo "Listing outputs from ${API_BASE}/out/"
-          curl -sL "${API_BASE}/out/" | jq -r '.[]' | while read -r name; do
+          curl -sL -H "Authorization: Bearer ${YUKICODER_TOKEN}" "${API_BASE}/out/" | jq -r '.[]' | while read -r name; do
             echo "Downloading out/$name"
-            curl -sL "${API_BASE}/out/${name}" -o "testcases/out/${name}"
+            curl -sL -H "Authorization: Bearer ${YUKICODER_TOKEN}" "${API_BASE}/out/${name}" -o "testcases/out/${name}"
           done
       - name: Compile target
         run: |

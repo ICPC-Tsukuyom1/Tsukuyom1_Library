@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  prepare-matrix:
+  prepare-matrix-yosupo:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -20,14 +20,27 @@ jobs:
           problems=$(grep -r -E '^//@yosupo' --include='*.cpp' ./verify | sed -E 's|^(.*)://@yosupo (.*)$|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
           echo "matrix=$problems" >> $GITHUB_OUTPUT
 
+  prepare-matrix-yukicoder:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Find yukicoder files
+        id: set-matrix
+        run: |
+          problems=$(grep -r -E '^//@yukicoder' --include='*.cpp' ./verify | sed -E 's|^(.*)://@yukicoder ([^[:space:]]+).*|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
+          echo "matrix=$problems" >> $GITHUB_OUTPUT
+
   yosupo-verify:
-    needs: prepare-matrix
+    needs: prepare-matrix-yosupo
     runs-on: ubuntu-latest
     timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
-        problem: ${{ fromJson(needs.prepare-matrix.outputs.matrix) }}
+        problem: ${{ fromJson(needs.prepare-matrix-yosupo.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,3 +64,55 @@ jobs:
           mkdir -p ./out
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'ulimit -s unlimited && echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'
+
+  yukicoder-verify:
+    needs: prepare-matrix-yukicoder
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        problem: ${{ fromJson(needs.prepare-matrix-yukicoder.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Extract matrix info
+        run: |
+          echo "PROBLEM=`echo "${{ matrix.problem }}" | cut -d'$' -f1`" >> $GITHUB_ENV
+          echo "FILE=`echo "${{ matrix.problem }}" | cut -d'$' -f2-`" >> $GITHUB_ENV
+          echo "URL=https://yukicoder.me/problems/no/$PROBLEM" >> $GITHUB_ENV
+      - name: Echo filename
+        run: echo problem:$PROBLEM,file:$FILE,url:$URL
+      - name: Download yukicoder IO files via API
+        run: |
+          set -eu
+          mkdir -p testcases/in testcases/out testcases/actual
+          API_BASE="https://yukicoder.me/api/v1/problems/${PROBLEM}/file"
+          echo "Listing inputs from ${API_BASE}/in/"
+          curl -sL "${API_BASE}/in/" | jq -r '.[]' | while read -r name; do
+            echo "Downloading in/$name"
+            curl -sL "${API_BASE}/in/${name}" -o "testcases/in/${name}"
+          done
+          echo "Listing outputs from ${API_BASE}/out/"
+          curl -sL "${API_BASE}/out/" | jq -r '.[]' | while read -r name; do
+            echo "Downloading out/$name"
+            curl -sL "${API_BASE}/out/${name}" -o "testcases/out/${name}"
+          done
+      - name: Compile target
+        run: |
+          g++ -std=c++20 -O2 -I `dirname $FILE` $FILE
+      - name: Execute and judge (diff)
+        run: |
+          set -eu
+          shopt -s nullglob
+          for f in testcases/in/*; do
+            name=$(basename "$f")
+            echo "executing $name..."
+            ./a.out < "$f" > "testcases/actual/$name"
+            if [ -f "testcases/out/$name" ]; then
+              echo "judging $name..."
+              diff -u "testcases/out/$name" "testcases/actual/$name"
+            else
+              echo "warning: expected output testcases/out/$name not found; skipping diff" >&2
+            fi
+          done

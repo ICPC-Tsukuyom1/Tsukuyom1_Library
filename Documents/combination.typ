@@ -14,6 +14,18 @@ $
 D(n) = n! sum_(k=0)^n (-1)^k / k! = floor(n!/e + 1/2)
 $
 
+=== Lucas の定理
+任意の素数 $p$ と非負整数 $m, n$ に対し、$m$ の $p$ 進数表示を $m_k m_(k-1) ... m_0$, $n$ の $p$ 進数表示を $n_k n_(k-1) ... n_0$ とすると
+
+$
+  ""_m "C"_n equiv product_(i=0)^(k) ""_(m_i) "C"_(n_i)
+$
+
+=== 多項係数
+$
+  vec(k_1 + ... + k_n, (k_1, k_2, ..., k_n)) = (sum k_i)!/(k_1 ! k_2 ! ... k_n !)
+$
+
 === Combination の関係式
 
 - Vandermonde の畳み込み

@@ -3,6 +3,7 @@
 = Mathematics
 
 #include "modint.typ"
+#include "modula.typ"
 #include "binomial_coefficients.typ"
 #include "bitwise_or_convolution.typ"
 #include "bitwise_and_convolution.typ"
@@ -10,6 +11,9 @@
 #include "convolution_mod.typ"
 #include "euler_phi.typ"
 #include "extgcd.typ"
+#include "primroot.typ"
+#include "floorsum.typ"
+#include "garner.typ"
 #include "MillerRabin.typ"
 #include "FastFactorize.typ"
 #include "matrix.typ"

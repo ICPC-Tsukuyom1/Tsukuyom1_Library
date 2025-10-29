@@ -40,3 +40,4 @@ ll modsqrt(ll a, ll p) {
         b = modmul(b, g, p);
     }
 }
+ll modinv(ll x, ll mod) { return modpow(x, mod - 2, mod); }

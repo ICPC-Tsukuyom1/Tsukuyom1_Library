@@ -11,6 +11,6 @@ ll floorsum(ll n, ll a, ll b, ll c) {
 	ll top = (a * (n - 1) + b) / c;
 	res += top * n;
 	ll h = (b + c) / c;
-	if (h <= top) res -= floor_sum(top - h + 1, c, c * h - (b + 1), a) + top - h + 1;
+	if (h <= top) res -= floorsum(top - h + 1, c, c * h - (b + 1), a) + top - h + 1;
 	return res;
 }

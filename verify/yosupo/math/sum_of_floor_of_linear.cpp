@@ -5,7 +5,7 @@
 
 void solve() {
     ll n, m, a, b; cin >> n >> m >> a >> b;
-	cout << floor_sum(n, a, b, m) << endl;
+	cout << floorsum(n, a, b, m) << endl;
 }
 int main() {
     ll T = 1;

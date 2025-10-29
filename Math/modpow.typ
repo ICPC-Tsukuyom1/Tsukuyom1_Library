@@ -1,5 +1,0 @@
-#import "@preview/codelst:2.0.2": sourcefile, sourcecode
-
-== modpow
-
-#sourcefile(read("../Math/modpow.cpp"), lang: "cpp")

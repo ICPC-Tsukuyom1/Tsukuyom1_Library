@@ -10,7 +10,6 @@
 #include "convolution_mod.typ"
 #include "euler_phi.typ"
 #include "extgcd.typ"
-#include "modpow.typ"
 #include "MillerRabin.typ"
 #include "FastFactorize.typ"
 #include "matrix.typ"

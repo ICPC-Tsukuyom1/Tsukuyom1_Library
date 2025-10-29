@@ -1,4 +1,4 @@
-#include "modpow.cpp"
+#include "modula.cpp"
 bool isprime(ll n) {
   if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;
   ll a[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022},

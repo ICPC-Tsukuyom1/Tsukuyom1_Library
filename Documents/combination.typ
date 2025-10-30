@@ -27,6 +27,7 @@ $
 $
 
 === Combination の関係式
+$vec(n, k) = vec(n - 1, k - 1) + vec(n - 1, k), vec(n, k) = n/k vec(n - 1, k - 1), vec(L, k) + ... + vec(R - 1, k) = vec(R, k + 1) - vec(L, k + 1)$
 
 - Vandermonde の畳み込み
 $

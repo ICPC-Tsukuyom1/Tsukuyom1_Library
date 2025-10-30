@@ -62,3 +62,5 @@ $1/k (exp x-1)^k = sum_(n=0)^infinity S(n, k) x^n/n!$ (第二種スターリン�
 $(exp(-x))/(1-x) = sum_(n=0)^infinity a_n x^n/n!$ (モンモール数)
 
 $C(x)^k = ((1-sqrt(1-4x))/(2x))^k = sum_(n = 0)^infinity k/(n + k) vec(2n + k - 1, n)$ (カタラン数の母関数の累乗)
+
+$product_(n=1)^infinity 1/(1-x^n) = sum_(n=0)^infinity P_n x^n$ (分割数)

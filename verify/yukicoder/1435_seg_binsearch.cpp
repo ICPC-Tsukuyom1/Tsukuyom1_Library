@@ -37,12 +37,12 @@ int main() {
 
   ll ans = 0;
   rep(l, n) {
-    int r = seg.max_right([](Node x) -> bool {
+    ll r = seg.max_right([](Node x) -> bool {
       if (x.mn2 >= INF / 2) return true;
       return x.mx <= x.mn1 + x.mn2;
     });
     chmin(r, n);
-    ans += max(0, r - l - 1);
+    ans += max(0LL, r - l - 1);
     seg.update(l, e);
   }
 

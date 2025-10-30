@@ -1,6 +1,6 @@
 #import "@preview/codelst:2.0.2": sourcefile, sourcecode
 
-== 三角関数
+== Troubleshooting
 
 提出前 : 
 - サンプルが弱かった場合、自分でちょっとテストケースを作る。

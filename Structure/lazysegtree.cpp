@@ -47,4 +47,21 @@ struct LazySeg {
     T rv = query(L, R, x * 2 + 1, mid, rx);
     return op(lv, rv);
   }
+
+  int max_right(auto f) {
+    if (!f(e)) return 0;
+    if (f(v[1])) return n;
+    T s = e;
+    int i = 1, len = n;
+    while (i < n) {
+      _(i, len);
+      int l = i << 1;
+      _(l, len >> 1);
+      T t = op(s, v[l]);
+      if (f(t)) s = t, i = l + 1;
+      else i = l;
+      len >>= 1;
+    }
+    return i - n;
+  }
 };

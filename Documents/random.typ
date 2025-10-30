@@ -7,7 +7,8 @@
 #sourcecode(```cpp
 // 半開区間 [l, r) から一様ランダムに整数を返す
 ll rnd(ll l, ll r) {
-  static mt19937_64 gen(rand());
+  random_device gen_seed;
+  mt19937_64 gen(gen_seed());
   return uniform_int_distribution<ll>(l, r - 1)(gen);
 }
 ```)
@@ -17,8 +18,9 @@ ll rnd(ll l, ll r) {
 $O(n)$
 
 #sourcecode(```cpp
-mt19937_64 rng(rand());
-shuffle(all(v), rng);
+random_device gen_seed;
+mt19937_64 gen(gen_seed());
+shuffle(all(v), gen);
 ```)
 
 === 列と木の対応 (プリューファー列)

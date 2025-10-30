@@ -6,5 +6,6 @@
 #include "Trigonometry.typ"
 #include "Geometry.typ"
 #include "hash.typ"
+#include "random.typ"
 #include "io.typ"
 #include "parallel-binsearch.typ"

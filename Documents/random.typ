@@ -7,9 +7,7 @@
 #sourcecode(```cpp
 // 半開区間 [l, r) から一様ランダムに整数を返す
 ll rnd(ll l, ll r) {
-  static mt19937_64 gen(
-    chrono::steady_clock::now().time_since_epoch().count()
-  );
+  static mt19937_64 gen(rand());
   return uniform_int_distribution<ll>(l, r - 1)(gen);
 }
 ```)
@@ -19,7 +17,7 @@ ll rnd(ll l, ll r) {
 $O(n)$
 
 #sourcecode(```cpp
-mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+mt19937_64 rng(rand());
 shuffle(all(v), rng);
 ```)
 

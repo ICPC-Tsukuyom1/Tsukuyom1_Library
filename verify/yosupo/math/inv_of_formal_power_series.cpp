@@ -4,8 +4,10 @@
 
 void solve() {
 	ll N; cin >> N;
-	FPS<ll> a(N); cin >> a;
-	cout << a.inv() << endl;
+	FPS<ll> a(N); 
+    rep(i, N) cin >> a[i];
+    auto ans = a.inv();
+	rep(i, sz(ans)) cout << ans[i] << " \n"[i == sz(ans) - 1];
 }
 int main() {
 	ll T = 1;

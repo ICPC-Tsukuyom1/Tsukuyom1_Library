@@ -13,7 +13,7 @@ int main() {
     if (t == 0) {
       uf.unite(u, v);
     } else {
-      cout << (int)uf.same(u, v) << endl;
+      cout << (uf.root(u) == uf.root(v)) << endl;
     }
   }
 }

@@ -1,30 +1,17 @@
 struct UnionFind {
-  ll cnt;
-  vector<ll> par, siz;
-  UnionFind(ll N) : par(N, -1LL), siz(N, 1LL) { cnt = N; }
-
+  vl info;
+  UnionFind(ll n) : info(n, -1LL) {}
   ll root(ll v) {
-    if (par[v] == -1) return v;
-    return par[v] = root(par[v]);
+    if (info[v] < 0) return v;
+    return info[v] = root(info[v]);
   }
-
-  bool same(ll u, ll v) { return root(u) == root(v); }
-
   bool unite(ll u, ll v) {
-    u = root(u);
-    v = root(v);
+    u = root(u), v = root(v);
     if (u == v) return false;
-    if (siz[u] < siz[v]) swap(u, v);
-    par[v] = u;
-    siz[u] += siz[v];
-    cnt--;
+    if (-info[u] < -info[v]) swap(u, v);
+    info[u] += info[v];
+    info[v] = u;
     return true;
   }
-
-  ll size(ll v) {
-    v = root(v);
-    return siz[v];
-  }
-
-  ll count() { return cnt; }
+  ll size(ll v) { return -info[root(v)]; }
 };

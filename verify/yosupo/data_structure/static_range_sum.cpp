@@ -3,15 +3,13 @@
 #include "../../../template.cpp"
 #include "../../../Structure/BIT.cpp"
 
-int main()
-{
+int main() {
   ll n, q;
   cin >> n >> q;
   vl a(n);
   rep(i, n) cin >> a[i];
   BIT b(a);
-  while (q--)
-  {
+  while (q--) {
     ll l, r;
     cin >> l >> r;
     cout << b.prod(l, r) << '\n';

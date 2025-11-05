@@ -14,3 +14,7 @@
 #include "scc.typ"
 #include "topological.typ"
 #include "warshall-floyd.typ"
+#include "PushRelabel.typ"
+#include "hopcroftKarp.typ"
+#include "maxMatching.typ"
+#include "Centroid-Decomposition.typ"

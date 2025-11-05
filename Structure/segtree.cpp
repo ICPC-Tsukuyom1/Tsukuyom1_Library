@@ -26,8 +26,21 @@ struct SegTree {
     if (rx <= l || r <= lx) return e;
     if (l <= lx && rx <= r) return v[x];
     int m = (lx + rx) / 2;
-    T lv = query(l, r, x * 2, lx, m),
-      rv = query(l, r, x * 2 + 1, m, rx);
+    T lv = query(l, r, x * 2, lx, m), rv = query(l, r, x * 2 + 1, m, rx);
     return op(lv, rv);
+  }
+
+  int max_right(auto f) {
+    if (!f(e)) return 0;
+    if (f(v[1])) return n;
+    T s = e;
+    int i = 1;
+    while (i < n) {
+      int l = i << 1;
+      T t = op(s, v[l]);
+      if (f(t)) s = t, i = l + 1;
+      else i = l;
+    }
+    return i - n;
   }
 };

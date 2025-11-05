@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 void bfs(vv<pll>& G, ll s, vector<ll>& dist) {
     queue<ll>Q;
     dist[s] = 0; Q.push(s);
@@ -9,5 +10,21 @@ void bfs(vv<pll>& G, ll s, vector<ll>& dist) {
                 Q.push(nv.first);
             }
         }
+=======
+// need: Graph.cpp
+void bfs(Graph& G, ll s, vector<ll>& dist) {
+  queue<ll> Q;
+  dist[s] = 0;
+  Q.push(s);
+  while (!Q.empty()) {
+    ll v = Q.front();
+    Q.pop();
+    for (auto nv : G[v]) {
+      if (dist[nv.to] == INF) {
+        dist[nv.to] = dist[v] + 1;
+        Q.push(nv.to);
+      }
+>>>>>>> main
     }
+  }
 }

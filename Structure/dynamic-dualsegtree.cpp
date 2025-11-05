@@ -1,4 +1,6 @@
-#include <algorithm>
+struct DynamicDualSeg;
+// 必ず vec でなく deque で
+deque<DynamicDualSeg> alloc;
 
 struct DynamicDualSeg {
   DynamicDualSeg *lc = 0, *rc = 0;
@@ -12,8 +14,8 @@ struct DynamicDualSeg {
   void _() {
     if (!lc) {
       ll mid = (l + r) / 2;
-      lc = new DynamicDualSeg(l, mid);
-      rc = new DynamicDualSeg(mid, r);
+      alloc.emplace_back(l, mid); lc = &alloc.back();
+      alloc.emplace_back(mid, r); rc = &alloc.back();
     }
     lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }
@@ -32,7 +34,7 @@ struct DynamicDualSeg {
   // 点取得 O(log N)
   F get(ll i) {
     if (i < l || r <= i) return id;
-    if (i <= l && r <= i+1) return v;
+    if (i <= l && r <= i + 1) return v;
     _();
     F lv = lc->get(i), rv = rc->get(i);
     return merge(lv, rv);

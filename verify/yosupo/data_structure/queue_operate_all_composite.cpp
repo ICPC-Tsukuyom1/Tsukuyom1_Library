@@ -1,4 +1,4 @@
-//@yosupo deque_operate_all_composite
+//@yosupo queue_operate_all_composite
 
 #include "../../../template.cpp"
 
@@ -26,15 +26,9 @@ int main() {
     if (t == 0) {
       ll a, b;
       cin >> a >> b;
-      s.push_front({a, b});
-    } else if (t == 1) {
-      ll a, b;
-      cin >> a >> b;
       s.push_back({a, b});
-    } else if (t == 2) {
+    } else if (t == 1) {
       s.pop_front();
-    } else if (t == 3) {
-      s.pop_back();
     } else {
       ll x;
       cin >> x;

@@ -1,9 +1,11 @@
-// need: Graph.cpp, UnionFind.cpp
+struct Edge {
+  ll from, to, cost;
+};
 struct MST {
   ll cost;
-  Edges edges;
+  vec<Edge> edges;
 };
-MST Kruskal(Edges &edges, ll V) {
+MST Kruskal(vec<Edge> &edges, ll V) {
   sort(edges.begin(), edges.end(),
        [](Edge &a, Edge &b) { return a.cost < b.cost; });
   UnionFind uf(V);

@@ -5,7 +5,6 @@
 #include "bellman-ford.typ"
 #include "kruskal.typ"
 #include "lca.typ"
-#include "prim.typ"
 #include "rerooting.typ"
 #include "scc.typ"
 #include "topological.typ"

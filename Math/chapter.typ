@@ -2,7 +2,6 @@
 
 = Mathematics
 
-#include "modint.typ"
 #include "modula.typ"
 #include "binomial_coefficients.typ"
 #include "bitwise_or_convolution.typ"

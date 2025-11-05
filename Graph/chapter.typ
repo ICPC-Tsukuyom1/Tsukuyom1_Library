@@ -3,7 +3,6 @@
 = Graph
 
 #include "bellman-ford.typ"
-#include "graph.typ"
 #include "kruskal.typ"
 #include "lca.typ"
 #include "prim.typ"

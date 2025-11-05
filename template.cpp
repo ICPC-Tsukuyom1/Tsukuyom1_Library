@@ -25,12 +25,3 @@ template <typename T>
 bool chmin(T& a, const T& b) {
   return a > b ? a = b, true : false;
 }
-void solve() {}
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  cout << fixed << setprecision(12);
-  ll T = 1;
-  // cin >> T;
-  while (T--) solve();
-}

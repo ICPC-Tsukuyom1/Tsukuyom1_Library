@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 struct Edge {
     ll from, to, cost;
 };
@@ -11,13 +10,6 @@ bool bellman_ford(vec<Edge> &edges, vl &dist, ll V, ll s) {
             chmin(dist[e.to], dist[e.from] + e.cost);
         }
     }
-=======
-// need: Graph.cpp
-bool bellman_ford(Edges &edges, vector<ll> &dist, ll V, ll s) {
-  dist = vector<ll>(V, INF);
-  dist[s] = 0;
-  rep(i, V - 1) {
->>>>>>> main
     for (auto e : edges) {
       if (dist[e.from] == INF) continue;
       chmin(dist[e.to], dist[e.from] + e.cost);

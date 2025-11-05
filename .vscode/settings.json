@@ -10,6 +10,7 @@
         "regex": "cpp",
         "valarray": "cpp",
         "random": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     }
 }

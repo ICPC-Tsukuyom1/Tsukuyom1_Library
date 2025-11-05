@@ -7,5 +7,6 @@
 #include "Geometry.typ"
 #include "hash.typ"
 #include "random.typ"
+#include "timer.typ"
 #include "io.typ"
 #include "parallel-binsearch.typ"

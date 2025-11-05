@@ -3,9 +3,6 @@
 = Graph
 
 #include "bellman-ford.typ"
-#include "bfs.typ"
-#include "dfs.typ"
-#include "dijkstra.typ"
 #include "graph.typ"
 #include "kruskal.typ"
 #include "lca.typ"
@@ -13,7 +10,6 @@
 #include "rerooting.typ"
 #include "scc.typ"
 #include "topological.typ"
-#include "warshall-floyd.typ"
 #include "PushRelabel.typ"
 #include "hopcroftKarp.typ"
 #include "maxMatching.typ"

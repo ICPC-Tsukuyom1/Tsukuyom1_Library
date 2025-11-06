@@ -13,6 +13,6 @@ static な配列に対し, 以下の条件を満たす演算を行う区間ク�
 #sourcecode(```cpp
 #define T ll
 #define op(a, b) a + b
-```
+```)
 
 #sourcefile(read("../Structure/disjoint-sparsetable.cpp"), lang: "cpp")

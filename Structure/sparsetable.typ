@@ -12,6 +12,6 @@ static な配列に対し, 以下の条件を満たす演算を行う区間ク�
 #sourcecode(```cpp
 #define T int
 #define op(a, b) min(a, b)
-```
+```)
 
 #sourcefile(read("../Structure/SparseTable.cpp"), lang: "cpp")

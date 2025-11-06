@@ -17,6 +17,7 @@ struct DisjointSparseTable {
     }
   }
 
+  // 0-indexed, [l, r)
   T fold(ll l, ll r) {
     --r;
     if (l == r) return st[0][l];

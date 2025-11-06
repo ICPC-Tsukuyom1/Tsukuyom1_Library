@@ -7,10 +7,11 @@ struct SparseTable {
       st.emplace_back(n - len + 1);
       auto& pre = st[sz(st) - 2];
       auto& cur = st.back();
-      rep(i, sz(cur)) cur[i] = op(pre[i], pre[i + len/2]);
+      rep(i, sz(cur)) cur[i] = op(pre[i], pre[i + len / 2]);
     }
   }
 
+  // 0-indexed, [l, r)
   T fold(ll l, ll r) {
     ll b = __lg(r - l);
     return op(st[b][l], st[b][r - (1 << b)]);

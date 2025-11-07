@@ -1,3 +1,5 @@
+#include "../Structure/unionfind.cpp"
+
 struct Edge {
   ll from, to, cost;
 };
@@ -10,9 +12,9 @@ MST Kruskal(vec<Edge> &edges, ll V) {
        [](Edge &a, Edge &b) { return a.cost < b.cost; });
   UnionFind uf(V);
   ll total = 0ll;
-  Edges es;
+  vec<Edge> es;
   for (auto e : edges) {
-    if (!uf.same(e.from, e.to)) {
+    if (uf.root(e.from) != uf.root(e.to)) {
       es.emplace_back(e);
       total += e.cost;
       uf.unite(e.from, e.to);

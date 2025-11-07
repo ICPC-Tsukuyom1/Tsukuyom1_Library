@@ -30,7 +30,7 @@
 #show heading.where(level: 1): text.with(fill: white)
 
 #show heading.where(level: 1): block.with(
-  above: 8pt,
+  above: 12pt,
   below: 4pt,
   fill: luma(0%),
   inset: 4pt
@@ -41,7 +41,8 @@
   weight: "semibold"
 )
 #show heading.where(level: 2): block.with(
-  above: 8pt
+  above: 10pt,
+  below: 8pt,
 )
 
 #show raw: set text(font: ("Fira Code", "Noto Sans CJK JP"))
@@ -51,6 +52,8 @@
 #outline(
   title: "TOC",
 )
+
+#pagebreak()
 
 #include "../chapter.typ"
 #include "../Geometry/chapter.typ"

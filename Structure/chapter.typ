@@ -12,6 +12,7 @@
 #include "hld.typ"
 #include "rollinghash.typ"
 #include "sparsetable.typ"
+#include "disjoint-sparsetable.typ"
 #include "swag.typ"
 #include "unionfind.typ"
 #include "weightedunionfind.typ"

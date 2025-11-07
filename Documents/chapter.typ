@@ -10,3 +10,5 @@
 #include "timer.typ"
 #include "io.typ"
 #include "parallel-binsearch.typ"
+#include "combination.typ"
+#include "math.typ"

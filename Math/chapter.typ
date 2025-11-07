@@ -16,3 +16,4 @@
 #include "FastFactorize.typ"
 #include "matrix.typ"
 #include "fps.typ"
+#include "golden_section_search.typ"

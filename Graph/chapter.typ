@@ -8,6 +8,7 @@
 #include "rerooting.typ"
 #include "scc.typ"
 #include "topological.typ"
+#include "twosat.typ"
 #include "PushRelabel.typ"
 #include "hopcroftKarp.typ"
 #include "maxMatching.typ"

@@ -48,8 +48,11 @@ struct FPS : vector<T> {
     root = g;
   }
 
+  
+  ll size() { return (ll)this->size(); }
+
   P pre(ll def) const {
-    return P(begin(*this), begin(*this) + min((ll)this->size(), def));
+    return P(begin(*this), begin(*this) + min(size(), def));
   }
   P rev(ll deg = -1) const {
     P ret(*this);
@@ -62,7 +65,7 @@ struct FPS : vector<T> {
     while (this->size() && !this->back()) this->pop_back();
   }
 
-  T freq(ll p) const { return (p < (ll)this->size()) ? (*this)[p] : T(0); }
+  T freq(ll p) const { return (p < size()) ? (*this)[p] : T(0); }
 
   P operator+(const P& r) const { return P(*this) += r; }
   P operator+(const T& v) const { return P(*this) += v; }
@@ -74,13 +77,13 @@ struct FPS : vector<T> {
   P operator%(const P& r) const { return P(*this) %= r; }
 
   P& operator+=(const P& r) {
-    if (sz(r) > (ll)this->size()) this->resize(sz(r));
-    rep(i, sz(r))(*this)[i] += r[i];
+    if (r.size() > size()) this->resize(r.size());
+    rep(i, r.size())(*this)[i] += r[i];
     return *this;
   }
   P& operator-=(const P& r) {
-    if (sz(r) > (ll)this->size()) this->resize(sz(r));
-    rep(i, sz(r))(*this)[i] =
+    if (r.size() > size()) this->resize(r.size());
+    rep(i, r.size())(*this)[i] =
         (*this)[i] - r[i] + (r[i] > (*this)[i] ? mod : 0ll);
     return *this;
   }
@@ -94,11 +97,11 @@ struct FPS : vector<T> {
     return *this = {all(ret)};
   }
   P& operator/=(const P& r) {
-    if (this->size() < r.size()) {
+    if (size() < r.size()) {
       this->clear();
       return *this;
     }
-    ll n = this->size() - r.size() + 1;
+    ll n = size() - r.size() + 1;
     return *this = (rev().pre(n) * r.rev().inv(n)).pre(n).rev(n);
   }
   P& operator%=(const P& r) {
@@ -113,8 +116,8 @@ struct FPS : vector<T> {
     return make_pair(q, x);
   }
   P operator-() const {
-    P ret(sz(this));
-    rep(i, sz(this)) ret[i] = -(*this)[i];
+    P ret(size());
+    rep(i, size()) ret[i] = -(*this)[i];
     return ret;
   }
   P& operator+=(const T& v) {
@@ -128,16 +131,16 @@ struct FPS : vector<T> {
     return *this;
   }
   P& operator*=(const T& v) {
-    rep(i, (ll)this->size())(*this)[i] = modmul((*this)[i], v, mod);
+    rep(i, size())(*this)[i] = modmul((*this)[i], v, mod);
     return *this;
   }
   P dot(P r) const {
-    P ret(min(this->size(), r.size()));
-    rep(i, sz(ret)) ret[i] = modmul((*this)[i], r[i], mod);
+    P ret(min(size(), r.size()));
+    rep(i, ret.size()) ret[i] = modmul((*this)[i], r[i], mod);
     return ret;
   }
   P operator>>(ll sz) const {
-    if ((ll)this->size() <= sz) return {};
+    if (size() <= sz) return {};
     P ret(*this);
     ret.erase(ret.begin(), ret.begin() + sz);
     return ret;
@@ -156,19 +159,19 @@ struct FPS : vector<T> {
     return r;
   }
   P diff() const {
-    const ll n = (ll)this->size();
+    const ll n = size();
     P ret(max(0ll, n - 1));
     reps(i, 1, n) ret[i - 1] = modmul((*this)[i], T(i), mod);
     return ret;
   }
   P integral() const {
-    const ll n = (ll)this->size();
+    const ll n = size();
     P ret(n + 1);
     rep(i, n) ret[i + 1] = modmul(freq(i), modinv(T(i + 1), mod), mod);
     return ret;
   }
   P inv(ll deg = -1) const {
-    if (deg == -1) deg = (ll)this->size();
+    if (deg == -1) deg = size();
     P res = P({modmul(T(1), modinv(freq(0), mod), mod)});
     for (ll i = 1; i < deg; i *= 2) {
       res = (res * T(2) - res * res * pre(2 * i)).pre(2 * i);
@@ -177,7 +180,7 @@ struct FPS : vector<T> {
   }
   P exp(ll n = -1) const {
     assert(freq(0) == T(0));
-    if (n == -1) n = (ll)this->size();
+    if (n == -1) n = size();
     P g = P({T(1)});
     for (ll i = 1; i < n; i *= 2) {
       g = (g * (pre(i * 2) + P({T(1)}) - g.log(i * 2))).pre(i * 2);
@@ -185,13 +188,13 @@ struct FPS : vector<T> {
     return g.pre(n);
   }
   P log(ll n = -1) const {
-    if (n == -1) n = (ll)this->size();
+    if (n == -1) n = size();
     assert(freq(0) == T(1));
     auto f = pre(n);
     return (f.diff() * f.inv(n - 1)).pre(n - 1).integral();
   }
   P sqrt(ll deg = -1) const {
-    const ll n = (ll)this->size();
+    const ll n = size();
     if (deg == -1) deg = n;
     if ((*this)[0] == T(0)) {
       reps(i, 1, n) {
@@ -201,7 +204,7 @@ struct FPS : vector<T> {
           auto ret = (*this >> i).sqrt(deg - i / 2);
           if (ret.empty()) return {};
           ret = ret << (i / 2);
-          if (sz(ret) < deg) ret.resize(deg, T(0));
+          if (ret.size() < deg) ret.resize(deg, T(0));
           return ret;
         }
       }
@@ -217,13 +220,13 @@ struct FPS : vector<T> {
     return ret.pre(deg);
   }
   P pow(ll k, ll n = -1) {
-    if (n == -1) n = (ll)this->size();
+    if (n == -1) n = size();
     if (k == 0) {
       P res(n);
       res[0] = T(1);
       return res;
     }
-    rep(i, (ll)this->size()) {
+    rep(i, size()) {
       if ((*this)[i]) {
         T rev = modmul(T(1), modinv((*this)[i], mod), mod);
         P ret = (((*this * rev) >> i).log(n) * T(k)).exp(n);
@@ -246,7 +249,7 @@ struct FPS : vector<T> {
     return r;
   }
   P shift(T c) const {
-    ll n = this->size();
+    ll n = size();
     vec<T> fact(n), rfact(n);
     fact[0] = rfact[0] = T(1);
     reps(i, 1, n) fact[i] = modmul(fact[i - 1], T(i), mod);

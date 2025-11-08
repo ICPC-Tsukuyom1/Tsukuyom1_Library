@@ -6,4 +6,4 @@
 現在時刻を `time()` で取得でき、`rollback(t)` で時刻 `t` に巻き戻せる。
 `unite()`, `root()` は $O(log N)$ 、`size()`, `time()` は $O(1)$ 、`rollback()` は巻き戻す回数を $k$ として $O(k)$ で動作する。
 
-#sourcefile(read("../Structure/unionfind-rollback.cpp"), lang: "cpp")
+#sourcefile(read("../Structure/UnionFind-rollback.cpp"), lang: "cpp")

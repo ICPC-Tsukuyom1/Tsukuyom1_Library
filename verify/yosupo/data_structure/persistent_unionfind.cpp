@@ -40,7 +40,7 @@ int main() {
   UFRollback uf(n);
 
   auto dfs = [&](auto&& dfs, ll cur) -> void {
-    for (auto &q : queriesAt[cur]) {
+    for (auto& q : queriesAt[cur]) {
       ans[q.idx] = (uf.root(q.u) == uf.root(q.v));
     }
     for (ll nxt : child[cur]) {

@@ -1,5 +1,5 @@
 struct SWAG {
-  #define get(v) (sz(v) ? v.back().second : (e))
+#define get(v) (sz(v) ? v.back().second : (e))
   using vp = vec<pair<T, T>>;
   vp f, b;
   SWAG() {}

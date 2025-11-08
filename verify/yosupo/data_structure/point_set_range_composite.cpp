@@ -34,7 +34,7 @@ int main() {
     } else {
       ll l, r, x;
       cin >> l >> r >> x;
-      auto&& [a, b] = seg.query(l, r);
+      auto &&[a, b] = seg.query(l, r);
       cout << a * x + b << '\n';
     }
   }

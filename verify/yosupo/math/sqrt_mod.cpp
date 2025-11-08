@@ -2,11 +2,12 @@
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"
 void solve() {
-    ll x, p; cin >> x >> p;
-	cout << modsqrt(x, p) << endl;
+  ll x, p;
+  cin >> x >> p;
+  cout << modsqrt(x, p) << endl;
 }
 int main() {
-    ll T = 1;
-    cin >> T;
-    while (T--) solve();
+  ll T = 1;
+  cin >> T;
+  while (T--) solve();
 }

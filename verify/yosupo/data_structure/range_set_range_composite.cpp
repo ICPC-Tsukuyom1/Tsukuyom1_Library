@@ -33,7 +33,7 @@ T pow_fn(T fn, ll n) {
 int main() {
   int n, q;
   cin >> n >> q;
-  auto* seg = new LazySeg(n);
+  auto *seg = new LazySeg(n);
   rep(i, n) {
     ll a, b;
     cin >> a >> b;

@@ -14,8 +14,10 @@ struct DynamicDualSeg {
   void _() {
     if (!lc) {
       ll mid = (l + r) / 2;
-      alloc.emplace_back(l, mid); lc = &alloc.back();
-      alloc.emplace_back(mid, r); rc = &alloc.back();
+      alloc.emplace_back(l, mid);
+      lc = &alloc.back();
+      alloc.emplace_back(mid, r);
+      rc = &alloc.back();
     }
     lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }

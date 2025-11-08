@@ -13,9 +13,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vec<int> a(n);
-  rep(i, n) {
-    cin >> a[i];
-  }
+  rep(i, n) { cin >> a[i]; }
   SparseTable st(a);
   rep(i, q) {
     int l, r;

@@ -1,4 +1,4 @@
-#include "./Point.cpp"
+// depends on: Point
 // strict = true => NOT include points on edge
 // strict = false => include points on edge
 Polygon convex_hull(Polygon &p, bool strict = true) {

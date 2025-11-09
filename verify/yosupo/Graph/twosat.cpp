@@ -1,7 +1,6 @@
 //@yosupo two_sat
 
 #include "../../../template.cpp"
-#include "../../../Graph/Graph.cpp"
 #include "../../../Graph/SCC.cpp"
 #include "../../../Graph/twosat.cpp"
 

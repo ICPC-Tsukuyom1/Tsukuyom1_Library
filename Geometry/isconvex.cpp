@@ -1,5 +1,4 @@
-#include "./Point.cpp"
-#include "./ccw.cpp"
+// depends on: Point, ccw
 bool isconvex(Polygon S) {
   ll n = sz(S);
   rep(i, n) {

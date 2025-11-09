@@ -1,6 +1,6 @@
 struct Twosat {
   ll N;
-  Graph gr;
+  vv<ll> gr;
   vl values;
   Twosat(ll n = 0) : N(n), gr(2 * n) {}
 
@@ -8,14 +8,13 @@ struct Twosat {
   // i = f は、either(i, f, i, f)
   // (i = f) -> (j = g) は、either(i, !f, j, g)
   void either(ll i, bool f, ll j, bool g) {
-    gr.add(i * 2 + (!f), j * 2 + g, 1, 1);
-    gr.add(j * 2 + (!g), i * 2 + f, 1, 1);
+    gr[i * 2 + (!f)].emplace_back(j * 2 + g);
+    gr[j * 2 + (!g)].emplace_back(i * 2 + f);
     return;
   }
 
   vec<bool> satisfy() {
     SCC scc(gr);
-    scc.build();
     vec<bool> ret(N);
     vl idx = scc.cmp;
     rep(i, N) {

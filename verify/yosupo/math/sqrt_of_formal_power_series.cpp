@@ -2,19 +2,19 @@
 #include "../../../template.cpp"
 #include "../../../Math/fps.cpp"
 void solve() {
-	ll N; cin >> N;
-	FPS<ll> a(N); 
-    rep(i, N) cin >> a[i];
-	auto ans = a.sqrt();
-	if (ans.empty()) {
-		cout << -1 << endl;
-	}
-	else {
-        rep(i, sz(ans)) cout << ans[i] << " \n"[i == sz(ans) - 1];
-    }
+  ll N;
+  cin >> N;
+  FPS<ll> a(N);
+  rep(i, N) cin >> a[i];
+  auto ans = a.sqrt();
+  if (ans.empty()) {
+    cout << -1 << endl;
+  } else {
+    rep(i, sz(ans)) cout << ans[i] << " \n"[i == sz(ans) - 1];
+  }
 }
 int main() {
-	ll T = 1;
-	// cin >> T;
-	while (T--) solve();
+  ll T = 1;
+  // cin >> T;
+  while (T--) solve();
 }

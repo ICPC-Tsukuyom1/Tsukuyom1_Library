@@ -1,6 +1,8 @@
 //@yosupo furthest_pair
 
 #include "../../../template.cpp"
+#include "../../../Geometry/Point.cpp"
+#include "../../../Geometry/convex_hull.cpp"
 #include "../../../Geometry/diamConvex.cpp"
 void solve() {
   ll n;

@@ -2,7 +2,6 @@
 
 = Mathematics
 
-#include "modint.typ"
 #include "modula.typ"
 #include "binomial_coefficients.typ"
 #include "bitwise_or_convolution.typ"
@@ -17,3 +16,4 @@
 #include "FastFactorize.typ"
 #include "matrix.typ"
 #include "fps.typ"
+#include "golden_section_search.typ"

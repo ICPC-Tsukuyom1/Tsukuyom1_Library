@@ -1,13 +1,12 @@
-// need: Graph.cpp
-vector<ll> topological_sort(Graph &G) {
-  vector<ll> ans;
-  ll N = (ll)G.size();
-  vector<ll> ind(N);
-  for (ll i = 0; i < N; i++) {
-    for (auto e : G[i]) { ind[e.to]++; }
+vl toposort(vv<ll>& G) {
+  vl ans;
+  ll N = sz(G);
+  vl ind(N);
+  rep(i, N) {
+    for (auto e : G[i]) { ind[e]++; }
   }
   queue<ll> Q;
-  for (ll i = 0; i < N; i++) {
+  rep(i, N) {
     if (ind[i] == 0) Q.push(i);
   }
   while (!Q.empty()) {
@@ -15,8 +14,8 @@ vector<ll> topological_sort(Graph &G) {
     ans.push_back(v);
     Q.pop();
     for (auto e : G[v]) {
-      ind[e.to]--;
-      if (ind[e.to] == 0) Q.push(e.to);
+      ind[e]--;
+      if (ind[e] == 0) Q.push(e);
     }
   }
   return ans;

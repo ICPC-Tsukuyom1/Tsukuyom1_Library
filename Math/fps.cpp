@@ -74,13 +74,13 @@ public:
 	P operator%(const P& r) const { return P(*this) %= r; }
 
 	P& operator+=(const P& r) {
-		if (sz(r) > (ll)this->size()) this->resize(sz(r));
-		rep(i, sz(r)) (*this)[i] += r[i];
+		if (r.size() > this->size()) this->resize(r.size());
+		rep(i, r.size()) (*this)[i] += r[i];
 		return *this;
 	}
 	P& operator-=(const P& r) {
-		if (sz(r) > (ll)this->size()) this->resize(sz(r));
-		rep(i, sz(r)) (*this)[i] = (*this)[i] - r[i] + (r[i] > (*this)[i] ? mod : 0ll);
+		if (r.size() > this->size()) this->resize(r.size());
+		rep(i, r.size()) (*this)[i] = (*this)[i] - r[i] + (r[i] > (*this)[i] ? mod : 0ll);
 		return *this;
 	}
 
@@ -112,8 +112,8 @@ public:
 		return make_pair(q, x);
 	}
 	P operator-() const {
-		P ret(sz(this));
-		rep(i, sz(this)) ret[i] = -(*this)[i];
+		P ret(this->size());
+		rep(i, (ll)this->size()) ret[i] = -(*this)[i];
 		return ret;
 	}
 	P& operator+=(const T& v) {
@@ -132,7 +132,7 @@ public:
 	}
 	P dot(P r) const {
 		P ret(min(this->size(), r.size()));
-		rep(i, sz(ret)) ret[i] = modmul((*this)[i], r[i], mod);
+		rep(i, (ll)ret.size()) ret[i] = modmul((*this)[i], r[i], mod);
 		return ret;
 	}
 	P operator>>(ll sz) const {
@@ -200,7 +200,7 @@ public:
 					auto ret = (*this >> i).sqrt(deg - i / 2);
 					if (ret.empty()) return {};
 					ret = ret << (i / 2);
-					if (sz(ret) < deg) ret.resize(deg, T(0));
+					if ((ll)ret.size() < deg) ret.resize(deg, T(0));
 					return ret;
 				}
 			}

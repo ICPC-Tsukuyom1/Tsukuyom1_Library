@@ -1,4 +1,4 @@
-#include "./Point.cpp"
+// depends on: Point
 vec<Line> commonTangents(Circle c1, Circle c2) {
   bool s = false;
   if (c1.r < c2.r) {

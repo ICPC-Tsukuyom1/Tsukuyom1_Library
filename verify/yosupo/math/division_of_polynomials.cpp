@@ -1,5 +1,6 @@
 //@yosupo division_of_polynomials
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
 #include "../../../Math/fps.cpp"
 void solve() {
   ll N, M;

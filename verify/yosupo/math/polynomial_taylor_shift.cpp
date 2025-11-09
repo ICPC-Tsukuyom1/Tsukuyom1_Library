@@ -1,5 +1,6 @@
 //@yosupo polynomial_taylor_shift
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
 #include "../../../Math/fps.cpp"
 void solve() {
   ll N, c;

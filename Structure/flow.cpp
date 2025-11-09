@@ -8,11 +8,11 @@ struct Dinic {
   vv<edge> graph;
   vl min_cost, iter;
 
-  explicit Dinic(int V) : graph(V) {}
+  Dinic(int V) : graph(V) {}
 
   void add(ll from, ll to, ll cap, ll idx = -1) {
-    graph[from].emplace_back((edge){to, cap, sz(graph[to]), false, idx});
-    graph[to].emplace_back((edge){from, 0, sz(graph[from]) - 1, true, idx});
+    graph[from].emplace_back(edge{to, cap, sz(graph[to]), false, idx});
+    graph[to].emplace_back(edge{from, 0, sz(graph[from]) - 1, true, idx});
   }
 
   bool build(int s, int t) {
@@ -56,7 +56,7 @@ struct Dinic {
     }
     return flow;
   }
-  vector<bool> min_cut(int s) {
+  vec<bool> min_cut(int s) {
     vec<bool> used(sz(graph));
     queue<ll> que;
     que.emplace(s);

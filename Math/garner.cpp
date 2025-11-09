@@ -1,4 +1,5 @@
-#include "./modula.cpp"
+// depends on modula 演算
+
 ll garner(vl a, vl p, ll mod) {
   const ll n = sz(a);
   vl kp(n + 1, 0), rmult(n + 1, 1);

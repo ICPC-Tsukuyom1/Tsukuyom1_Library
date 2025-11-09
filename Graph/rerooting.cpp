@@ -1,14 +1,21 @@
+template <class T = ll>
+struct Edge {
+  ll from, to;
+  T cost;
+  Edge(ll from, ll to, T cost) : from(from), to(to), cost(cost) {}
+};
+
 template <class T>
-vec<V> rerooting(Graph<T>& G) {
+vec<V> rerooting(vv<Edge<T>>& G) {
   ll n = G.size();
   vec<V> ans0(n);
   vv<E> l_acc(n), r_acc(n);
   auto dfs0 = [&](auto&& f, ll i, ll p) -> void {
     vec<E> cache;
-    for (auto& c : G[i]) {
-      if (c.to == p) continue;
-      f(f, c.to, i);
-      cache.push_back(put_edge(ans0[c.to], c));
+    for (auto& e : G[i]) {
+      if (e.to == p) continue;
+      f(f, e.to, i);
+      cache.push_back(put_edge(ans0[e.to], e));
     }
     l_acc[i].push_back(ee);
     r_acc[i].push_back(ee);

@@ -1,5 +1,6 @@
 //@yosupo sqrt_of_formal_power_series
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
 #include "../../../Math/fps.cpp"
 void solve() {
   ll N;

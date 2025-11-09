@@ -1,7 +1,7 @@
 #include "./Point.cpp"
 
 ld Area(Polygon S) {
-  ld ans = 0;
-  rep(i, sz(S) - 2) { ans += (S[i + 1] - S[0]).cross(S[i + 2] - S[0]) * 0.5; }
+  ld ans = 0; Point p = S[0];
+  rep(i,sz(S)-2) ans+=(S[i+1]-p).cross(S[i+2]-p);
   return ans;
 }

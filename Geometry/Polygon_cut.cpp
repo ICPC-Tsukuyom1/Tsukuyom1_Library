@@ -1,4 +1,4 @@
-#include "lineInter.cpp"
+// depends on: Point, lineInter
 Polygon polygonCut(Polygon &p, Point s, Point e) {
   Polygon res;
   rep(i, sz(p)) {

@@ -1,5 +1,5 @@
 #include "../random.cpp"
-#include "./FastFactorize.cpp"
+#include "FastFactorize.cpp"
 ll primroot(ll p) {
   auto v = fac(p - 1);
   sort(all(v));

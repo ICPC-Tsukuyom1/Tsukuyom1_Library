@@ -1,5 +1,5 @@
 vec<mint> fac, inv;
-vec<vec<mint>> pascal;
+vv<mint> pascal;
 void init(ll n) {
   if (n <= 4500) {
     pascal = vv(n + 1, vec<mint>(n + 1, 0));

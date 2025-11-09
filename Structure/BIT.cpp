@@ -1,11 +1,10 @@
 template <typename T = ll>
 struct BIT {
   ll N;
-  vector<T> data;
+  vec<T> data;
 
-  BIT() = default;
-  explicit BIT(ll N_) : N(N_ + 1), data(N + 1, T()) {}
-  explicit BIT(vector<T> &v) : BIT((ll)v.size()) { build(v); }
+  BIT(ll N_) : N(N_ + 1), data(N + 1, T()) {}
+  BIT(vec<T> &v) : BIT(sz(v)) { build(v); }
 
   void build(vector<T> &v) {
     rep(i, N) data[i + 1] = v[i];
@@ -19,15 +18,15 @@ struct BIT {
     for (++k; k <= N; k += k & -k) data[k] += x;
   }
 
-  T prod(ll r) const {
+  T prod(ll r) {
     T ret = T();
     for (; r > 0; r -= r & -r) ret += data[r];
     return ret;
   }
 
-  T prod(ll l, ll r) const { return prod(r) - prod(l); }
+  T prod(ll l, ll r) { return prod(r) - prod(l); }
 
-  ll lower_bound(T x) const {
+  ll lower_bound(T x) {
     ll i = 0;
     for (ll k = 1 << (__lg(N) + 1); k > 0; k >>= 1) {
       if (i + k <= N && data[i + k] < x) {
@@ -38,7 +37,7 @@ struct BIT {
     return i;
   }
 
-  ll upper_bound(T x) const {
+  ll upper_bound(T x) {
     ll i = 0;
     for (ll k = 1 << (__lg(N) + 1); k > 0; k >>= 1) {
       if (i + k <= N && data[i + k] <= x) {

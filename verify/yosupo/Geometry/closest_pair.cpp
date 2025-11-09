@@ -1,6 +1,7 @@
 //@yosupo closest_pair
 
 #include "../../../template.cpp"
+#include "../../../Geometry/Point.cpp"
 #include "../../../Geometry/closest_pair.cpp"
 
 void solve() {

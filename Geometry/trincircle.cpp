@@ -1,4 +1,4 @@
-#include "area.cpp"
+// depends on: Point, area
 Circle trinCircle(Polygon p) {
   assert(sz(p) == 3);
   vec<ld> a = {(p[1] - p[2]).abs(), (p[2] - p[0]).abs(), (p[0] - p[1]).abs()};

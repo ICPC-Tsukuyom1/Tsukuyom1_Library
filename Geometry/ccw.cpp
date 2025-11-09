@@ -1,4 +1,4 @@
-#include "./Point.cpp"
+// depends on: Point
 
 static const int COUNTER_CLOCKWISE = 1;
 static const int CLOCKWISE = -1;

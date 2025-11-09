@@ -1,6 +1,4 @@
-#include "Point.cpp"
-#include "segDistance.cpp"
-#include "segInter.cpp"
+// depends on: Point, segDistance, segInter
 
 ld ssDist(Segment S1, Segment S2) {
   if (sz(segInter(S1, S2))) return 0.0;

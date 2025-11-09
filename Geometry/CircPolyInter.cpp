@@ -1,4 +1,4 @@
-#include "Point.cpp"
+// depends on: Point
 ld arg(Point p, Point q) { return atan2(p.cross(q), p.dot(q)); }
 ld fac(Circle c, Polygon ps) {
   auto tri = [&](Point p, Point q) {

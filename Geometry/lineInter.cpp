@@ -1,4 +1,4 @@
-#include "Point.cpp"
+// depends on: Point
 pair<bool, Point> lineInter(Line l1, Line l2) {
   auto d = (l1.e - l1.s).cross(l2.e - l2.s);
   if (sign(d) == 0) return {-eq(l1.s.cross(l1.e, l2.s), (ld)0), Point(0, 0)};

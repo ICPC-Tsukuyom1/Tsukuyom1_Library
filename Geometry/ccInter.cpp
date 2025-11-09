@@ -1,4 +1,4 @@
-#include "commonTangents.cpp"
+// depends on: Point, commonTangents
 Point pol(double a, double r) { return Point(cosl(r) * a, sinl(r) * a); }
 pair<Point, Point> ccInter(Circle c1, Circle c2) {
   if (sz(commonTangents(c1, c2)) % 4 == 0) {

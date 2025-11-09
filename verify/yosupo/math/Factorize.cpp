@@ -1,6 +1,8 @@
 //@yosupo factorize
 
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
+#include "../../../Math/MillerRabin.cpp"
 #include "../../../Math/FastFactorize.cpp"
 
 int main() {

@@ -1,4 +1,4 @@
-#include "MillerRabin.cpp"
+// depends on modula 演算, MillerRabin
 
 ll pollard(ll n) {
   ll x = 0, y = 0, t = 30, prd = 2, i = 1, q;

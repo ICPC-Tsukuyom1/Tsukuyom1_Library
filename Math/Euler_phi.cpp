@@ -1,4 +1,5 @@
-#include "FastFactorize.cpp"
+// depends on modula 演算, MillerRabin, FastFactorize
+
 ll Euler_phi(ll N) {
   vl A = fac(N);
   sort(all(A));

@@ -1,5 +1,10 @@
-#include "../random.cpp"
-#include "FastFactorize.cpp"
+// depends on modula 演算, MillerRabin, FastFactorize
+
+ll rnd(ll l, ll r) {  //[l, r)
+  random_device gen_seed;
+  static mt19937_64 gen(gen_seed());
+  return uniform_int_distribution<ll>(l, r - 1)(gen);
+}
 ll primroot(ll p) {
   auto v = fac(p - 1);
   sort(all(v));

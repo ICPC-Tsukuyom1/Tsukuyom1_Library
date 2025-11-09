@@ -13,7 +13,7 @@ struct Point {
   ld abs() const { return sqrtl(norm()); }
   ld norm() const { return x * x + y * y; }
   bool operator<(const P& p) const { return tie(x, y) < tie(p.x, p.y); }
-  bool operator==(P& p) const { return eq(x, p.x) && eq(y, p.y); }
+  bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
   ld dot(P p) const { return x*p.x + y*p.y; }
   ld cross(P p) const { return x*p.y - y*p.x; }
   ld cross(P a, P b) const { return (a-*this).cross(b-*this); }

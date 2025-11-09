@@ -11,6 +11,7 @@
 #include "dualsegtree.typ"
 #include "dynamic-dualsegtree.typ"
 #include "hld.typ"
+#include "kd-tree.typ"
 #include "rollinghash.typ"
 #include "sparsetable.typ"
 #include "disjoint-sparsetable.typ"

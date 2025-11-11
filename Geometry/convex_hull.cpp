@@ -9,7 +9,7 @@ Polygon convex_hull(Polygon &p, bool str = 1) {
   vec<Point> c(2*n);
   auto check = [&](ll i) {
     Point a = c[k-1] - c[k-2], b = p[i] - c[k-1];
-    return a.cross(b) <= (strict ? EPS : -EPS);
+    return a.cross(b) <= (str ? EPS : -EPS);
   };
   for (ll i = 0; i < n; c[k++] = p[i++])
     while (k >= 2 && check(i)) --k;

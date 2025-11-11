@@ -1,4 +1,4 @@
-#include "Point.cpp"
+// depends on: Point
 pair<Point, Point> circTangents(Circle c, Point p) {
   ld theta = acosl(c.r / (p - c.c).abs());
   Point i = c.c + (p - c.c).unit() * c.r;

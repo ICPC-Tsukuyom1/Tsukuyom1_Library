@@ -1,10 +1,7 @@
 // depends on: Point
 vec<Line> commonTangents(Circle c1, Circle c2) {
   bool s = false;
-  if (c1.r < c2.r) {
-    s = true;
-    swap(c1, c2);
-  }
+  if (c1.r < c2.r) s=true, swap(c1, c2);
   typedef Point P;
   ld d = (c1.c - c2.c).abs();
   set<pair<Point, Point>> L;

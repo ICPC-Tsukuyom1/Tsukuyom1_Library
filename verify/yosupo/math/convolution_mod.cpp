@@ -1,6 +1,7 @@
 //@yosupo convolution_mod
 
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
 #include "../../../Math/fps.cpp"
 
 int main() {

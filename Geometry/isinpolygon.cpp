@@ -1,4 +1,4 @@
-#include "./Point.cpp"
+// depends on: Point
 int isinPolygon(Point p, Polygon S) {
   bool check = false;
   rep(i, sz(S)) {

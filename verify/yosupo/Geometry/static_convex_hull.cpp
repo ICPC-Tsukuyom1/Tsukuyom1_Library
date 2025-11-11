@@ -1,6 +1,7 @@
 //@yosupo static_convex_hull
 
 #include "../../../template.cpp"
+#include "../../../Geometry/Point.cpp"
 #include "../../../Geometry/convex_hull.cpp"
 int main() {
   ll T;

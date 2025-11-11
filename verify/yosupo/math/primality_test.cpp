@@ -1,5 +1,6 @@
 //@yosupo primality_test
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
 #include "../../../Math/MillerRabin.cpp"
 
 int main() {

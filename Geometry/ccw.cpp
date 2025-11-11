@@ -1,5 +1,4 @@
 // depends on: Point
-
 static const int COUNTER_CLOCKWISE = 1;
 static const int CLOCKWISE = -1;
 static const int ONLINE_BACK = 2;

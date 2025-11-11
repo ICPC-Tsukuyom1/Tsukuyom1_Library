@@ -2,51 +2,34 @@
 #define eq(a, b) (fabs((a) - (b)) < EPS)
 ll sign(ld x) { return (x >= EPS) - (x <= -EPS); }
 const ld pi = 3.141592653589793238;
-class Point {
+struct Point {
   typedef Point P;
-
- public:
   ld x, y;
-
   Point(ld _x = 0, ld _y = 0) : x(_x), y(_y) {}
-
-  P operator+(Point p) const { return P(x + p.x, y + p.y); }
-  P operator-(Point p) const { return P(x - p.x, y - p.y); }
-  P operator*(ld a) const { return P(a * x, a * y); }
-  P operator/(ld a) const { return P(x / a, y / a); }
-
+  P operator+(P p) const { return P(x+p.x, y+p.y); }
+  P operator-(P p) const { return P(x-p.x, y-p.y); }
+  P operator*(ld a) const { return P(a*x, a*y); }
+  P operator/(ld a) const { return P(x/a, y/a); }
   ld abs() const { return sqrtl(norm()); }
   ld norm() const { return x * x + y * y; }
-
   bool operator<(const P& p) const { return tie(x, y) < tie(p.x, p.y); }
   bool operator==(const P& p) const { return eq(x, p.x) && eq(y, p.y); }
-  ld dot(P p) const { return x * p.x + y * p.y; }
-  ld cross(P p) const { return x * p.y - y * p.x; }
-  ld cross(P a, P b) const { return (a - *this).cross(b - *this); }
-  ld angle() const {
-    if (x < 0 && y == 0) return pi;
-    if (x == 0 && y == 0) return ld(0);
-    return atan2(y, x);
-  }
-  P unit() const { return *this / abs(); }
+  ld dot(P p) const { return x*p.x + y*p.y; }
+  ld cross(P p) const { return x*p.y - y*p.x; }
+  ld cross(P a, P b) const { return (a-*this).cross(b-*this); }
+  P unit() const { return *this/abs(); }
   P perp() const { return P(-y, x); }
-  P normal() const { return perp() / abs(); }
+  P normal() const { return perp()/abs(); }
+  ld angle() const { return atan2(y, x); }
   P rotate(ld theta) const {
     return P(x * cosl(theta) - y * sinl(theta),
-             x * sinl(theta) + y * cosl(theta));
-  }
-  P rotate(ld theta, Point& p) const { return (*this - p).rotate(theta) + p; }
+             x * sinl(theta) + y * cosl(theta));}
 };
 typedef Point Vector;
-struct Segment {
-  Point s;
-  Point e;
-};
+struct Segment { Point s, e; };
 typedef Segment Line;
-class Circle {
- public:
-  Point c;
-  ld r;
-  Circle(Point c = Point(), ld r = 0.0) : c(c), r(r) {}
+struct Circle {
+  Point c; ld r;
+  Circle(Point c=Point(), ld r=0.0) : c(c),r(r) {}
 };
-typedef vector<Point> Polygon;
+typedef vec<Point> Polygon;

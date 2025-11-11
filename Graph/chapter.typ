@@ -4,6 +4,7 @@
 
 #include "bellman-ford.typ"
 #include "kruskal.typ"
+#include "directed-mst.typ"
 #include "lca.typ"
 #include "rerooting.typ"
 #include "scc.typ"

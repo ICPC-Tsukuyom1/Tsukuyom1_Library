@@ -13,7 +13,7 @@ Polygon convex_hull(Polygon &p, bool str = 1) {
   };
   for (ll i = 0; i < n; c[k++] = p[i++])
     while (k >= 2 && check(i)) --k;
-  for (ll i = n-2, t = k+1; i; c[k++] = p[i--])
+  for (ll i = n-2, t = k+1; i>=0; c[k++] = p[i--])
     while (k >= t && check(i)) --k;
   c.resize(k-1);
   return c;

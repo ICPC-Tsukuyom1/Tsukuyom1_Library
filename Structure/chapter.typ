@@ -10,6 +10,7 @@
 #include "dynamic-lazysegtree.typ"
 #include "dualsegtree.typ"
 #include "dynamic-dualsegtree.typ"
+#include "skew-heap.typ"
 #include "hld.typ"
 #include "kd-tree.typ"
 #include "rollinghash.typ"

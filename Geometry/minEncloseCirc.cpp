@@ -1,4 +1,4 @@
-#include "circumcircle.cpp"
+// depends on: Point, ccCicle
 Circle mec(Polygon ps) {
   shuffle(all(ps), mt19937(time(0)));
   Circle c = {ps[0], 0};

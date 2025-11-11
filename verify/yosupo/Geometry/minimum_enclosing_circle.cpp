@@ -1,6 +1,8 @@
 //@yosupo minimum_enclosing_circle
 
 #include "../../../template.cpp"
+#include "../../../Geometry/Point.cpp"
+#include "../../../Geometry/circumcircle.cpp"
 #include "../../../Geometry/minEncloseCirc.cpp"
 
 int main() {

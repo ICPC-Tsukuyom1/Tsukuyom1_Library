@@ -4,17 +4,7 @@
 
 *なにこれ*
 
-WeightedUnionFind は、頂点の連結状態と重みを管理するつよそうなデータ構造。
-
-*使い方*
-
-*宣言*
-
-#sourcecode(```cpp
-WeightedUnionFind wuf(N);
-```)
-
-*連結*
+WeightedUnionFind は、頂点の連結状態と重みを管理するデータ構造。
 
 #sourcecode(```cpp
 wuf.merge(a, b, w);

@@ -1,5 +1,4 @@
-#include "Point.cpp"
-const ld pi = 3.141592653589793238;
+// depends on: Point
 ld fac(Circle c1, Circle c2) {
   ld dd = (c2.c - c1.c).norm();
   if (sign(dd - (c1.r + c2.r) * (c1.r + c2.r)) >= 0) return 0.0;

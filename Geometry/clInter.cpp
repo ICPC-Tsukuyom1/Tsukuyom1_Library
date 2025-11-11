@@ -1,4 +1,4 @@
-#include "projection.cpp"
+// depends on: Point, projection
 const ld inf = numeric_limits<ld>::max() / 2;
 pair<Point, Point> clInter(Circle c, Line l) {
   ld dd = (l.e - l.s).cross(c.c - l.s) / (l.e - l.s).abs();

@@ -1,4 +1,5 @@
-#include "./modula.cpp"
+// depends on modula 演算
+
 template <typename T = ll>
 struct FPS : vector<T> {
 private:

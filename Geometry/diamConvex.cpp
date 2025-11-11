@@ -1,4 +1,4 @@
-#include "convex_hull.cpp"
+// depends on: convex_hull
 pair<Point, Point> diamConvex(Polygon S) {
   Polygon Q = convex_hull(S);
   ll n = sz(Q), j = n < 2 ? 0 : 1;

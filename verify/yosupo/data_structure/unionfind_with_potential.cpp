@@ -17,8 +17,8 @@ int main() {
     if (t == 0) {
       mint x;
       cin >> x;
-      if (uf.same(u, v)) {
-        if (uf.diff(v, u) != x) {
+      if (uf.find(u) == uf.find(v)) {
+        if (uf.weight(u) - uf.weight(v) != x) {
           cout << 0 << endl;
           continue;
         }
@@ -26,8 +26,8 @@ int main() {
       uf.merge(v, u, x);
       cout << 1 << endl;
     } else {
-      if (uf.same(u, v)) {
-        cout << uf.diff(v, u) << endl;
+      if (uf.find(u) == uf.find(v)) {
+        cout << uf.weight(u) - uf.weight(v) << endl;
       } else {
         cout << -1 << endl;
       }

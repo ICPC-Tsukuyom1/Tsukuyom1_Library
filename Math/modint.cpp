@@ -1,4 +1,3 @@
-const ll mod = 998244353;
 struct mint {
   ll x;
   mint(ll y = 0) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}

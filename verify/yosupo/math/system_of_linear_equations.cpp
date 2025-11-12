@@ -1,6 +1,7 @@
 //@yosupo system_of_linear_equations
 
 #include "../../../template.cpp"
+const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 #include "../../../Math/matrix.cpp"
 #include "../../../Math/solveLinear.cpp"

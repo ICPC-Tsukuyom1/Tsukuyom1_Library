@@ -8,7 +8,8 @@ void solve() {
 	ll n, m; cin >> n >> m;
   Matrix<mint> A(n, m);
   rep(i, n) rep(j, m) cin >> A[i][j];
-  vec<mint> b(n); cin >> b;
+  vec<mint> b(n);
+  rep(i, n) cin >> b[i];
   vec<mint> x;
   auto res = solveLinear(A, b);
   if (res.empty()) {
@@ -16,7 +17,11 @@ void solve() {
   } else {
     cout << sz(res) - 1 << endl;
     for (auto v : res) {
-      cout << v;
+      rep(i, sz(v)) {
+        cout << v[i];
+        if (i + 1 == sz(v)) cout << endl;
+        else cout << " ";
+      }
     }
   }
 }

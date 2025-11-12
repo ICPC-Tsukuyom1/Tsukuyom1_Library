@@ -1,4 +1,5 @@
-template <typename T>
+// depends on: modint
+template <typename T = mint>
 class Matrix {
   typedef Matrix<T> M;
 

@@ -27,7 +27,7 @@ struct MinCostFlow {
     ll di;
     using Pq = __gnu_pbds::priority_queue<pll>;
     Pq q;
-    vec<Pq::point_iterator> its(n);
+    vec<Pq::point_iterator> its(n, q.end());
     q.push({0, s});
     while (!q.empty()) {
       s = q.top().second;

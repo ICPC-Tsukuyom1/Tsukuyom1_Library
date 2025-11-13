@@ -9,6 +9,7 @@
 #include "random.typ"
 #include "timer.typ"
 #include "io.typ"
+#include "bit.typ"
 #include "parallel-binsearch.typ"
 #include "combination.typ"
 #include "math.typ"

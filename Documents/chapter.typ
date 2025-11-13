@@ -12,4 +12,5 @@
 #include "parallel-binsearch.typ"
 #include "combination.typ"
 #include "math.typ"
+#include "project-selection.typ"
 #include "troubleshooting.typ"

@@ -2,14 +2,6 @@
 
 == 入出力
 
-=== 高速化
-
-#sourcecode(```cpp
-ios::sync_with_stdio(false);
-cin.tie(nullptr);
-#define endl '\n'
-```)
-
 === マニピュレータ
 
 - `boolalpha` : boolを文字列として入出力する

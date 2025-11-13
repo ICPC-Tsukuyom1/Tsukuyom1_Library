@@ -2,7 +2,7 @@
 
 == タイマー
 
-=== `clock`
+- `clock`
 
 精度は10msほど
 
@@ -13,7 +13,7 @@ clock_t end = clock();
 ll ms = (end - start) * 1000 / CLOCKS_PER_SEC;
 ```)
 
-=== `chrono`
+- `chrono`
 
 精度は1msほど
 

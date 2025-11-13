@@ -2,8 +2,6 @@
 
 == 幾何
 
-=== 三角形
-
 辺の長さを $a, b, c$ として、$display(p=(a+b+c)/2)$ とすると、面積 $A = sqrt(p(p-a)(p-b)(p-c))$、外接円半径 $display(R = (a b c)/4A)$、内接円半径 $display(r=A/p)$
 
 正弦定理 : $display((sin alpha)/a = (sin beta)/b = (sin gamma)/c = 1/(2R))$

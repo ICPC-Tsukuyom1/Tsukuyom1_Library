@@ -11,6 +11,7 @@
 #include "topological.typ"
 #include "twosat.typ"
 #include "PushRelabel.typ"
+#include "flow.typ"
 #include "mincostflow.typ"
 #include "hopcroftKarp.typ"
 #include "maxMatching.typ"

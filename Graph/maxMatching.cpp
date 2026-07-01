@@ -74,7 +74,7 @@ struct maxMatch {
   }
   vec<pll> max_match() {
     vec<pll> res;
-    rep(i, n) if (i < mt[i]) res.emplace_back(i, mt[i]);
+    rep(i, n) if (i < mt[i]) res.emplace_back(pll{i, mt[i]});
     return res;
   }
 };

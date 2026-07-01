@@ -22,7 +22,7 @@ struct LowLink {
                 k = dfs(e, k, x);
                 chmin(low[x], low[e]);
                 is_arti |= (p != -1) && (low[e] >= ord[x]);
-                if (ord[x] < low[e]) bridge.emplace_back(min(x, e), max(x, e));
+                if (ord[x] < low[e]) bridge.emplace_back(pll{min(x, e), max(x, e)});
             } else if (e != p || second) {
                 chmin(low[x], ord[e]);
             } else {

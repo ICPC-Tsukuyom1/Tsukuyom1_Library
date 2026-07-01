@@ -12,8 +12,8 @@ struct UFRollback {
     a = root(a), b = root(b);
     if (a == b) return false;
     if (e[a] > e[b]) swap(a, b);
-    st.emplace_back(a, e[a]);
-    st.emplace_back(b, e[b]);
+    st.emplace_back(pll{a, e[a]});
+    st.emplace_back(pll{b, e[b]});
     e[a] += e[b];
     e[b] = a;
     return true;

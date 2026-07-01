@@ -13,8 +13,8 @@ const ll mod = 998244353;
   F { 1, 0 }
 #define op(a, b) a + b
 #define merge(a, b) \
-  F { a[0] *b[0], a[1] *b[0] + b[1] }
-#define apply(f, x, l) f[0]* x + f[1]* l
+  F { a.first *b.first, a.second *b.first + b.second }
+#define apply(f, x, l) f.first* x + f.second* l
 
 #include "../../../Structure/lazysegtree.cpp"
 

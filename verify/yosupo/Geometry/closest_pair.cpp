@@ -13,11 +13,11 @@ void solve() {
   auto ans = closest(v);
   ll p = -1;
   rep(i, N) {
-    if (s[i] == ans[0]) { p = i; }
+    if (s[i] == ans.first) { p = i; }
   }
   rep(i, N) {
     if (i == p) continue;
-    if (s[i] == ans[1]) {
+    if (s[i] == ans.second) {
       cout << p << ' ' << i << endl;
       return;
     }

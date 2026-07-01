@@ -10,7 +10,7 @@ const ll mod = 998244353;
 #define e \
   { 1, 0 }
 #define op(a, b) \
-  { a[0] *b[0], a[1] *b[0] + b[1] }
+  { a.first *b.first, a.second *b.first + b.second }
 
 #include "../../../Structure/segtree.cpp"
 

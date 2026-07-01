@@ -11,11 +11,11 @@ void solve() {
   rep(i, n) cin >> g[i].x >> g[i].y;
   auto res = diamConvex(g);
   ll l, r;
-  rep(i, n) if (res[0] == g[i]) {
+  rep(i, n) if (res.first == g[i]) {
     l = i;
     break;
   }
-  rep(i, n) if (res[1] == g[i] && l != i) {
+  rep(i, n) if (res.second == g[i] && l != i) {
     r = i;
     break;
   }

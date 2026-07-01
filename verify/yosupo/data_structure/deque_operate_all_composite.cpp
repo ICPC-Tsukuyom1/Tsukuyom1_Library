@@ -9,7 +9,7 @@ const ll mod = 998244353;
 using T = pair<mint, mint>;
 const T e = pair{1, 0};
 #define op(a, b) \
-  pair { a[0] *b[0], b[0] *a[1] + b[1] }
+  pair { a.first *b.first, b.first *a.second + b.second }
 
 #include "../../../Structure/swag.cpp"
 
@@ -39,7 +39,7 @@ int main() {
       ll x;
       cin >> x;
       auto a = s.query();
-      cout << a[0] * x + a[1] << "\n";
+      cout << a.first * x + a.second << "\n";
     }
   }
 }

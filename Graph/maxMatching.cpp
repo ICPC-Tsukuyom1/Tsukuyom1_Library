@@ -13,18 +13,18 @@ struct maxMatch {
     ll d = mt[p];
     mt[p] = b;
     if (d == -1 || mt[d] != p) return;
-    if (nx[p].second == -1) {
-      mt[d] = nx[p].first;
-      match(nx[p].first, d);
+    if (nx[p][1] == -1) {
+      mt[d] = nx[p][0];
+      match(nx[p][0], d);
     } else {
-      match(nx[p].first, nx[p].second);
-      match(nx[p].second, nx[p].first);
+      match(nx[p][0], nx[p][1]);
+      match(nx[p][1], nx[p][0]);
     }
   }
   bool arg() {
     ev[st] = st;
     gr[st] = -1;
-    nx[st] = pll(-1, -1);
+    nx[st] = pll{-1, -1};
     queue<ll> q;
     q.push(st);
     while (!q.empty()) {
@@ -43,24 +43,24 @@ struct maxMatch {
           ll z = -1;
           while (x != -1 || y != -1) {
             if (y != -1) swap(x, y);
-            if (nx[x] == pll(a, b)) {
+            if (nx[x] == pll{a, b}) {
               z = x;
               break;
             }
-            nx[x] = pll(a, b);
-            x = group(nx[mt[x]].first);
+            nx[x] = pll{a, b};
+            x = group(nx[mt[x]][0]);
           }
           for (ll v : {group(a), group(b)}) {
             while (v != z) {
               q.push(v);
               ev[v] = st, gr[v] = z;
-              v = group(nx[mt[v]].first);
+              v = group(nx[mt[v]][0]);
             }
           }
         } else if (ev[mt[b]] != st) {
           ev[mt[b]] = st;
-          nx[b] = pll(-1, -1);
-          nx[mt[b]] = pll(a, -1);
+          nx[b] = pll{-1, -1};
+          nx[mt[b]] = pll{a, -1};
           gr[mt[b]] = b;
           q.push(mt[b]);
         }
@@ -74,7 +74,7 @@ struct maxMatch {
   }
   vec<pll> max_match() {
     vec<pll> res;
-    rep(i, n) if (i < mt[i]) res.emplace_back(i, mt[i]);
+    rep(i, n) if (i < mt[i]) res.emplace_back(pll{i, mt[i]});
     return res;
   }
 };

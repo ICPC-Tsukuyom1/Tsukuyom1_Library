@@ -22,5 +22,5 @@ int main() {
     mcf.add_edge(v, u, 1, d);
   }
   
-  cout << mcf.maxflow(0, n-1, 2).second << endl;
+  cout << mcf.maxflow(0, n-1, 2)[1] << endl;
 }

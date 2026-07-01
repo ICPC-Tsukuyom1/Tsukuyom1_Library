@@ -29,7 +29,7 @@ structの定義の直前に、`using`、`define`、または関数定義を用�
 #sourcecode(```cpp
 #define T pair<mint, mint>
 #define e {1, 0}
-#define op(a, b) {a.first * b.first, a.second * b.first + b.second}
+#define op(a, b) {a[0] * b[0], a[1] * b[0] + b[1]}
 ```)
 
 #sourcefile(read("../Structure/segtree.cpp"), lang: "cpp")

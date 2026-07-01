@@ -5,7 +5,7 @@ Polygon polygonCut(Polygon &p, Point s, Point e) {
     Point cur = p[i], prev = i ? p[i - 1] : p.back();
     bool side = sign(s.cross(e, cur)) < 0;
     if (side != (sign(s.cross(e, prev)) < 0)) {
-      res.push_back(lineInter({s, e}, {cur, prev}).second);
+      res.push_back(lineInter({s, e}, {cur, prev})[1]);
     }
     if (side) res.push_back(cur);
   }

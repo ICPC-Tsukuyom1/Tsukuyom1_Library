@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 using ld = long double;
-using pll = allay<ll, 2>;
+using pll = array<ll, 2>;
 using vl = vector<ll>;
 template <class T>
 using vec = vector<T>;

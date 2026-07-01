@@ -4,6 +4,6 @@ pair<Point, Point> circTangents(Circle c, Point p) {
   Point i = c.c + (p - c.c).unit() * c.r;
   pair<Point, Point> ret =
       make_pair(i.rotate(theta, c.c), i.rotate(-theta, c.c));
-  if (!(ret[0] < ret[1])) swap(ret[0], ret[1]);
+  if (!(ret.first < ret.second)) swap(ret.first, ret.second);
   return ret;
 }

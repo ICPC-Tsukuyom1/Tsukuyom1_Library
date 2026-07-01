@@ -24,7 +24,7 @@ struct maxMatch {
   bool arg() {
     ev[st] = st;
     gr[st] = -1;
-    nx[st] = pll(-1, -1);
+    nx[st] = pll{-1, -1};
     queue<ll> q;
     q.push(st);
     while (!q.empty()) {
@@ -43,11 +43,11 @@ struct maxMatch {
           ll z = -1;
           while (x != -1 || y != -1) {
             if (y != -1) swap(x, y);
-            if (nx[x] == pll(a, b)) {
+            if (nx[x] == pll{a, b}) {
               z = x;
               break;
             }
-            nx[x] = pll(a, b);
+            nx[x] = pll{a, b};
             x = group(nx[mt[x]][0]);
           }
           for (ll v : {group(a), group(b)}) {
@@ -59,8 +59,8 @@ struct maxMatch {
           }
         } else if (ev[mt[b]] != st) {
           ev[mt[b]] = st;
-          nx[b] = pll(-1, -1);
-          nx[mt[b]] = pll(a, -1);
+          nx[b] = pll{-1, -1};
+          nx[mt[b]] = pll{a, -1};
           gr[mt[b]] = b;
           q.push(mt[b]);
         }

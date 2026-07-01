@@ -14,7 +14,7 @@
 を高速に計算可能
 
 また、列同士の(要素ごと)XORを利用したい場合、加算の代わりにXORを、乗算の代わりにNim productを利用する (Nimber)
-Nim productは $a times.circle b = "mex" { (a times.circle b') plus.circle (a' times.circle b) plus.circle (a' times.circle b) | a' < a, b' < b }$ で表される演算であり、Nimberは交換・結合法則を満たす
+Nim productは $a times.o b = "mex" { (a times.o b') plus.o (a' times.o b) plus.o (a' times.o b) | a' < a, b' < b }$ で表される演算であり、Nimberは交換・結合法則を満たす
 
 === 集合 (Zobrist Hash)
 

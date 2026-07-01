@@ -91,7 +91,7 @@ ostream &operator<<(ostream &_ostr, const list<T> &_v) {
 }
 template <class T, class Y>
 ostream &operator<<(ostream &_ostr, const pair<T, Y> &_v) {
-  return _ostr << _v.first << ":" << _v.second;
+  return _ostr << _v[0] << ":" << _v[1];
 }
 template <class... Ts>
 ostream &operator<<(ostream &_ostr, const tuple<Ts...> &_v) {
@@ -169,7 +169,7 @@ istream &operator>>(istream &_istr, deque<T> &_v) {
 }
 template <class T, class Y>
 istream &operator>>(istream &_istr, pair<T, Y> &_v) {
-  return _istr >> _v.first >> _v.second;
+  return _istr >> _v[0] >> _v[1];
 }
 struct init {
   init() {

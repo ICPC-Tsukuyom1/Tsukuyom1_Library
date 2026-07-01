@@ -30,7 +30,7 @@ struct MinCostFlow {
     vec<Pq::point_iterator> its(n, q.end());
     q.push({0, s});
     while (!q.empty()) {
-      s = q.top().second;
+      s = q.top()[1];
       q.pop();
       seen[s] = 1;
       di = dist[s] + pi[s];

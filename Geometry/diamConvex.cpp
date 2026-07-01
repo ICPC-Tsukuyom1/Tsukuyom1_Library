@@ -9,5 +9,5 @@ pair<Point, Point> diamConvex(Polygon S) {
       if ((Q[(j+1)%n]-Q[j]).cross(Q[i + 1]-Q[i]) > -EPS) break;
     }
   }
-  return ans.second;
+  return ans[1];
 }

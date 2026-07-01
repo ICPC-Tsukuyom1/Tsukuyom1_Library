@@ -11,11 +11,11 @@ vec<mint> a;
 #define V pair<mint, ll>
 #define E pair<mint, ll>
 #define put_edge(v, edge) \
-  E { v.first *edge.cost.first + edge.cost.second *v.second, v.second }
+  E { v[0] *edge.cost[0] + edge.cost[1] *v[1], v[1] }
 #define put_vert(e, i) \
-  V { e.first + a[i], e.second + 1 }
+  V { e[0] + a[i], e[1] + 1 }
 #define op(a, b) \
-  E { a.first + b.first, a.second + b.second }
+  E { a[0] + b[0], a[1] + b[1] }
 #define ee \
   E { 0, 0 }
 
@@ -35,5 +35,5 @@ int main() {
     g[v].emplace_back(v, u, pair{b, c});
   }
   auto res = rerooting(g);
-  rep(i, n) { cout << res[i].first << endl; }
+  rep(i, n) { cout << res[i][0] << endl; }
 }

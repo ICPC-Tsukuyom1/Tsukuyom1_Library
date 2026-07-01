@@ -14,7 +14,7 @@
 #sourcecode(```cpp
 #define F pair<mint, mint>
 #define id F{1, 0}
-#define merge(a, b) F{a.first * b.first, a.second * b.first + b.second}
+#define merge(a, b) F{a[0] * b[0], a[1] * b[0] + b[1]}
 ```)
 
 #sourcefile(read("../Structure/dualsegtree.cpp"), lang: "cpp")

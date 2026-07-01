@@ -10,7 +10,7 @@ const ll mod = 998244353;
 #define id \
   F { 1, 0 }
 #define merge(a, b) \
-  F { a.first *b.first, a.second *b.first + b.second }
+  F { a[0] *b[0], a[1] *b[0] + b[1] }
 
 #include "../../../Structure/dynamic-dualsegtree.cpp"
 

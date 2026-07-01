@@ -13,12 +13,12 @@ struct maxMatch {
     ll d = mt[p];
     mt[p] = b;
     if (d == -1 || mt[d] != p) return;
-    if (nx[p].second == -1) {
-      mt[d] = nx[p].first;
-      match(nx[p].first, d);
+    if (nx[p][1] == -1) {
+      mt[d] = nx[p][0];
+      match(nx[p][0], d);
     } else {
-      match(nx[p].first, nx[p].second);
-      match(nx[p].second, nx[p].first);
+      match(nx[p][0], nx[p][1]);
+      match(nx[p][1], nx[p][0]);
     }
   }
   bool arg() {
@@ -48,13 +48,13 @@ struct maxMatch {
               break;
             }
             nx[x] = pll(a, b);
-            x = group(nx[mt[x]].first);
+            x = group(nx[mt[x]][0]);
           }
           for (ll v : {group(a), group(b)}) {
             while (v != z) {
               q.push(v);
               ev[v] = st, gr[v] = z;
-              v = group(nx[mt[v]].first);
+              v = group(nx[mt[v]][0]);
             }
           }
         } else if (ev[mt[b]] != st) {

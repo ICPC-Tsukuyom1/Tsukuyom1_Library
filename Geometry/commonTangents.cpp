@@ -37,8 +37,8 @@ vec<Line> commonTangents(Circle c1, Circle c2) {
   while (!L.empty()) {
     auto it = *L.begin();
     L.erase(L.begin());
-    if (s) swap(it.first, it.second);
-    ans.push_back(Line(it.first, it.second));
+    if (s) swap(it[0], it[1]);
+    ans.push_back(Line(it[0], it[1]));
   }
   return ans;
 }

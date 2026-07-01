@@ -13,7 +13,7 @@ const ll mod = 998244353;
 #define id \
   F { 0, 0 }
 #define op(a, b) \
-  T { a.first *b.first, a.second *b.first + b.second }
+  T { a[0] *b[0], a[1] *b[0] + b[1] }
 
 T pow_fn(T fn, ll n) {
   T ans = e;
@@ -25,8 +25,8 @@ T pow_fn(T fn, ll n) {
   return ans;
 }
 
-#define merge(a, b) b.first == 0 ? a : b
-#define apply(f, x, l) f.first == 0 ? x : pow_fn(f, l)
+#define merge(a, b) b[0] == 0 ? a : b
+#define apply(f, x, l) f[0] == 0 ? x : pow_fn(f, l)
 
 #include "../../../Structure/lazysegtree.cpp"
 

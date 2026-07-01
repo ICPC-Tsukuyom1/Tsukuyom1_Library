@@ -10,7 +10,7 @@ const ll mod = 998244353;
 #define e \
   { 1, 0 }
 #define op(a, b) \
-  { a.first *b.first, a.second *b.first + b.second }
+  { a[0] *b[0], a[1] *b[0] + b[1] }
 
 #include "../../../Structure/dynamic-segtree.cpp"
 
@@ -27,7 +27,7 @@ int main() {
   // }
   // rep(i, n)
   // {
-  //   cout << seg.query(i, i+1).first << " " << seg.query(i, i+1).second <<
+  //   cout << seg.query(i, i+1)[0] << " " << seg.query(i, i+1)[1] <<
   //   endl;
   // }
   while (q--) {

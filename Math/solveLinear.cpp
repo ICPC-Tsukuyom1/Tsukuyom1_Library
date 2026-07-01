@@ -38,7 +38,7 @@ vv<mint> solveLinear(Matrix<mint> a, vec<mint> b) {
   rep(i, n) a[i].push_back(b[i]);
   a.m++;
   auto p = Gauss(a, true);
-  ll rank = p.first;
+  ll rank = p[0];
   reps(i, rank, n) {
     if (a[i][m].x) return vv<mint>(); // no solution
   }

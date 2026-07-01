@@ -10,10 +10,10 @@ void solve() {
   FPS<ll> b(M);
   rep(i, M) cin >> b[i];
   auto ans = a.div_mod(b);
-  cout << sz(ans.first) << ' ' << sz(ans.second) << endl;
-  rep(i, sz(ans.first)) cout << ans.first[i] << " \n"[i == sz(ans.first) - 1];
-  rep(i, sz(ans.second)) cout << ans.second[i]
-                              << " \n"[i == sz(ans.second) - 1];
+  cout << sz(ans[0]) << ' ' << sz(ans[1]) << endl;
+  rep(i, sz(ans[0])) cout << ans[0][i] << " \n"[i == sz(ans[0]) - 1];
+  rep(i, sz(ans[1])) cout << ans[1][i]
+                              << " \n"[i == sz(ans[1]) - 1];
 }
 int main() {
   ll T = 1;

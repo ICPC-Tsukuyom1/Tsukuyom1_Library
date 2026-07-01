@@ -1,5 +1,5 @@
 struct SWAG {
-#define get(v) (sz(v) ? v.back().second : (e))
+#define get(v) (sz(v) ? v.back()[1] : (e))
   using vp = vec<pair<T, T>>;
   vp f, b;
   SWAG() {}
@@ -9,11 +9,11 @@ struct SWAG {
     reverse(all(v));
     copy(all(b), back_inserter(v));
     f.clear(), b.clear();
-    rrep(i, 0, s) push_front(v[i].first);
-    reps(i, s, n) push_back(v[i].first);
+    rrep(i, 0, s) push_front(v[i][0]);
+    reps(i, s, n) push_back(v[i][0]);
   }
-  T front() { return (sz(f) ? f.back() : b.front()).first; }
-  T back() { return (sz(b) ? b.back() : f.front()).first; }
+  T front() { return (sz(f) ? f.back() : b.front())[0]; }
+  T back() { return (sz(b) ? b.back() : f.front())[0]; }
   void push_front(T x) { f.emplace_back(x, op(x, get(f))); }
   void push_back(T x) { b.emplace_back(x, op(get(b), x)); }
   void pop_front() {

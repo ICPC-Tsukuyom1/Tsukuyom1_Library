@@ -10,7 +10,7 @@
 using T = pair<mint, mint>;
 const T e = pair{1, 0};
 #define op(a, b) \
-  pair { a.first *b.first, b.first *a.second + b.second }
+  pair { a[0] *b[0], b[0] *a[1] + b[1] }
 ```)
 
 #sourcefile(read("../Structure/swag.cpp"), lang: "cpp")

@@ -5,7 +5,7 @@ struct UFRollback {
   ll root(ll x) { return e[x] < 0 ? x : root(e[x]); }
   ll time() { return sz(st); }
   void rollback(ll t) {
-    for (ll i = time(); i-- > t;) e[st[i].first] = st[i].second;
+    for (ll i = time(); i-- > t;) e[st[i][0]] = st[i][1];
     st.resize(t);
   }
   bool unite(ll a, ll b) {

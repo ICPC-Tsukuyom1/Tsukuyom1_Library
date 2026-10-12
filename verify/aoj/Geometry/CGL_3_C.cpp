@@ -13,6 +13,6 @@ int main() {
   while (q--) {
     Point x;
     cin >> x.x >> x.y;
-    cout << (isinPolygon(x, p) == 0 ? 0 : 1) << endl;
+    cout << isinPolygon(x, p) << endl;
   }
 }

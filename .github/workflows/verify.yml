@@ -33,6 +33,19 @@ jobs:
           problems=$(grep -r -E '^//@yukicoder' --include='*.cpp' ./verify | sed -E 's|^(.*)://@yukicoder ([^[:space:]]+).*|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
           echo "matrix=$problems" >> $GITHUB_OUTPUT
 
+  prepare-matrix-aoj:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Find AOJ files
+        id: set-matrix
+        run: |
+          problems=$(grep -r -E '^//@aoj' --include='*.cpp' ./verify | sed -E 's|^(.*)://@aoj ([^[:space:]]+).*|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
+          echo "matrix=$problems" >> $GITHUB_OUTPUT
+
   yosupo-verify:
     needs: prepare-matrix-yosupo
     runs-on: ubuntu-24.04
@@ -149,8 +162,66 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+  aoj-verify:
+    needs: prepare-matrix-aoj
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        problem: ${{ fromJson(needs.prepare-matrix-aoj.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Extract matrix info
+        run: |
+          PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
+          FILE=$(echo "${{ matrix.problem }}" | cut -d'$' -f2-)
+          echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV
+          echo "FILE=$FILE" >> $GITHUB_ENV
+          echo "URL=https://onlinejudge.u-aizu.ac.jp/problems/$PROBLEM" >> $GITHUB_ENV
+      - name: Install online judge tools
+        run: |
+          python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Download AOJ system testcases
+        run: |
+          set -eu
+          BASE_DIR="testcases/${PROBLEM}"
+          mkdir -p "$BASE_DIR"
+          oj download "$URL" --system --directory "$BASE_DIR"
+      - name: Compile target
+        run: g++ -std=c++20 -O2 --coverage -I "$(dirname "$FILE")" "$FILE" -o a.out
+      - name: Run oj test
+        run: |
+          set -eu
+          BASE_DIR="testcases/${PROBLEM}"
+          TEST_DIR=""
+          while IFS= read -r -d '' candidate; do
+            if ls "$candidate"/*.in > /dev/null 2>&1 && ls "$candidate"/*.out > /dev/null 2>&1; then
+              TEST_DIR="$candidate"
+              break
+            fi
+          done < <(find "$BASE_DIR" -type d -print0 | sort -z)
+          if [ -z "$TEST_DIR" ]; then
+            echo "error: no matching (.in, .out) testcase pairs under $BASE_DIR" >&2
+            exit 1
+          fi
+          oj test -c ./a.out -d "$TEST_DIR" -t 10 --error 1e-6
+      - name: Collect coverage data
+        id: collect-coverage
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
+
   coverage-summary:
-    needs: [yosupo-verify, yukicoder-verify]
+    needs: [yosupo-verify, yukicoder-verify, aoj-verify]
     if: always()
     runs-on: ubuntu-24.04
     steps:

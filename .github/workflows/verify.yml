@@ -8,12 +8,12 @@ on:
 
 jobs:
   prepare-matrix-yosupo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Find yosupo files
         id: set-matrix
         run: |
@@ -21,12 +21,12 @@ jobs:
           echo "matrix=$problems" >> $GITHUB_OUTPUT
 
   prepare-matrix-yukicoder:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Find yukicoder files
         id: set-matrix
         run: |
@@ -35,7 +35,7 @@ jobs:
 
   yosupo-verify:
     needs: prepare-matrix-yosupo
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     strategy:
       fail-fast: false
@@ -43,7 +43,7 @@ jobs:
         problem: ${{ fromJson(needs.prepare-matrix-yosupo.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Extract matrix info
         run: |
           echo "PROBLEM=`echo "${{ matrix.problem }}" | cut -d'$' -f1`" >> $GITHUB_ENV
@@ -66,10 +66,10 @@ jobs:
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'
       - name: Collect coverage data
         id: collect-coverage
-        run: python3 scripts/gcov_summary.py "$PROBLEM" "$FILE"
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
       - name: Upload coverage data
         if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.collect-coverage.outputs.artifact_name }}
           path: coverage-data/*.gcov.json.gz
@@ -78,7 +78,7 @@ jobs:
 
   yukicoder-verify:
     needs: prepare-matrix-yukicoder
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     strategy:
       fail-fast: false
@@ -86,7 +86,7 @@ jobs:
         problem: ${{ fromJson(needs.prepare-matrix-yukicoder.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Extract matrix info
         run: |
           PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
@@ -139,10 +139,10 @@ jobs:
           oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
       - name: Collect coverage data
         id: collect-coverage
-        run: python3 scripts/gcov_summary.py "$PROBLEM" "$FILE"
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
       - name: Upload coverage data
         if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.collect-coverage.outputs.artifact_name }}
           path: coverage-data/*.gcov.json.gz
@@ -152,12 +152,12 @@ jobs:
   coverage-summary:
     needs: [yosupo-verify, yukicoder-verify]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Download coverage data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: coverage-*
           path: coverage-data

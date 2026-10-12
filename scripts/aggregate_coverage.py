@@ -91,8 +91,11 @@ def main() -> int:
         total_lines += len(file_lines)
         covered_lines += sum(file_lines.values())
 
+        verify_summary = "<br>".join(f"`{source}`" for source in sorted(verifiers[path])) or "—"
         if not file_functions and not file_lines:
-            rows.append(f"| `{path}` | — | — | — | — |")
+            rows.append(
+                f"| `{path}` | — | — | — | {verify_summary} | ⚠️ No coverage data |"
+            )
             continue
 
         function_count = sum(file_functions.values())
@@ -100,7 +103,7 @@ def main() -> int:
         function_rate = 100 * function_count / len(file_functions) if file_functions else 100
         line_rate = 100 * line_count / len(file_lines) if file_lines else 100
         incomplete = function_count < len(file_functions) or line_count < len(file_lines)
-        warning = "⚠️ " if incomplete else ""
+        status = "⚠️ Incomplete" if incomplete else "✅ 100%"
 
         missed_functions = sorted(
             name for (_, name), covered in file_functions.items() if not covered
@@ -112,8 +115,7 @@ def main() -> int:
             missing.append("functions: " + ", ".join(f"`{name}`" for name in escaped_names))
         if missed_lines:
             missing.append("lines: " + line_ranges(missed_lines))
-        missing_summary = warning + ("; ".join(missing) if missing else "—")
-        verify_summary = "<br>".join(f"`{source}`" for source in sorted(verifiers[path])) or "—"
+        missing_summary = ("⚠️ " if incomplete else "") + ("; ".join(missing) if missing else "—")
         function_summary = (
             f"{function_count}/{len(file_functions)} ({function_rate:.1f}%)"
             if file_functions
@@ -125,7 +127,7 @@ def main() -> int:
             else "—"
         )
         rows.append(
-            f"| `{path}` | {function_summary} | {line_summary} | {missing_summary} | {verify_summary} |"
+            f"| `{path}` | {function_summary} | {line_summary} | {missing_summary} | {verify_summary} | {status} |"
         )
 
     function_rate = 100 * covered_functions / total_functions if total_functions else 0
@@ -133,15 +135,15 @@ def main() -> int:
     report_lines = [
         "# Library C++ Coverage",
         "",
-        f"Collected {len(reports)} verify coverage report(s). Files absent from all reports are shown as `—`.",
+        f"Collected {len(reports)} verify coverage report(s). Files with no coverage data are marked `⚠️`.",
         "Verify files are listed when their translation unit includes the library file.",
         "",
-        "| Library `.cpp` file | Functions | Lines | Uncovered functions / lines | Reached from verify files |",
-        "| --- | ---: | ---: | --- | --- |",
+        "| Library `.cpp` file | Functions | Lines | Uncovered functions / lines | Reached from verify files | Status |",
+        "| --- | ---: | ---: | --- | --- | --- |",
         *rows,
         (
             f"| **Total** | **{covered_functions}/{total_functions} ({function_rate:.1f}%)** "
-            f"| **{covered_lines}/{total_lines} ({line_rate:.1f}%)** | | |"
+            f"| **{covered_lines}/{total_lines} ({line_rate:.1f}%)** | | | |"
         ),
     ]
     summary_path = os.environ.get("GITHUB_STEP_SUMMARY")

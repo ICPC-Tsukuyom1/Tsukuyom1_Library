@@ -69,7 +69,7 @@ jobs:
         run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
       - name: Upload coverage data
         if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ steps.collect-coverage.outputs.artifact_name }}
           path: coverage-data/*.gcov.json.gz
@@ -142,7 +142,7 @@ jobs:
         run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
       - name: Upload coverage data
         if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ steps.collect-coverage.outputs.artifact_name }}
           path: coverage-data/*.gcov.json.gz
@@ -157,7 +157,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Download coverage data
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: coverage-*
           path: coverage-data

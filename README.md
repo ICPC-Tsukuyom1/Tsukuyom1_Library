@@ -18,6 +18,4 @@ Library Checkerの問題であれば、GitHub Actionsで自動Verifyできるよ
 `./scripts/expander.py {cppファイル}` を実行することで、指定したcppファイルのインクルードを展開したコードを標準出力に出力します
 オンラインジャッジに提出する際などにご利用ください
 
-## Verify Checker
 
-`./scripts/check_verification.py` を実行することで、verifyが設定されていないソースファイルを検出できます

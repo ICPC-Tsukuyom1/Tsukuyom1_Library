@@ -101,19 +101,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Extract matrix info
+        id: extract
         run: |
           PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
           FILE=$(echo "${{ matrix.problem }}" | cut -d'$' -f2-)
           echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV
           echo "FILE=$FILE" >> $GITHUB_ENV
           echo "URL=https://yukicoder.me/problems/no/$PROBLEM" >> $GITHUB_ENV
+          echo "problem=$PROBLEM" >> $GITHUB_OUTPUT
       - name: Echo filename
         run: echo problem:$PROBLEM,file:$FILE,url:$URL
+      - name: Cache online judge tools packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-online-judge-tools-v1
       - name: Install online judge tools
-        run: |
-          python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
+      - name: Cache yukicoder testcases
+        id: cache-testcases
+        uses: actions/cache@v4
+        with:
+          path: testcases/${{ steps.extract.outputs.problem }}
+          key: yukicoder-testcases-${{ steps.extract.outputs.problem }}-v1
       - name: Download yukicoder testcases via oj
+        if: steps.cache-testcases.outputs.cache-hit != 'true'
         env:
           YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         run: |
@@ -122,7 +134,7 @@ jobs:
           : "${YUKICODER_TOKEN:?YUKICODER_TOKEN is required}"
           rm -rf "$BASE_DIR"
           mkdir -p "$BASE_DIR"
-          oj download "$URL" --system --directory "$BASE_DIR" --yukicoder-token "${YUKICODER_TOKEN}"
+          PATH="$HOME/.local/bin:$PATH" oj download "$URL" --system --directory "$BASE_DIR" --yukicoder-token "${YUKICODER_TOKEN}"
       - name: Compile target
         run: |
           g++ -std=c++20 -O2 --coverage -I `dirname $FILE` $FILE
@@ -149,7 +161,7 @@ jobs:
           fi
 
           echo "using test directory: $TEST_DIR"
-          oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
+          PATH="$HOME/.local/bin:$PATH" oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
       - name: Collect coverage data
         id: collect-coverage
         run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
@@ -174,22 +186,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Extract matrix info
+        id: extract
         run: |
           PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
           FILE=$(echo "${{ matrix.problem }}" | cut -d'$' -f2-)
           echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV
           echo "FILE=$FILE" >> $GITHUB_ENV
           echo "URL=https://onlinejudge.u-aizu.ac.jp/problems/$PROBLEM" >> $GITHUB_ENV
+          echo "problem=$PROBLEM" >> $GITHUB_OUTPUT
+      - name: Cache online judge tools packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-online-judge-tools-v1
       - name: Install online judge tools
-        run: |
-          python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
+      - name: Cache AOJ system testcases
+        id: cache-testcases
+        uses: actions/cache@v4
+        with:
+          path: testcases/${{ steps.extract.outputs.problem }}
+          key: aoj-testcases-${{ steps.extract.outputs.problem }}-v1
       - name: Download AOJ system testcases
+        if: steps.cache-testcases.outputs.cache-hit != 'true'
         run: |
           set -eu
           BASE_DIR="testcases/${PROBLEM}"
           mkdir -p "$BASE_DIR"
-          oj download "$URL" --system --directory "$BASE_DIR"
+          PATH="$HOME/.local/bin:$PATH" oj download "$URL" --system --directory "$BASE_DIR"
       - name: Compile target
         run: g++ -std=c++20 -O2 --coverage -I "$(dirname "$FILE")" "$FILE" -o a.out
       - name: Run oj test
@@ -207,7 +231,7 @@ jobs:
             echo "error: no matching (.in, .out) testcase pairs under $BASE_DIR" >&2
             exit 1
           fi
-          oj test -c ./a.out -d "$TEST_DIR" -t 10 --error 1e-6
+          PATH="$HOME/.local/bin:$PATH" oj test -c ./a.out -d "$TEST_DIR" -t 10 --error 1e-6
       - name: Collect coverage data
         id: collect-coverage
         run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"

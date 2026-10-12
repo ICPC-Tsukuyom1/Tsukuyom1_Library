@@ -9,7 +9,7 @@ ll modpow(ll a, ll b, ll mod) {
 ll modlog(ll a, ll b, ll p) {
   ll n = (ll)sqrtl(p) + 1, e = 1, f = 1, j = 1;
   unordered_map<ll, ll> A;
-  while (j = n && (e = f = e * a % p) != b % p) A[e * b % p] = j++;
+  while (j <= n && (e = f = e * a % p) != b % p) A[e * b % p] = j++;
   if (e == b % p) return j;
   if (gcd(p, e) == gcd(p, b))
     reps(i, 2, n + 2) if (A.count(e = e * f % p)) return n * i - A[e];

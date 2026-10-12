@@ -64,8 +64,17 @@ jobs:
           mkdir -p ./out
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'ulimit -s unlimited && echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'
-      - name: Summarize coverage
+      - name: Collect coverage data
+        id: collect-coverage
         run: python3 scripts/gcov_summary.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
 
   yukicoder-verify:
     needs: prepare-matrix-yukicoder
@@ -128,5 +137,30 @@ jobs:
 
           echo "using test directory: $TEST_DIR"
           oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
-      - name: Summarize coverage
+      - name: Collect coverage data
+        id: collect-coverage
         run: python3 scripts/gcov_summary.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
+
+  coverage-summary:
+    needs: [yosupo-verify, yukicoder-verify]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download coverage data
+        uses: actions/download-artifact@v4
+        with:
+          pattern: coverage-*
+          path: coverage-data
+          merge-multiple: true
+      - name: Summarize library coverage
+        run: python3 scripts/aggregate_coverage.py coverage-data

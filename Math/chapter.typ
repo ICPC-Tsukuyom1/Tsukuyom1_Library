@@ -3,6 +3,7 @@
 = Mathematics
 
 #include "modula.typ"
+#include "BigInt.typ"
 #include "binomial_coefficients.typ"
 #include "bitwise_or_convolution.typ"
 #include "bitwise_and_convolution.typ"

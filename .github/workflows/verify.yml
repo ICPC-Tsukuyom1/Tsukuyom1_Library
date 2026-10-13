@@ -112,7 +112,7 @@ jobs:
       - name: Echo filename
         run: echo problem:$PROBLEM,file:$FILE,url:$URL
       - name: Cache online judge tools packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-online-judge-tools-v1
@@ -120,7 +120,7 @@ jobs:
         run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
       - name: Cache yukicoder testcases
         id: cache-testcases
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: testcases/${{ steps.extract.outputs.problem }}
           key: yukicoder-testcases-${{ steps.extract.outputs.problem }}-v1
@@ -195,7 +195,7 @@ jobs:
           echo "URL=https://onlinejudge.u-aizu.ac.jp/problems/$PROBLEM" >> $GITHUB_ENV
           echo "problem=$PROBLEM" >> $GITHUB_OUTPUT
       - name: Cache online judge tools packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-online-judge-tools-v1
@@ -203,7 +203,7 @@ jobs:
         run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
       - name: Cache AOJ system testcases
         id: cache-testcases
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: testcases/${{ steps.extract.outputs.problem }}
           key: aoj-testcases-${{ steps.extract.outputs.problem }}-v1
@@ -252,7 +252,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Download coverage data
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           pattern: coverage-*
           path: coverage-data

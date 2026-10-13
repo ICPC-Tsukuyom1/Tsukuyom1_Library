@@ -1,4 +1,9 @@
+//@yosupo primitive_root
+
 #include "../../../template.cpp"
+#include "../../../Math/modula.cpp"
+#include "../../../Math/MillerRabin.cpp"
+#include "../../../Math/FastFactorize.cpp"
 #include "../../../Math/primroot.cpp"
 
 void solve() {

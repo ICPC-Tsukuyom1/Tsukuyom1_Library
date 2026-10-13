@@ -8,12 +8,12 @@ on:
 
 jobs:
   prepare-matrix-yosupo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Find yosupo files
         id: set-matrix
         run: |
@@ -21,21 +21,34 @@ jobs:
           echo "matrix=$problems" >> $GITHUB_OUTPUT
 
   prepare-matrix-yukicoder:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Find yukicoder files
         id: set-matrix
         run: |
           problems=$(grep -r -E '^//@yukicoder' --include='*.cpp' ./verify | sed -E 's|^(.*)://@yukicoder ([^[:space:]]+).*|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
           echo "matrix=$problems" >> $GITHUB_OUTPUT
 
+  prepare-matrix-aoj:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Find AOJ files
+        id: set-matrix
+        run: |
+          problems=$(grep -r -E '^//@aoj' --include='*.cpp' ./verify | sed -E 's|^(.*)://@aoj ([^[:space:]]+).*|\2$\1|' | jq -Rsc 'split("\n") | map(select(length > 0))')
+          echo "matrix=$problems" >> $GITHUB_OUTPUT
+
   yosupo-verify:
     needs: prepare-matrix-yosupo
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     strategy:
       fail-fast: false
@@ -43,7 +56,7 @@ jobs:
         problem: ${{ fromJson(needs.prepare-matrix-yosupo.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Extract matrix info
         run: |
           echo "PROBLEM=`echo "${{ matrix.problem }}" | cut -d'$' -f1`" >> $GITHUB_ENV
@@ -58,16 +71,27 @@ jobs:
         run: echo DIR=`find . -path "*/$PROBLEM" -type d` >> $GITHUB_ENV
       - name: Compile target
         run: |
-          g++ -std=c++20 -O2 -I `dirname $FILE` $FILE
+          g++ -std=c++20 -O2 --coverage -I `dirname $FILE` $FILE
       - name: Execute
         run: |
           mkdir -p ./out
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'ulimit -s unlimited && echo "executing {}..." && cat "{}" | ./a.out >> "./out/$(basename "{}" .in)"'
           find "$DIR"/in -type f -print0 | xargs -0 -I {} sh -c 'echo "judging {}..." && $DIR/checker $DIR/in/$(basename "{}") $DIR/out/$(basename "{}" .in).out ./out/$(basename "{}" .in)'
+      - name: Collect coverage data
+        id: collect-coverage
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
 
   yukicoder-verify:
     needs: prepare-matrix-yukicoder
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     strategy:
       fail-fast: false
@@ -75,21 +99,33 @@ jobs:
         problem: ${{ fromJson(needs.prepare-matrix-yukicoder.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Extract matrix info
+        id: extract
         run: |
           PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
           FILE=$(echo "${{ matrix.problem }}" | cut -d'$' -f2-)
           echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV
           echo "FILE=$FILE" >> $GITHUB_ENV
           echo "URL=https://yukicoder.me/problems/no/$PROBLEM" >> $GITHUB_ENV
+          echo "problem=$PROBLEM" >> $GITHUB_OUTPUT
       - name: Echo filename
         run: echo problem:$PROBLEM,file:$FILE,url:$URL
+      - name: Cache online judge tools packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-online-judge-tools-v1
       - name: Install online judge tools
-        run: |
-          python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
+      - name: Cache yukicoder testcases
+        id: cache-testcases
+        uses: actions/cache@v5
+        with:
+          path: testcases/${{ steps.extract.outputs.problem }}
+          key: yukicoder-testcases-${{ steps.extract.outputs.problem }}-v1
       - name: Download yukicoder testcases via oj
+        if: steps.cache-testcases.outputs.cache-hit != 'true'
         env:
           YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         run: |
@@ -98,10 +134,10 @@ jobs:
           : "${YUKICODER_TOKEN:?YUKICODER_TOKEN is required}"
           rm -rf "$BASE_DIR"
           mkdir -p "$BASE_DIR"
-          oj download "$URL" --system --directory "$BASE_DIR" --yukicoder-token "${YUKICODER_TOKEN}"
+          PATH="$HOME/.local/bin:$PATH" oj download "$URL" --system --directory "$BASE_DIR" --yukicoder-token "${YUKICODER_TOKEN}"
       - name: Compile target
         run: |
-          g++ -std=c++20 -O2 -I `dirname $FILE` $FILE
+          g++ -std=c++20 -O2 --coverage -I `dirname $FILE` $FILE
       - name: Run oj test
         run: |
           set -eu
@@ -125,4 +161,101 @@ jobs:
           fi
 
           echo "using test directory: $TEST_DIR"
-          oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
+          PATH="$HOME/.local/bin:$PATH" oj test -c "./a.out" -d "$TEST_DIR" -t 10 --error 1e-6
+      - name: Collect coverage data
+        id: collect-coverage
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
+
+  aoj-verify:
+    needs: prepare-matrix-aoj
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        problem: ${{ fromJson(needs.prepare-matrix-aoj.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Extract matrix info
+        id: extract
+        run: |
+          PROBLEM=$(echo "${{ matrix.problem }}" | cut -d'$' -f1)
+          FILE=$(echo "${{ matrix.problem }}" | cut -d'$' -f2-)
+          echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV
+          echo "FILE=$FILE" >> $GITHUB_ENV
+          echo "URL=https://onlinejudge.u-aizu.ac.jp/problems/$PROBLEM" >> $GITHUB_ENV
+          echo "problem=$PROBLEM" >> $GITHUB_OUTPUT
+      - name: Cache online judge tools packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-online-judge-tools-v1
+      - name: Install online judge tools
+        run: python3 -m pip install --break-system-packages --upgrade --user online-judge-tools online-judge-api-client
+      - name: Cache AOJ system testcases
+        id: cache-testcases
+        uses: actions/cache@v5
+        with:
+          path: testcases/${{ steps.extract.outputs.problem }}
+          key: aoj-testcases-${{ steps.extract.outputs.problem }}-v1
+      - name: Download AOJ system testcases
+        if: steps.cache-testcases.outputs.cache-hit != 'true'
+        run: |
+          set -eu
+          BASE_DIR="testcases/${PROBLEM}"
+          mkdir -p "$BASE_DIR"
+          PATH="$HOME/.local/bin:$PATH" oj download "$URL" --system --directory "$BASE_DIR"
+      - name: Compile target
+        run: g++ -std=c++20 -O2 --coverage -I "$(dirname "$FILE")" "$FILE" -o a.out
+      - name: Run oj test
+        run: |
+          set -eu
+          BASE_DIR="testcases/${PROBLEM}"
+          TEST_DIR=""
+          while IFS= read -r -d '' candidate; do
+            if ls "$candidate"/*.in > /dev/null 2>&1 && ls "$candidate"/*.out > /dev/null 2>&1; then
+              TEST_DIR="$candidate"
+              break
+            fi
+          done < <(find "$BASE_DIR" -type d -print0 | sort -z)
+          if [ -z "$TEST_DIR" ]; then
+            echo "error: no matching (.in, .out) testcase pairs under $BASE_DIR" >&2
+            exit 1
+          fi
+          PATH="$HOME/.local/bin:$PATH" oj test -c ./a.out -d "$TEST_DIR" -t 10 --error 1e-6
+      - name: Collect coverage data
+        id: collect-coverage
+        run: python3 scripts/collect_coverage.py "$PROBLEM" "$FILE"
+      - name: Upload coverage data
+        if: always() && hashFiles('coverage-data/*.gcov.json.gz') != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ steps.collect-coverage.outputs.artifact_name }}
+          path: coverage-data/*.gcov.json.gz
+          if-no-files-found: error
+          retention-days: 1
+
+  coverage-summary:
+    needs: [yosupo-verify, yukicoder-verify, aoj-verify]
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Download coverage data
+        uses: actions/download-artifact@v8
+        with:
+          pattern: coverage-*
+          path: coverage-data
+          merge-multiple: true
+      - name: Summarize library coverage
+        run: python3 scripts/aggregate_coverage.py coverage-data

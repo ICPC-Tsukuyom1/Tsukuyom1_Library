@@ -15,6 +15,7 @@
 #include "kd-tree.typ"
 #include "rollinghash.typ"
 #include "sparsetable.typ"
+#include "wavelet-matrix.typ"
 #include "disjoint-sparsetable.typ"
 #include "swag.typ"
 #include "unionfind.typ"

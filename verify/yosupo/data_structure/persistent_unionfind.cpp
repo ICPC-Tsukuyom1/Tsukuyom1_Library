@@ -1,6 +1,10 @@
 //@yosupo persistent_unionfind
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Structure/UnionFind-rollback.cpp"
 
 struct Query {
@@ -8,11 +12,9 @@ struct Query {
 };
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
 
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
 
   vv<ll> child(q + 1);
   vec<Query> queries;
@@ -23,7 +25,7 @@ int main() {
   ll out_cnt = 0;
   rep(i, q) {
     ll T, K, U, V;
-    cin >> T >> K >> U >> V;
+    in >> T >> K >> U >> V;
     t[i] = T;
     k[i] = K;
     u[i] = U;
@@ -53,6 +55,6 @@ int main() {
 
   dfs(dfs, q);
 
-  rep(i, out_cnt) cout << ans[i] << '\n';
+  rep(i, out_cnt) out << ans[i] << '\n';
   return 0;
 }

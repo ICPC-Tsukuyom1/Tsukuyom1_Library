@@ -1,15 +1,19 @@
 //@yosupo zalgorithm
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
+
 #include "../../../Strings/ZAlgorithm.cpp"
 void solve() {
   string s;
-  cin >> s;
+  in >> s;
   auto Z = Zalgo(s);
-  rep(i, sz(s)) { cout << Z[i] << " \n"[i + 1 == sz(s)]; }
+  rep(i, sz(s)) { out << Z[i] << " \n"[i + 1 == sz(s)]; }
 }
 int main() {
   ll T = 1;
-  // cin >> T;
   while (T--) solve();
 }

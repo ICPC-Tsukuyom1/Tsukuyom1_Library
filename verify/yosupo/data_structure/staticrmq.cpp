@@ -1,6 +1,10 @@
 //@yosupo staticrmq
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll INF = 4e18;
 
@@ -12,17 +16,17 @@ const ll INF = 4e18;
 
 int main() {
   int n, q;
-  cin >> n >> q;
+  in >> n >> q;
   SegTree seg(n);
   rep(i, n) {
     int x;
-    cin >> x;
+    in >> x;
     seg.update(i, x);
   }
   rep(i, q) {
     int l, r;
-    cin >> l >> r;
-    cout << seg.query(l, r) << endl;
+    in >> l >> r;
+    out << seg.query(l, r) << '\n';
   }
   return 0;
 }

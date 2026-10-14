@@ -1,33 +1,45 @@
 //@yosupo system_of_linear_equations
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
 const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
 #include "../../../Math/matrix.cpp"
 #include "../../../Math/solveLinear.cpp"
+
+FastIn in;
+FastOut out;
+
 void solve() {
-	ll n, m; cin >> n >> m;
+	ll n, m; in >> n >> m;
   Matrix<mint> A(n, m);
-  rep(i, n) rep(j, m) cin >> A[i][j];
+  rep(i, n) rep(j, m) {
+    ll temp;
+    in >> temp;
+    A[i][j] = mint(temp);
+  }
   vec<mint> b(n);
-  rep(i, n) cin >> b[i];
+  rep(i, n) {
+    ll temp;
+    in >> temp;
+    b[i] = mint(temp);
+  }
   vec<mint> x;
   auto res = solveLinear(A, b);
   if (res.empty()) {
-    cout << -1 << endl;
+    out << -1 << '\n';
   } else {
-    cout << sz(res) - 1 << endl;
+    out << sz(res) - 1 << '\n';
     for (auto v : res) {
       rep(i, sz(v)) {
-        cout << v[i];
-        if (i + 1 == sz(v)) cout << endl;
-        else cout << " ";
+        out << v[i].x;
+        if (i + 1 == sz(v)) out << '\n';
+        else out << " ";
       }
     }
   }
 }
 int main() {
     ll T = 1;
-    // cin >> T;
     while (T--) solve();
 }

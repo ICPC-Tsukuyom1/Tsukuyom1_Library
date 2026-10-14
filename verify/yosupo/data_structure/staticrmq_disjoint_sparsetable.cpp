@@ -1,6 +1,10 @@
 //@yosupo staticrmq
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 #define T int
 #define op(a, b) min(a, b)
@@ -8,17 +12,15 @@
 #include "../../../Structure/disjoint-sparsetable.cpp"
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
   int n, q;
-  cin >> n >> q;
+  in >> n >> q;
   vec<int> a(n);
-  rep(i, n) { cin >> a[i]; }
+  rep(i, n) { in >> a[i]; }
   DisjointSparseTable dst(a);
   rep(i, q) {
     int l, r;
-    cin >> l >> r;
-    cout << dst.fold(l, r) << "\n";
+    in >> l >> r;
+    out << dst.fold(l, r) << "\n";
   }
   return 0;
 }

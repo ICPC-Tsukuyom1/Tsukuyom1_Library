@@ -1,6 +1,10 @@
 //@yosupo range_affine_range_sum
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll mod = 998244353;
 
@@ -20,24 +24,24 @@ const ll mod = 998244353;
 
 int main() {
   int n, q;
-  cin >> n >> q;
+  in >> n >> q;
   LazySeg seg(n);
   rep(i, n) {
     ll x;
-    cin >> x;
+    in >> x;
     seg.effect(i, i + 1, {0, x});
   }
   while (q--) {
     int type;
-    cin >> type;
+    in >> type;
     if (type == 0) {
       ll l, r, b, c;
-      cin >> l >> r >> b >> c;
+      in >> l >> r >> b >> c;
       seg.effect(l, r, {b, c});
     } else {
       int l, r;
-      cin >> l >> r;
-      cout << seg.query(l, r) << endl;
+      in >> l >> r;
+      out << seg.query(l, r).x << '\n';
     }
   }
 }

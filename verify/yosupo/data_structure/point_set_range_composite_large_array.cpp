@@ -1,6 +1,10 @@
 //@yosupo point_set_range_composite_large_array
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll mod = 998244353;
 
@@ -16,32 +20,35 @@ const ll mod = 998244353;
 
 int main() {
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
 
   DynamicSeg seg(n);
   // rep(i, n)
   // {
   //   mint a, b;
-  //   cin >> a >> b;
+  //   ll a_input, b_input;
+  //   in >> a_input >> b_input;
+  //   a = a_input;
+  //   b = b_input;
   //   seg.update(i, {a, b});
   // }
   // rep(i, n)
   // {
-  //   cout << seg.query(i, i+1).first << " " << seg.query(i, i+1).second <<
-  //   endl;
+  //   out << seg.query(i, i+1).first.x << " " << seg.query(i, i+1).second.x <<
+  //   '\n';
   // }
   while (q--) {
     ll t;
-    cin >> t;
+    in >> t;
     if (t == 0) {
       ll p, c, d;
-      cin >> p >> c >> d;
+      in >> p >> c >> d;
       seg.update(p, {c, d});
     } else {
       ll l, r, x;
-      cin >> l >> r >> x;
+      in >> l >> r >> x;
       auto &&[a, b] = seg.query(l, r);
-      cout << a * x + b << '\n';
+      out << (a * x + b).x << '\n';
     }
   }
 }

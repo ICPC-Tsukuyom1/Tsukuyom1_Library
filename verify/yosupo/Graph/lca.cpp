@@ -1,17 +1,20 @@
 //@yosupo lca
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
+
 #include "../../../Graph/lca.cpp"
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
   vv<ll> g(n);
   rep(i, n - 1) {
     ll p;
-    cin >> p;
+    in >> p;
     g[i + 1].emplace_back(p);
     g[p].emplace_back(i + 1);
   }
@@ -20,7 +23,7 @@ int main() {
 
   rep(Q, q) {
     ll u, v;
-    cin >> u >> v;
-    cout << lca.query(u, v) << "\n";
+    in >> u >> v;
+    out << lca.query(u, v) << "\n";
   }
 }

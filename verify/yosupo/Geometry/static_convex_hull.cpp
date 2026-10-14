@@ -1,18 +1,27 @@
 //@yosupo static_convex_hull
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Geometry/Point.cpp"
 #include "../../../Geometry/convex_hull.cpp"
 int main() {
   ll T;
-  cin >> T;
+  in >> T;
   while (T--) {
     ll N;
-    cin >> N;
+    in >> N;
     Polygon S(N);
-    rep(i, N) cin >> S[i].x >> S[i].y;
+    rep(i, N) {
+      ll x, y;
+      in >> x >> y;
+      S[i].x = x;
+      S[i].y = y;
+    }
     Polygon ans = convex_hull(S);
-    cout << sz(ans) << endl;
-    rep(i, sz(ans)) { cout << (ll)ans[i].x << ' ' << (ll)ans[i].y << endl; }
+    out << sz(ans) << '\n';
+    rep(i, sz(ans)) { out << (ll)ans[i].x << ' ' << (ll)ans[i].y << '\n'; }
   }
 }

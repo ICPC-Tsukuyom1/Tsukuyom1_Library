@@ -3,6 +3,10 @@
 // TODO: HLDはもっとまともな問題でVerifyする (Vertex Set Path Composite など?)
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 #include "../../../Structure/hld.cpp"
 
@@ -12,13 +16,13 @@ using Graph = vv<ll>;
 
 int main() {
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
   vl a(n);
-  rep(i, n) cin >> a[i];
+  rep(i, n) in >> a[i];
   Graph g(n);
   rep(i, n - 1) {
     ll u, v;
-    cin >> u >> v;
+    in >> u >> v;
     g[u].emplace_back(v);
     g[v].emplace_back(u);
   }
@@ -33,18 +37,18 @@ int main() {
 
   rep(i, q) {
     ll t;
-    cin >> t;
+    in >> t;
     if (t == 0) {
       ll p, x;
-      cin >> p >> x;
+      in >> p >> x;
       hld.process(p, p, [&](int l, int r) { bit.apply(l, x); });
     } else {
       ll u, v;
-      cin >> u >> v;
-      cout << hld.queryPath(
+      in >> u >> v;
+      out << hld.queryPath(
                   u, v, 0LL, [&](ll l, ll r) { return bit.prod(l, r); },
                   [](ll a, ll b) { return a + b; })
-           << endl;
+           << '\n';
     }
   }
 }

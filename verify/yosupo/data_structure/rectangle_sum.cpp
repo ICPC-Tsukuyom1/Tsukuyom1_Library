@@ -1,22 +1,23 @@
 //@yosupo rectangle_sum
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Structure/kd-tree.cpp"
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout << fixed << setprecision(12);
 
     ll n, q;
-    cin >> n >> q;
+    in >> n >> q;
 
 
     vec<tuple<ll, ll, ll>> src;
 
     rep(i, n) {
         ll x, y, w;
-        cin >> x >> y >> w;
+        in >> x >> y >> w;
         src.emplace_back(x, y, w);
     }
 
@@ -24,7 +25,7 @@ int main(){
 
     rep(i, q) {
         ll l, d, r, u;
-        cin >> l >> d >> r >> u;
-        cout << kd.prod(l, r, d, u) << endl;
+        in >> l >> d >> r >> u;
+        out << kd.prod(l, r, d, u) << '\n';
     }
 }

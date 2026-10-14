@@ -1,14 +1,23 @@
 //@yosupo closest_pair
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Geometry/Point.cpp"
 #include "../../../Geometry/closest_pair.cpp"
 
 void solve() {
   ll N;
-  cin >> N;
+  in >> N;
   Polygon s(N);
-  rep(i, N) { cin >> s[i].x >> s[i].y; }
+  rep(i, N) {
+    ll x, y;
+    in >> x >> y;
+    s[i].x = x;
+    s[i].y = y;
+  }
   Polygon v = s;
   auto ans = closest(v);
   ll p = -1;
@@ -18,13 +27,13 @@ void solve() {
   rep(i, N) {
     if (i == p) continue;
     if (s[i] == ans.second) {
-      cout << p << ' ' << i << endl;
+      out << p << ' ' << i << '\n';
       return;
     }
   }
 }
 int main() {
   ll T = 1;
-  cin >> T;
+  in >> T;
   while (T--) solve();
 }

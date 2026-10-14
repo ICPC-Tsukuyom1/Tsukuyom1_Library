@@ -1,5 +1,9 @@
 //@yosupo line_add_get_min
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Structure/LiChaoTree.cpp"
 struct query {
   ll t;
@@ -7,24 +11,24 @@ struct query {
 };
 void solve() {
   ll N, Q;
-  cin >> N >> Q;
+  in >> N >> Q;
   vl x;
   vec<query> q;
   rep(i, N) {
     ll a, b;
-    cin >> a >> b;
+    in >> a >> b;
     q.emplace_back(0, a, b);
   }
   while (Q--) {
     ll t;
-    cin >> t;
+    in >> t;
     if (t == 0) {
       ll a, b;
-      cin >> a >> b;
+      in >> a >> b;
       q.emplace_back(t, a, b);
     } else {
       ll p;
-      cin >> p;
+      in >> p;
       q.emplace_back(t, p, 0);
       x.emplace_back(p);
     }
@@ -36,12 +40,12 @@ void solve() {
       lct.update(q[i].a, q[i].b);
     } else {
       ll ans = lct.query(q[i].a);
-      cout << ans << endl;
+      out << ans << '\n';
     }
   }
 }
 int main() {
   ll T = 1;
-  // cin >> T;
+  // in >> T;
   while (T--) { solve(); }
 }

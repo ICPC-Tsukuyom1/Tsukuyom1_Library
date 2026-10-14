@@ -1,6 +1,10 @@
 //@yosupo associative_array
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 #include "../../../Structure/pbds.cpp"
 
 using ull = unsigned long long;
@@ -18,19 +22,19 @@ struct chash {
 
 int main() {
   ll q;
-  cin >> q;
+  in >> q;
   FastMap<ll, ll, chash> mp;
   rep(Q, q) {
     ll t;
-    cin >> t;
+    in >> t;
     if (t == 0) {
       ll k, v;
-      cin >> k >> v;
+      in >> k >> v;
       mp[k] = v;
     } else {
       ll k;
-      cin >> k;
-      cout << (mp.find(k) == mp.end() ? 0 : mp[k]) << "\n";
+      in >> k;
+      out << (mp.find(k) == mp.end() ? 0 : mp[k]) << "\n";
     }
   }
 }

@@ -1,6 +1,10 @@
 //@yosupo static_range_sum
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 #define T ll
 #define op(a, b) a + b
@@ -8,16 +12,14 @@
 #include "../../../Structure/disjoint-sparsetable.cpp"
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
   vl a(n);
-  rep(i, n) cin >> a[i];
+  rep(i, n) in >> a[i];
   DisjointSparseTable dst(a);
   while (q--) {
     ll l, r;
-    cin >> l >> r;
-    cout << dst.fold(l, r) << '\n';
+    in >> l >> r;
+    out << dst.fold(l, r) << '\n';
   }
 }

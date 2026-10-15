@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/point_set_range_composite_large_array.cpp */
 //@yosupo point_set_range_composite_large_array
 
 #include "../../../template.cpp"

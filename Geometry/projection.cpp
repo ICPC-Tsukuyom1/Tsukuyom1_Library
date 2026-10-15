@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/projection.cpp */
 // depends on: Point
 Point Projection(Segment S, Point p, bool reflect) {
   Vector base = S.e - S.s;

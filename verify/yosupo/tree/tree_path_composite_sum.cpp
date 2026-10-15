@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/tree/tree_path_composite_sum.cpp */
 //@yosupo tree_path_composite_sum
 
 #include "../../../template.cpp"

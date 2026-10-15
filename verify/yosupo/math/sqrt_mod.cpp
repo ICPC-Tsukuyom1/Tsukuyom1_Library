@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/sqrt_mod.cpp */
 //@yosupo sqrt_mod
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"

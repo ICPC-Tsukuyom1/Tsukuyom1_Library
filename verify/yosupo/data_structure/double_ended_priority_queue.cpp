@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/double_ended_priority_queue.cpp */
 //@yosupo double_ended_priority_queue
 
 #include "../../../template.cpp"

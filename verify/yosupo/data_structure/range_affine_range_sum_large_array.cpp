@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/range_affine_range_sum_large_array.cpp */
 //@yosupo range_affine_range_sum_large_array
 
 #include "../../../template.cpp"

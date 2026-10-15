@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yukicoder/306_golden_section_search.cpp */
 //@yukicoder 306
 
 #include "../../template.cpp"

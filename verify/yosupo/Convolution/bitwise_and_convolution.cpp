@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Convolution/bitwise_and_convolution.cpp */
 //@yosupo bitwise_and_convolution
 
 #include "../../../template.cpp"

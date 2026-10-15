@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/system_of_linear_equations.cpp */
 //@yosupo system_of_linear_equations
 
 #include "../../../template.cpp"

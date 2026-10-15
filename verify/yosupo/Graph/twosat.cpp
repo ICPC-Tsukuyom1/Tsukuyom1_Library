@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Graph/twosat.cpp */
 //@yosupo two_sat
 
 #include "../../../template.cpp"

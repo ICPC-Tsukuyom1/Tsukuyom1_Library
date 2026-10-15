@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/primroot.cpp */
 //@yosupo primitive_root
 
 #include "../../../template.cpp"

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/dump.cpp */
 const string TERM_RED = "\033[31m";
 const string TERM_RESET = "\033[0m";
 

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/static_range_sum.cpp */
 //@yosupo static_range_sum
 
 #include "../../../template.cpp"

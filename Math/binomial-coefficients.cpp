@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/binomial-coefficients.cpp */
 vec<mint> fac, inv;
 vv<mint> pascal;
 void init(ll n) {

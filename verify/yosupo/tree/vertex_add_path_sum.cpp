@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/tree/vertex_add_path_sum.cpp */
 //@yosupo vertex_add_path_sum
 
 // TODO: HLDはもっとまともな問題でVerifyする (Vertex Set Path Composite など?)

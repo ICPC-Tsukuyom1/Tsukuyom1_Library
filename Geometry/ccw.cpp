@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/ccw.cpp */
 // depends on: Point
 static const int COUNTER_CLOCKWISE = 1;
 static const int CLOCKWISE = -1;

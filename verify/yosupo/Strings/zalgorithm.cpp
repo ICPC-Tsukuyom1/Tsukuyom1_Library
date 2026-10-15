@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Strings/zalgorithm.cpp */
 //@yosupo zalgorithm
 
 #include "../../../template.cpp"

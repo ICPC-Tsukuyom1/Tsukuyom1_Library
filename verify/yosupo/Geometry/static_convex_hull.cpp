@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Geometry/static_convex_hull.cpp */
 //@yosupo static_convex_hull
 
 #include "../../../template.cpp"

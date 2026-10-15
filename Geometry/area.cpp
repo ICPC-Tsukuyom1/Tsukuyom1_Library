@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/area.cpp */
 // depends on: Point
 ld Area(Polygon S) {
   ld ans = 0; Point p = S[0];

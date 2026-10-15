@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/pow_of_matrix.cpp */
 //@yosupo pow_of_matrix
 
 #include "../../../template.cpp"

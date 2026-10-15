@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Geometry/closest_pair.cpp */
 //@yosupo closest_pair
 
 #include "../../../template.cpp"

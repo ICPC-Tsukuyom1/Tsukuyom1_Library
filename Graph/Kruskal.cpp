@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/Kruskal.cpp */
 #include "../Structure/unionfind.cpp"
 
 struct Edge {

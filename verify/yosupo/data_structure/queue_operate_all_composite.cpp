@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/queue_operate_all_composite.cpp */
 //@yosupo queue_operate_all_composite
 
 #include "../../../template.cpp"

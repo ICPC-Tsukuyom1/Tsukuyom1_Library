@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/sum_of_floor_of_linear.cpp */
 //@yosupo sum_of_floor_of_linear
 
 #include "../../../template.cpp"

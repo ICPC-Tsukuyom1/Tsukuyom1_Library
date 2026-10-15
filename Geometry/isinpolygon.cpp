@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/isinpolygon.cpp */
 // depends on: Point
 int isinPolygon(Point p, Polygon S) {
   bool check = false;

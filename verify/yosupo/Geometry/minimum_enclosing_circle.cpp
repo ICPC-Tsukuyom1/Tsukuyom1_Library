@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Geometry/minimum_enclosing_circle.cpp */
 //@yosupo minimum_enclosing_circle
 
 #include "../../../template.cpp"

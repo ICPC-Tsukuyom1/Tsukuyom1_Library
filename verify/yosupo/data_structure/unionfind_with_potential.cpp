@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/unionfind_with_potential.cpp */
 //@yosupo unionfind_with_potential
 
 #include "../../../template.cpp"

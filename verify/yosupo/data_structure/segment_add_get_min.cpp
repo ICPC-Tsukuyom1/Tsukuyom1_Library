@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/segment_add_get_min.cpp */
 //@yosupo segment_add_get_min
 #include "../../../template.cpp"
 #include "../../../Structure/LiChaoTree.cpp"

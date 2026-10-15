@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/clInter.cpp */
 // depends on: Point, projection
 const ld inf = numeric_limits<ld>::max() / 2;
 pair<Point, Point> clInter(Circle c, Line l) {

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/LowLink.cpp */
 template <typename G>
 struct LowLink {
     ll n;

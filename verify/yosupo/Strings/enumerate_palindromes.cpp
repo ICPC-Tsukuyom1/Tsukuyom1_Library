@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Strings/enumerate_palindromes.cpp */
 //@yosupo enumerate_palindromes
 
 #include "../../../template.cpp"

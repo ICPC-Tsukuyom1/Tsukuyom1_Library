@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/aoj/Geometry/CGL_1_A.cpp */
 //@aoj CGL_1_A
 
 #include "../../../template.cpp"

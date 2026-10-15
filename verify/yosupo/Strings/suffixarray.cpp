@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Strings/suffixarray.cpp */
 //@yosupo suffixarray
 
 #include "../../../template.cpp"

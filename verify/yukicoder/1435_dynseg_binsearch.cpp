@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yukicoder/1435_dynseg_binsearch.cpp */
 //@yukicoder 1435
 
 #include "../../template.cpp"

@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/exp_of_formal_power_series.cpp */
 //@yosupo exp_of_formal_power_series
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"

@@ -22,7 +22,7 @@ Library Checker、yukicoder、AOJの問題を使い、GitHub Actionsで自動Ver
 
 ## 出典URLとコンテストでの利用
 
-出典ヘッダーの対象は、Git追跡ファイルのうち拡張子が `.cpp`、`.cc`、`.cxx`、`.c`、`.h`、`.hh`、`.hpp`、`.hxx`、`.ipp`、`.tpp` のC/C++コードだけです。拡張子は大文字・小文字を区別します。Verifyやテンプレートのコードも対象ですが、Typst文書、Markdown、スクリプト、CI設定などには付けません。
+出典ヘッダーの対象は、`verify/`以外にあるGit追跡下のC/C++コード（`.cpp`、`.cc`、`.cxx`、`.c`、`.h`、`.hh`、`.hpp`、`.hxx`、`.ipp`、`.tpp`）です。テンプレートも対象です。`verify/`配下の検証用コードや、Typst文書・Markdown・スクリプト・CI設定には付けません。
 
 対象コードは次の1行で始まります。`<path>` はリポジトリルートからの各ファイルのパスです。
 
@@ -45,7 +45,7 @@ python3 -B scripts/source_urls.py fix
 python3 -B scripts/source_urls.py check
 ```
 
-`fix` は対象C/C++コードの管理ヘッダーを追加・更新します。差分を確認し、ヘッダーの変更も `git add` してください。対象外の拡張子にヘッダーは要求せず、例外マニフェストも使用しません。生成PDF、ビルド成果物、依存パッケージ、別worktreeは対象に含めません。
+`fix` は対象ライブラリコードのヘッダーを追加・更新します。差分を確認し、ヘッダーの変更も `git add` してください。対象外のファイルにヘッダーは要求しません。生成PDF、ビルド成果物、依存パッケージ、別worktreeは対象に含めません。
 
 PRとmainへのpushでは、`source-urls` ジョブが単体テストと出典検査を実行します。CIは自動修正・commit・pushを行いません。ブランチ保護のrequired checkへの設定を推奨しますが、これはリポジトリ管理者による別途設定が必要です。
 

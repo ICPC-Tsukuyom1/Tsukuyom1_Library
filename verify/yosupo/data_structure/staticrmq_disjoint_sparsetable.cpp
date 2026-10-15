@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/staticrmq_disjoint_sparsetable.cpp */
 //@yosupo staticrmq
 
 #include "../../../template.cpp"

@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Graph/minimum_spanning_tree.cpp */
 //@yosupo minimum_spanning_tree
 
 #include "../../../template.cpp"

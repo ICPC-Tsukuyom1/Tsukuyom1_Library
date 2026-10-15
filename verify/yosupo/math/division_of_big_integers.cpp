@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/division_of_big_integers.cpp */
 //@yosupo division_of_big_integers
 
 #include "../../../template.cpp"

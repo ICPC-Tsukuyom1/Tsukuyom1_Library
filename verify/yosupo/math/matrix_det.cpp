@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/matrix_det.cpp */
 //@yosupo matrix_det
 
 #include "../../../template.cpp"

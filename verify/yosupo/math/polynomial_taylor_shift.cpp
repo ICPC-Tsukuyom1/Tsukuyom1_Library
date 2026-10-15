@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/polynomial_taylor_shift.cpp */
 //@yosupo polynomial_taylor_shift
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"

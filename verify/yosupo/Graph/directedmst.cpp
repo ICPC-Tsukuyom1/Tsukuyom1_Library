@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Graph/directedmst.cpp */
 //@yosupo directedmst
 
 #include "../../../template.cpp"

@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/primality_test.cpp */
 //@yosupo primality_test
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"

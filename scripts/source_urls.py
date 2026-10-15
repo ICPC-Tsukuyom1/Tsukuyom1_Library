@@ -13,12 +13,16 @@ BASE_URL = "https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/"
 EXTENSIONS = {".cpp", ".cc", ".cxx", ".c", ".h", ".hh", ".hpp", ".hxx", ".ipp", ".tpp"}
 
 
+def is_library_source(path):
+    path = Path(path)
+    return path.suffix in EXTENSIONS and path.parts[0] != "verify"
+
+
 def source_files(root):
     result = subprocess.run(
         ["git", "ls-files", "-z"], cwd=root, check=True, capture_output=True
     )
-    return [Path(p) for p in result.stdout.decode().split("\0") if p
-            and Path(p).suffix in EXTENSIONS]
+    return [Path(p) for p in result.stdout.decode().split("\0") if p and is_library_source(p)]
 
 
 def header(path):
@@ -78,7 +82,7 @@ def prepare_pdf(root, files, output):
         destination = output / name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
-        if Path(name).suffix in EXTENSIONS:
+        if is_library_source(name):
             lines = destination.read_bytes().splitlines(keepends=True)
             destination.write_bytes(b"".join(lines[1:]))
 

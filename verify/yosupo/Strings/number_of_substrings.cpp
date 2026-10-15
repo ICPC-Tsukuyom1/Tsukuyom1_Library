@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/Strings/number_of_substrings.cpp */
 //@yosupo number_of_substrings
 
 #include "../../../template.cpp"

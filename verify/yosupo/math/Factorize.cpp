@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/Factorize.cpp */
 //@yosupo factorize
 
 #include "../../../template.cpp"

@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/math/division_of_polynomials.cpp */
 //@yosupo division_of_polynomials
 #include "../../../template.cpp"
 #include "../../../Math/modula.cpp"

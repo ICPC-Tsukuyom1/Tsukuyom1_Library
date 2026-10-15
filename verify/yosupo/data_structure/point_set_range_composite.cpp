@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yosupo/data_structure/point_set_range_composite.cpp */
 //@yosupo point_set_range_composite
 
 #include "../../../template.cpp"

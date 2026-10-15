@@ -1,4 +1,3 @@
-/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/verify/yukicoder/1288_mincostflow.cpp */
 //@yukicoder 1288
 
 #include "../../template.cpp"

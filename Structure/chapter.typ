@@ -6,6 +6,7 @@
 #include "bit2d.typ"
 #include "segtree.typ"
 #include "dynamic-segtree.typ"
+#include "binary-trie.typ"
 #include "lazysegtree.typ"
 #include "dynamic-lazysegtree.typ"
 #include "dualsegtree.typ"

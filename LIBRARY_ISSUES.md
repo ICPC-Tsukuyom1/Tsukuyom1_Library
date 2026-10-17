@@ -9,6 +9,7 @@
 - 更新履歴:
   - 初版: commit `4412a56` 時点（PR #159 マージ後）
   - **本版: main `eec8998` 時点（PR #160 幾何修正 / #161 幾何 6 機能追加 のマージ後）に全項目を現行コードと再照合し、状態を付与**
+  - **追補: main `53bc47c` 時点（PR #163 fps リファクタ / #164 fps 性能改善 のマージ後）に fps 関連項目を再照合し、状態を更新**
 
 ---
 
@@ -81,7 +82,7 @@
 | 39 | ⚠ `Math/floorsum.cpp:7,12` | `n*(n-1)/2*(a/c)` / `a*(n-1)+b` が `ll` オーバーフロー。 | 未修正 |
 | 40 | ⚠ `Structure/BIT.cpp:32,43` | `1 << (__lg(N)+1)` のリテラル `1`。`N>=2^30` で負シフト / UB。 | 修正済み（`1LL << ...` 化） |
 | 41 | ⚠ `Structure/LiChaoTree.cpp:5,41` | 「無限大」に `LLONG_MAX/4`、`1 << ub` も `int` シフト。`2.3e18` 以上の値は有限扱い。 | 未修正（`int` シフト残存） |
-| 42 | ⚠ `Math/fps.cpp:151-158` | `operator()(T x)` が `mod` で還元せず素の整数を返す → オーバーフロー、体の値と不一致。 | 未修正 |
+| 42 | ⚠ `Math/fps.cpp:151-158` | `operator()(T x)` が `mod` で還元せず素の整数を返す → オーバーフロー、体の値と不一致。 | 修正済み（#163 の modint 化で `poly<mint>::operator()` が `mint` を返すようになり解消） |
 | 43 | ⚠ `Geometry/clInter.cpp:3` / `ccInter.cpp:6` | 「無限遠点」`-inf` は `LDBL_MAX/2` の**有限値**。算術と組み合わせるとゴミになる。 | 修正済み（`Point.cpp:6` で真の `infinity()`） |
 
 ## 3. 正当性のバグ（ロジック）
@@ -92,7 +93,7 @@
 | 45 | ✅ `Structure/segtree.cpp:34-46` | `max_right(f)` が `[0,N)` ではなくパディング後の `[0,next_pow2(N)]` の添字を返す（`N` を保持していない）。 | 未修正（`N=3` で `4`） |
 | 46 | ✅ `Structure/hld.cpp:32-44` | `queryPath` は非可換モノイドで `u→v` の順にならない（`queryPath(u,v)==queryPath(v,u)`）。 | 未修正 |
 | 47 | ✅ `Math/matrix.cpp:27-33` | `operator*=` が結果配列を差し替えるがメンバ `m` を更新しない → 以降の次元が崩れる。 | 未修正 |
-| 48 | ✅ `Math/fps.cpp:7-8,48-55,89-103,174-177` | `set_mod()` が実質無効。継承した `vector<T>` のコンストラクタが `mod` / `root` を既定 `998244353` / `3` に戻す。 | 未修正（実測: `set_mod` 後も既定 mod を使用） |
+| 48 | ✅ `Math/fps.cpp:7-8,48-55,89-103,174-177` | `set_mod()` が実質無効。継承した `vector<T>` のコンストラクタが `mod` / `root` を既定 `998244353` / `3` に戻す。 | 該当なし（#163 で `FPS<T>::set_mod` を廃止。mod は `modint<0>::set_mod`、原始根は `convolution(a, b, g)` の引数に分離。ただし `poly::operator*` は `g = 3` 固定のため、原始根 3 以外の NTT 素数では `convolution` を直接使う必要あり） |
 | 49 | ✅ `Math/bitwise_xor_convolution.cpp:18` | `T iv = T(1)/sz(a);` が `T=ll` で整数除算（`>1` で0）→ 全ゼロ。 | 未修正 |
 | 50 | ✅ `Math/binomial-coefficients.cpp:19` | `inv[i]=inv[i-1]/i` が1要素につき1回逆元計算 → `O(n log p)`。`n>=p` で静かに誤答。 | 未修正 |
 | 51 | ⚠ `Math/binomial_coefficients.cpp:14` | `finv[n]=fac[n].inv()` が `n<mod` 前提。`n>=mod` で `inv()` の assert / 0 除算。 | 未修正 |
@@ -108,7 +109,7 @@
 | 61 | ✅ `Geometry/circumcircle.cpp:5-6` | `b.cross(c)` が共線 / 重複点で 0 → 除算で inf / NaN。 | 修正済み（共線時 `Circle(Point(), inf)`） |
 | 62 | ✅ `Strings/KMP.cpp:12-14` | 空パターンで偽の解の列を返す（正解は `|s|+1`）。 | 未修正（`"abc"` で `[1,2,3]`） |
 | 63 | ⚠ `Math/solveLinear.cpp:50` | `while (a[i][j].x==0) j++;` に `j<m` の上限が無い。 | 未修正 |
-| 64 | ⚠ `Math/fps.cpp:165-170,188-193` | `integral` / `log` が次数 `mod` 到達や空系列で `modinv(0)` / 負オフセット。 | 未修正 |
+| 64 | ⚠ `Math/fps.cpp:165-170,188-193` | `integral` / `log` が次数 `mod` 到達や空系列で `modinv(0)` / 負オフセット。 | 一部修正（#164 で `integral` は 1..n の逆元表を O(n) 構築し `n < mod` を assert。空系列 `log` と `n >= mod` の破綻は残存） |
 | 65 | ⚠ `Structure/weightedunionfind.cpp:7,22` | `find` / `size` が `int`、`n` は `ll`。`n>2^31` で切り詰め。 | 未修正 |
 | 66 | ⚠ `Structure/binary-trie.cpp:62,70` | `erase` が葉の `cnt=0` にして**重複を全消去**（`insert` / `count` は重複を数える）。 | 未修正 |
 | 67 | ⚠ `Structure/RollingHash.cpp:14` | `S[i]` が符号付き `char`。`>=128` で不一致。`base=150` 固定で非乱数。 | 未修正 |
@@ -138,15 +139,15 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **未修正** `Structure/skew-heap.cpp:25` — `pop` がノードを捨てる（リーク）。
 - **未修正** `Graph/directed-mst.cpp:17,28,34` — `new H` が O(E) リーク。
 - **未修正** `Structure/dynamic-{segtree,dualsegtree,lazysegtree}.cpp:4` — グローバル `alloc_*` が解放不能（改名済みだが性質は同じ）。常に両子を確保し、読み取りクエリでも木全体が実体化。
-- **未修正** `Math/fps.cpp:33` — NTT 長が 2 のべき乗で必要量の 2 倍（`bit_ceil` であるべき）。
-- **一部修正** `Math/fps.cpp:168,214,254`（および `binomial` 系）— `:168` は係数ごとに逆元計算で `O(n log mod)` が残存。`:214/:254` は現在は単発 `modinv` で該当なし。
+- **修正済み** `Math/ntt.cpp` — NTT 長を必要量以上の最小の 2 冪に変更（#163。旧 `Math/fps.cpp:33` は必要量の 2 倍を確保していた）。
+- **修正済み** `Math/poly.cpp` の `integral` — 係数ごとの逆元 `O(n log mod)` を O(n) の逆元表に（#164。旧 `Math/fps.cpp:168`）。`binomial` 系は別項（#50）。
 - **修正済み** ⚠ `Math/fps.cpp:105-115` — `%=` / `div_mod()` は `*this` を破壊しない（`operator/`/`operator-` は const、`div_mod` は複製を使用）。
 - **一部修正** `Graph/LowLink.cpp:5,9` / `Graph/maxMatching.cpp:4,72` — `LowLink` は値渡し＋メンバで二重コピー存続。`maxMatching` は参照引数で 1 回のみ。
 - **未修正** ⚠ `Math/primroot.cpp:4-8` — `rnd` 呼び出し毎に `random_device` を生成。
 - **未修正** ⚠ `Structure/LiChaoTree.cpp:14-15` — `const vector<ll>&` をメンバにコピーしてソート、座標の重複除去なし（`n` が最大 2 倍）。
 - **未修正** ⚠ `Structure/SparseTable.cpp:5` / `disjoint-sparsetable.cpp:5` — トリム無しの `n×log n`。
 - **一部修正** `Graph/flow.cpp:6,14` — `isrev` / `idx` が未読。/ `Graph/directed-mst.cpp:21` `comp` 未使用で即シャドー。/ `Graph/Centroid-Decomposition.cpp:41` 常に真。/ `Structure/dynamic-lazysegtree.cpp:19` ローカル `m` がメンバを隠蔽（スコープ内で無害）。なお `Graph/LowLink.cpp:4` の `n` は現在使用されている。
-- **未修正** `Math/fps.cpp:229` `T rev` がメンバ `rev()` を隠蔽 / `:140,146` `sz` がマクロを隠蔽 / `Math/matrix.cpp:67` `T vv` が型 `vv` を隠蔽（偶然動作）。
+- **一部修正** `Math/fps.cpp` の `T rev`（`rev()` の隠蔽）と `sz`（マクロの隠蔽）は #163 で解消。`Math/matrix.cpp:67` の `T vv` が型 `vv` を隠蔽は未修正（偶然動作）。
 - **未修正** ルート `io.cpp`(181行) / `dump.cpp`(8行) / `LIS.cpp`(14行) は**完全な孤児**（include / `.typ` / verify すべてゼロ）。`io.cpp:2-9` は `template.cpp:21-28` の `chmax`/`chmin` を二重定義。`io.cpp:175-181` は既定で `fixed`+`setprecision(16)` に変更（`chapter.typ` は 12 と記載）。
 
 ## 6. ファイル結合時の衝突（根本設計問題）
@@ -183,7 +184,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **未修正** `Structure/dynamic-*.typ` など — `T/e/op/F/id/merge/apply` を事前 `#define` する契約が未記載。
 - **未修正** `Structure/pbds.typ:14` — `ull` を使うが `template.cpp` に `ull` が無くコンパイル不可。
 - **未修正** `chapter.typ:26` — `Math/modint.typ` を「Template」章に直接入れ、`Math/chapter.typ` は modint を含まない（レイヤリング違反）。
-- **未修正** `Math/{matrix,fps,modint,binomial_coefficients}.typ` — ソースのみで散文ゼロ。`Math/LucasBinom.cpp` は `.typ` 無し。
+- **一部修正** `Math/{matrix,modint,binomial_coefficients}.typ` — ソースのみで散文ゼロ（`fps` は #163 で説明・注記を追加、`poly` / `ntt` の `.typ` も新設）。`Math/LucasBinom.cpp` は `.typ` 無し。
 - **未修正** `Documents/Trigonometry.typ:6,9` — 加法定理が誤り（`cos x`、余弦の符号誤り）。`Documents/math.typ:48,56,58,64` — 係数・級数の誤り。`Documents/combination.typ:7,84,136` — 誤り / 誤字。`Documents/parallel-binsearch.typ:8` — 計算量が誤り。
 - **一部修正** `README.md:3` — プレースホルダ「追加して～」は残存。`:20` の `expander.py` 用法は引数1つで一致するよう修正。verify の yukicoder トークン要件、カバレッジ系スクリプトは依然未記載。
 
@@ -228,7 +229,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 
 ## 11. 優先度付き修正リスト
 
-> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。
+> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。fps 関連は main `53bc47c`（#163・#164 マージ後）で追記更新。
 
 ### 完了（本更新で確認）
 
@@ -239,6 +240,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - メモリ安全: `SuffixArray`（#14）、`BIT`（#15,#40）、`dualsegtree`/`wavelet-matrix`/`LiChaoTree`(#18–20)/`SparseTable`(#21)/`disjoint-sparsetable`(#22) のガード、`fps` 空ガード（#24–26）、`BigInt` ゼロ除算（#27）、`Geometry` 空入力（#30–32）、`inf` の真の無限大化（#43）。
 - 幾何ロジック: `isconvex`(#56) / `clInter`(#57) / `ccInter`(#58) / `circumcircle`(#61) / `lineInter`(#60)。
 - `Math/fps.cpp` の `%=` / `div_mod` の破壊（§5）。
+- **（fps リファクタ / 性能改善 #163・#164 で追加解消）** `operator()` の非還元（#42）、NTT 長 2 倍（§5）、`integral` の `O(n log mod)`（#2 / §5）、`T rev`・`sz` の隠蔽（§5）、`fps.typ` の散文ゼロ（§7）。
 - ドキュメント: `projection` / `LineDistance` / `lineInter` / `ccInter` / `bellman-ford`（§7）。
 
 ### 最優先（コンパイル不能 + メモリ安全）
@@ -257,14 +259,14 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 ### 高（正当性）
 
 11. `Graph/flow.cpp:56` の `max_flow(s,s)`（#44）。
-12. `Math/fps.cpp:7` の `set_mod` 無効（#48）、`:33` の NTT 長（§5）。
+12. ~~`Math/fps.cpp:7` の `set_mod` 無効（#48）、`:33` の NTT 長（§5）。~~ **完了**（#163・#164）。
 13. `Math/bitwise_xor_convolution.cpp:18` の整数除算（#49）。
 14. `Math/binomial-coefficients.cpp:19` の逆元 `O(n log p)`（#50）、`binomial_coefficients.cpp:15` の `n<mod` 前提（#51）。
 15. `Math/LucasBinom.cpp` の既定引数確保（#52）、`modula` / `extgcd` / `floorsum` の前提・オーバーフロー（#37,#38,#39,#53）。
 16. `Math/FastFactorize.cpp` の失敗処理（#54）。
 17. `Geometry/commonTangents.cpp` の接点ゼロ長（#59）。
 18. `Strings/KMP.cpp` の空パターン（#62）、`Structure/segtree.cpp` の `max_right` 添字クランプ（#45）、`Structure/hld.cpp` の `queryPath` 順序（#46）。
-19. `Math/solveLinear.cpp:50`（#63）、`fps` integral/log（#64）、`weightedunionfind` の `int`（#65）、`binary-trie` erase（#66）、`RollingHash` 符号（#67）、`Kruskal` 非決定（#68）、`topological` 閉路（#69）、`twosat` 不能表現（#70）、`SCC` 縮約の重複辺（#55）。
+19. `Math/solveLinear.cpp:50`（#63）、`fps` integral/log（#64、#164 で一部修正）、`weightedunionfind` の `int`（#65）、`binary-trie` erase（#66）、`RollingHash` 符号（#67）、`Kruskal` 非決定（#68）、`topological` 閉路（#69）、`twosat` 不能表現（#70）、`SCC` 縮約の重複辺（#55）。
 
 ### 中（設計 / インフラ）
 
@@ -327,4 +329,4 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - `python scripts/source_urls.py check` を実行し CI の失敗を確認。
 - `git ls-files` / `git ls-files -s` で追跡一覧・実行ビットを確認。
 - 再帰の深さは大きなパス / 閉路入力でスタック枯渇を実測。
-- 本版の状態列は、main `eec8998` の作業ツリーに対して各項目を再検証して付与（検証スクリプトは `Geometry` 追加作業時のローカル環境を再利用）。
+- 本版の状態列は、main `eec8998` の作業ツリーに対して各項目を再検証して付与（検証スクリプトは `Geometry` 追加作業時のローカル環境を再利用）。fps 関連は main `53bc47c` で再検証（yosupo verify 8 問全ケース通過＋ランダム総当たり）。

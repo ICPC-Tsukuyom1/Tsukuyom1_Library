@@ -1,5 +1,8 @@
 name: Verify C++ Files
 
+# テスト実行ジョブ(yosupo-verify / yukicoder-verify / aoj-verify)の runner は
+# リポジトリ変数 VERIFY_RUNNER で切り替えられる(例: リポジトリ変数に self-hosted を設定)。
+# 未設定の場合は GitHub-hosted の ubuntu-24.04 を使用する。
 on:
   push:
     branches:
@@ -48,7 +51,7 @@ jobs:
 
   yosupo-verify:
     needs: prepare-matrix-yosupo
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.VERIFY_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -91,7 +94,7 @@ jobs:
 
   yukicoder-verify:
     needs: prepare-matrix-yukicoder
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.VERIFY_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 5
     strategy:
       fail-fast: false
@@ -176,7 +179,7 @@ jobs:
 
   aoj-verify:
     needs: prepare-matrix-aoj
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.VERIFY_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 5
     strategy:
       fail-fast: false

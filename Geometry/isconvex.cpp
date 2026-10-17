@@ -17,5 +17,6 @@ bool isconvex(Polygon S) {
     }
     turn += atan2l(cr, a.dot(b));
   }
-  return sgn != 0 && fabsl(fabsl(turn) - 2 * pi) < 1e-9;
+  if (sgn == 0) return true;  // 全頂点が一直線上（退化）は凸とみなす
+  return fabsl(fabsl(turn) - 2 * pi) < 1e-9;
 }

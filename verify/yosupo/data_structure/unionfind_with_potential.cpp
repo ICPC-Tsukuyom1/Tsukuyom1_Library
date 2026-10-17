@@ -6,9 +6,10 @@
 FastIn in;
 FastOut out;
 
-const ll mod = 998244353;
-
 #include "../../../Math/modint.cpp"
+
+using mint = modint<998244353>;
+
 #include "../../../Structure/weightedunionfind.cpp"
 
 int main() {

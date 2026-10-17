@@ -2,8 +2,10 @@
 
 #include "../../../template.cpp"
 #include "../../fastio.hpp"
-const ll mod = 998244353;
 #include "../../../Math/modint.cpp"
+
+using mint = modint<998244353>;
+
 #include "../../../Math/matrix.cpp"
 
 FastIn in;

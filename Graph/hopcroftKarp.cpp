@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/hopcroftKarp.cpp */
 // usage: vl btoa(n, -1); ll matching = hopcroftKarp(g, btoa) / 2;
 bool dfs(ll a, ll L, vv<ll>& g, vl& btoa, vl& A, vl& B) {
   if (A[a] != L) return 0;

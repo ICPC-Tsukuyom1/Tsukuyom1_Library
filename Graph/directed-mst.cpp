@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/directed-mst.cpp */
 // depends on: Undo可能UnionFind, Skew Heap
 
 struct Edge {

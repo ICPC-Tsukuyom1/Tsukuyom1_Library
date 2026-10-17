@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/closest_pair.cpp */
 // depends on: Point
 #define P Point
 pair<P, P> closest(Polygon &v) {

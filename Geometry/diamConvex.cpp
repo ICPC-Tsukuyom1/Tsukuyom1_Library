@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/diamConvex.cpp */
 // depends on: convex_hull
 pair<Point, Point> diamConvex(Polygon S) {
   Polygon Q = convex_hull(S);

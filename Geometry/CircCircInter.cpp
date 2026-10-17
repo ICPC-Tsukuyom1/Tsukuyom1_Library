@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/CircCircInter.cpp */
 // depends on: Point
 ld fac(Circle c1, Circle c2) {
   ld dd = (c2.c - c1.c).norm();

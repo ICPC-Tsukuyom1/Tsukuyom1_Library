@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/io.cpp */
 template <class T>
 bool chmax(T &a, const T &b) {
   return a < b ? a = b, true : false;

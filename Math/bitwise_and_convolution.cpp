@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/bitwise_and_convolution.cpp */
 // Subset Zeta Transform (上位集合)
 // assert: |v|は二冪
 #define szt(v, op)                   \

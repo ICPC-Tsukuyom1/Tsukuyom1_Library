@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/bitwise_xor_convolution.cpp */
 // Walsh Hadamard Transform
 // assert: |v|は二冪
 #define wht(v)                                         \

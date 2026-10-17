@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/lazysegtree.cpp */
 struct LazySeg {
   int n = 1;
   vec<T> v;

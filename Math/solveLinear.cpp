@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/solveLinear.cpp */
 //depends on; mint, Matrix
 pair<ll, mint> Gauss(Matrix<mint>& a, bool LE = false) {
   ll n = a.n, m = a.m;

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/BIT2d.cpp */
 template <typename T>
 struct BIT2d {
   ll h, w;

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/isconvex.cpp */
 // depends on: Point, ccw
 bool isconvex(Polygon S) {
   ll n = sz(S);

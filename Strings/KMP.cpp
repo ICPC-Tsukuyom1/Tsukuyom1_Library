@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Strings/KMP.cpp */
 vl pi(const string &s) {
   vl p(sz(s));
   reps(i, 1, sz(s)) {

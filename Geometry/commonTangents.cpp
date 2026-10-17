@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/commonTangents.cpp */
 // depends on: Point
 vec<Line> commonTangents(Circle c1, Circle c2) {
   bool s = false;

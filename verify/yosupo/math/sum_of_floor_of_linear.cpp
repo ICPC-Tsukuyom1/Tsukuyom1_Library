@@ -1,15 +1,19 @@
 //@yosupo sum_of_floor_of_linear
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
 #include "../../../Math/floorsum.cpp"
+
+FastIn in;
+FastOut out;
 
 void solve() {
   ll n, m, a, b;
-  cin >> n >> m >> a >> b;
-  cout << floorsum(n, a, b, m) << endl;
+  in >> n >> m >> a >> b;
+  out << floorsum(n, a, b, m) << '\n';
 }
 int main() {
   ll T = 1;
-  cin >> T;
+  in >> T;
   while (T--) solve();
 }

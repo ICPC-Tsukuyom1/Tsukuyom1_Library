@@ -1,19 +1,23 @@
 //@yosupo enumerate_palindromes
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
+
 #include "../../../Strings/Manacher.cpp"
 void solve() {
   string s;
-  cin >> s;
+  in >> s;
   auto m = Manacher(s);
   rep(i, sz(s)) {
-    cout << m[1][i] * 2 + 1;
-    if (i != sz(s) - 1) cout << ' ' << m[0][i + 1] * 2 << ' ';
+    out << m[1][i] * 2 + 1;
+    if (i != sz(s) - 1) out << ' ' << m[0][i + 1] * 2 << ' ';
   }
-  cout << endl;
+  out << '\n';
 }
 int main() {
   ll T = 1;
-  // cin >> T;
   while (T--) solve();
 }

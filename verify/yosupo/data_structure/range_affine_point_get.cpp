@@ -1,6 +1,10 @@
 //@yosupo range_affine_point_get
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll mod = 998244353;
 
@@ -15,22 +19,26 @@ const ll mod = 998244353;
 #include "../../../Structure/dualsegtree.cpp"
 int main() {
   int n, q;
-  cin >> n >> q;
+  in >> n >> q;
   DualSeg seg(n);
   vec<mint> a(n);
-  rep(i, n) { cin >> a[i]; }
+  rep(i, n) {
+    ll a_input;
+    in >> a_input;
+    a[i] = a_input;
+  }
   while (q--) {
     int type;
-    cin >> type;
+    in >> type;
     if (type == 0) {
       ll l, r, b, c;
-      cin >> l >> r >> b >> c;
+      in >> l >> r >> b >> c;
       seg.effect(l, r, {b, c});
     } else {
       int i;
-      cin >> i;
+      in >> i;
       auto [p, q] = seg.get(i);
-      cout << a[i] * p + q << endl;
+      out << (a[i] * p + q).x << '\n';
     }
   }
 }

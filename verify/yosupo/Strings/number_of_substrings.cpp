@@ -1,18 +1,22 @@
 //@yosupo number_of_substrings
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
+
 #include "../../../Strings/SuffixArray.cpp"
 void solve() {
   string s;
-  cin >> s;
+  in >> s;
   SuffixArray sa(s);
   ll sum = 0;
   rep(i, sz(sa.lcp)) sum += sa.lcp[i];
   ll n = sz(s);
-  cout << n * (n + 1) / 2 - sum << endl;
+  out << n * (n + 1) / 2 - sum << '\n';
 }
 int main() {
   ll T = 1;
-  // cin >> T;
   while (T--) solve();
 }

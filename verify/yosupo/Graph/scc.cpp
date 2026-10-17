@@ -1,25 +1,29 @@
 //@yosupo scc
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
+
 #include "../../../Graph/SCC.cpp"
 void solve() {
   ll n, m;
-  cin >> n >> m;
+  in >> n >> m;
   vv<ll> g(n);
   rep(i, m) {
     ll u, v;
-    cin >> u >> v;
+    in >> u >> v;
     g[u].emplace_back(v);
   }
   SCC scc(g);
-  cout << sz(scc.dag) << endl;
+  out << sz(scc.dag) << '\n';
   rep(i, sz(scc.dag)) {
-    cout << sz(scc.belong(i));
-    for (auto &e : scc.belong(i)) { cout << ' ' << e; }
-    cout << endl;
+    out << sz(scc.belong(i));
+    for (auto &e : scc.belong(i)) { out << ' ' << e; }
+    out << '\n';
   }
 }
 int main() {
   ll T = 1;
-  // cin >> T;
   while (T--) solve();
 }

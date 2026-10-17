@@ -1,6 +1,10 @@
 //@yosupo range_set_range_composite
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll mod = 998244353;
 
@@ -32,25 +36,25 @@ T pow_fn(T fn, ll n) {
 
 int main() {
   int n, q;
-  cin >> n >> q;
+  in >> n >> q;
   auto *seg = new LazySeg(n);
   rep(i, n) {
     ll a, b;
-    cin >> a >> b;
+    in >> a >> b;
     seg->effect(i, i + 1, {a, b});
   }
   while (q--) {
     int type;
-    cin >> type;
+    in >> type;
     if (type == 0) {
       ll l, r, c, d;
-      cin >> l >> r >> c >> d;
+      in >> l >> r >> c >> d;
       seg->effect(l, r, {c, d});
     } else {
       int l, r, x;
-      cin >> l >> r >> x;
+      in >> l >> r >> x;
       auto [a, b] = seg->query(l, r);
-      cout << a * x + b << endl;
+      out << (a * x + b).x << '\n';
     }
   }
 }

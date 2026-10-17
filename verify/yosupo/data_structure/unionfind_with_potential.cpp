@@ -1,6 +1,10 @@
 //@yosupo unionfind_with_potential
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 const ll mod = 998244353;
 
@@ -9,27 +13,29 @@ const ll mod = 998244353;
 
 int main() {
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
   WeightedUnionFind<mint> uf(n);
   while (q--) {
     ll t, u, v;
-    cin >> t >> u >> v;
+    in >> t >> u >> v;
     if (t == 0) {
       mint x;
-      cin >> x;
+      ll x_input;
+      in >> x_input;
+      x = x_input;
       if (uf.find(u) == uf.find(v)) {
         if (uf.weight(u) - uf.weight(v) != x) {
-          cout << 0 << endl;
+          out << 0 << '\n';
           continue;
         }
       }
       uf.merge(v, u, x);
-      cout << 1 << endl;
+      out << 1 << '\n';
     } else {
       if (uf.find(u) == uf.find(v)) {
-        cout << uf.weight(u) - uf.weight(v) << endl;
+        out << (uf.weight(u) - uf.weight(v)).x << '\n';
       } else {
-        cout << -1 << endl;
+        out << -1 << '\n';
       }
     }
   }

@@ -1,16 +1,20 @@
 //@yosupo primality_test
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
 #include "../../../Math/modula.cpp"
 #include "../../../Math/MillerRabin.cpp"
 
+FastIn in;
+FastOut out;
+
 int main() {
   ll Q;
-  cin >> Q;
+  in >> Q;
   while (Q--) {
     ll N;
-    cin >> N;
+    in >> N;
     if (isprime(N)) {
-      cout << "Yes" << endl;
-    } else cout << "No" << endl;
+      out << "Yes" << '\n';
+    } else out << "No" << '\n';
   }
 }

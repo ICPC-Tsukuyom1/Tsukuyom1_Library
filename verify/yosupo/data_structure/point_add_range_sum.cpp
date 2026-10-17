@@ -1,6 +1,10 @@
 //@yosupo point_add_range_sum
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
+
+FastIn in;
+FastOut out;
 
 #define T ll
 #define e 0
@@ -10,24 +14,24 @@
 
 int main() {
   ll n, q;
-  cin >> n >> q;
+  in >> n >> q;
   SegTree seg(n);
   rep(i, n) {
     ll a;
-    cin >> a;
+    in >> a;
     seg.update(i, a);
   }
   while (q--) {
     ll t;
-    cin >> t;
+    in >> t;
     if (t == 0) {
       ll p, x;
-      cin >> p >> x;
+      in >> p >> x;
       seg.update(p, seg.query(p, p + 1) + x);
     } else {
       ll l, r;
-      cin >> l >> r;
-      cout << seg.query(l, r) << '\n';
+      in >> l >> r;
+      out << seg.query(l, r) << '\n';
     }
   }
 }

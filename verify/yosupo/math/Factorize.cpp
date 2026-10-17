@@ -1,20 +1,24 @@
 //@yosupo factorize
 
 #include "../../../template.cpp"
+#include "../../fastio.hpp"
 #include "../../../Math/modula.cpp"
 #include "../../../Math/MillerRabin.cpp"
 #include "../../../Math/FastFactorize.cpp"
 
+FastIn in;
+FastOut out;
+
 int main() {
   ll Q;
-  cin >> Q;
+  in >> Q;
   while (Q--) {
     ll N;
-    cin >> N;
+    in >> N;
     auto f = fac(N);
-    cout << f.size();
+    out << f.size();
     sort(all(f));
-    for (ll p : f) { cout << ' ' << p; }
-    cout << endl;
+    for (ll p : f) { out << ' ' << p; }
+    out << '\n';
   }
 }

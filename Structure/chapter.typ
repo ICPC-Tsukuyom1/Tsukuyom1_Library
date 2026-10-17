@@ -4,6 +4,7 @@
 
 #include "bit.typ"
 #include "bit2d.typ"
+#include "bit2d-sparse.typ"
 #include "segtree.typ"
 #include "dynamic-segtree.typ"
 #include "binary-trie.typ"

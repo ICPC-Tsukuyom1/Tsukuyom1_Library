@@ -55,6 +55,7 @@ public:
     mint operator/(const mint &p) const { return mint(*this) /= p; }
     bool operator==(const mint &p) const { return x == p.x; }
     bool operator!=(const mint &p) const { return x != p.x; }
+    explicit operator bool() const { return x != 0; }
     friend ostream &operator<<(ostream &os, const mint &p) { return os << p.x; }
     friend istream &operator>>(istream &is, mint &a) {
         long long t; is >> t; a = mint(t); return (is);

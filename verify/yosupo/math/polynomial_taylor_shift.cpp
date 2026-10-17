@@ -1,19 +1,26 @@
 //@yosupo polynomial_taylor_shift
 #include "../../../template.cpp"
 #include "../../fastio.hpp"
-#include "../../../Math/modula.cpp"
-#include "../../../Math/fps.cpp"
+#include "../../../Math/modint.cpp"
+#include "../../../Math/ntt.cpp"
+#include "../../../Math/poly.cpp"
 
 FastIn in;
 FastOut out;
 
+using mint = modint<998244353>;
+
 void solve() {
   ll N, c;
   in >> N >> c;
-  FPS<ll> a(N);
-  rep(i, N) in >> a[i];
-  auto b = a.shift(c);
-  rep(i, sz(b)) out << b[i] << " \n"[i == sz(b) - 1];
+  poly<mint> a(N);
+  rep(i, N) {
+    ll x;
+    in >> x;
+    a[i] = mint(x);
+  }
+  auto b = a.shift(mint(c));
+  rep(i, sz(b)) out << b[i].x << " \n"[i == sz(b) - 1];
 }
 int main() {
   ll T = 1;

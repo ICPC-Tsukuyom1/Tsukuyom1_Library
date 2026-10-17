@@ -7,8 +7,10 @@ ld fac(Circle c1, Circle c2) {
     return pi * min(c1.r, c2.r) * min(c1.r, c2.r);
   ld p1 = (c1.r * c1.r - c2.r * c2.r + dd),
      p2 = (c2.r * c2.r - c1.r * c1.r + dd);
-  ld s1 = (c1.r * c1.r) * atan2(sqrtl(ld(4) * dd * c1.r * c1.r - p1 * p1), p1);
-  ld s2 = (c2.r * c2.r) * atan2(sqrtl(ld(4) * dd * c2.r * c2.r - p2 * p2), p2);
-  ld s0 = sqrtl(4 * dd * c1.r * c1.r - p1 * p1) / ld(2);
+  ld h1 = sqrtl(max((ld)0, ld(4) * dd * c1.r * c1.r - p1 * p1));
+  ld h2 = sqrtl(max((ld)0, ld(4) * dd * c2.r * c2.r - p2 * p2));
+  ld s1 = (c1.r * c1.r) * atan2l(h1, p1);
+  ld s2 = (c2.r * c2.r) * atan2l(h2, p2);
+  ld s0 = h1 / 2;
   return s1 + s2 - s0;
 }

@@ -3,6 +3,7 @@
 #define eq(a, b) (fabs((a) - (b)) < EPS)
 ll sign(ld x) { return (x >= EPS) - (x <= -EPS); }
 const ld pi = 3.141592653589793238;
+const ld inf = numeric_limits<ld>::infinity();
 struct Point {
   typedef Point P;
   ld x, y;
@@ -18,9 +19,9 @@ struct Point {
   ld dot(P p) const { return x*p.x + y*p.y; }
   ld cross(P p) const { return x*p.y - y*p.x; }
   ld cross(P a, P b) const { return (a-*this).cross(b-*this); }
-  P unit() const { return *this/abs(); }
+  P unit() const { ld a = abs(); return a ? P(x/a, y/a) : P(); }
   P perp() const { return P(-y, x); }
-  P normal() const { return perp()/abs(); }
+  P normal() const { ld a = abs(); return a ? P(-y/a, x/a) : P(); }
   ld angle() const { return atan2(y, x); }
   P rotate(ld theta) const {
     return P(x * cosl(theta) - y * sinl(theta),

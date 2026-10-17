@@ -3,6 +3,8 @@
 = Mathematics
 
 #include "modula.typ"
+#include "ntt.typ"
+#include "poly.typ"
 #include "BigInt.typ"
 #include "binomial_coefficients.typ"
 #include "bitwise_or_convolution.typ"

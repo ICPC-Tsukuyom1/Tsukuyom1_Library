@@ -2,18 +2,29 @@
 
 #include "../../../template.cpp"
 #include "../../fastio.hpp"
-#include "../../../Math/modula.cpp"
-#include "../../../Math/fps.cpp"
+#include "../../../Math/modint.cpp"
+#include "../../../Math/ntt.cpp"
+#include "../../../Math/poly.cpp"
 
 FastIn in;
 FastOut out;
 
+using mint = modint<998244353>;
+
 int main() {
   ll N, M;
   in >> N >> M;
-  FPS<ll> a(N), b(M);
-  rep(i, N) in >> a[i];
-  rep(i, M) in >> b[i];
-  vl c = a * b;
-  rep(i, sz(c)) { out << c[i] << " \n"[i == sz(c) - 1]; }
+  poly<mint> a(N), b(M);
+  rep(i, N) {
+    ll x;
+    in >> x;
+    a[i] = mint(x);
+  }
+  rep(i, M) {
+    ll x;
+    in >> x;
+    b[i] = mint(x);
+  }
+  poly<mint> c = a * b;
+  rep(i, sz(c)) out << c[i].x << " \n"[i == sz(c) - 1];
 }

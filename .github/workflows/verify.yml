@@ -1,8 +1,5 @@
 name: Verify C++ Files
 
-# テスト実行ジョブ(yosupo-verify / yukicoder-verify / aoj-verify)の runner は
-# リポジトリ変数 VERIFY_RUNNER で切り替えられる(例: リポジトリ変数に self-hosted を設定)。
-# 未設定の場合は GitHub-hosted の ubuntu-24.04 を使用する。
 on:
   push:
     branches:

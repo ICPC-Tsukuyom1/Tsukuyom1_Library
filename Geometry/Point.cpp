@@ -25,6 +25,7 @@ struct Point {
   P rotate(ld theta) const {
     return P(x * cosl(theta) - y * sinl(theta),
              x * sinl(theta) + y * cosl(theta));}
+  P rotate(ld theta, P o) const { return o + (*this - o).rotate(theta); }
 };
 typedef Point Vector;
 struct Segment { Point s, e; };

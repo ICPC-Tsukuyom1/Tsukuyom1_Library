@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/binomial_coefficients.cpp */
 template <class Mint>
 struct Binom {
     vector<Mint> fac, finv;

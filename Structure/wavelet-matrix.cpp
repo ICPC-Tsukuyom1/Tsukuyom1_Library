@@ -30,7 +30,7 @@ struct WaveletMatrix {
     sort(all(values));
     values.erase(unique(all(values)), values.end());
     values.shrink_to_fit();
-    lg = bit_width(values.size() - !values.empty());
+    lg = values.empty() ? 0 : bit_width(values.size() - 1);
     vec<int> cur(n);
     rep(i, n) cur[i] = index(a[i]);
     rrep(d, 0, lg) {

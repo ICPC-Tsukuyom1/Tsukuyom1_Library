@@ -1,7 +1,7 @@
 /* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/dynamic-dualsegtree.cpp */
 struct DynamicDualSeg;
 // 必ず vec でなく deque で
-deque<DynamicDualSeg> alloc;
+deque<DynamicDualSeg> alloc_dual;
 
 struct DynamicDualSeg {
   DynamicDualSeg *lc = 0, *rc = 0;
@@ -15,10 +15,10 @@ struct DynamicDualSeg {
   void _() {
     if (!lc) {
       ll mid = (l + r) / 2;
-      alloc.emplace_back(l, mid);
-      lc = &alloc.back();
-      alloc.emplace_back(mid, r);
-      rc = &alloc.back();
+      alloc_dual.emplace_back(l, mid);
+      lc = &alloc_dual.back();
+      alloc_dual.emplace_back(mid, r);
+      rc = &alloc_dual.back();
     }
     lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }

@@ -3,7 +3,8 @@ struct SuffixArray {
   vl sa, lcp;
   SuffixArray(string& s, ll lim = 256) {
     ll n = sz(s) + 1, k = 0, a, b;
-    vl x(all(s)), y(n), ws(max(n, lim));
+    vl x(sz(s)), y(n), ws(max(n, lim));
+    rep(i, sz(s)) x[i] = (unsigned char)s[i];
     x.push_back(0), sa = lcp = y, iota(all(sa), 0ll);
     for (ll j = 0, p = 0; p < n; j = max(1ll, j * 2), lim = p) {
       p = j, iota(all(y), n - j);

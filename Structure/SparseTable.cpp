@@ -14,6 +14,7 @@ struct SparseTable {
 
   // 0-indexed, [l, r)
   T fold(ll l, ll r) {
+    assert(l < r);
     ll b = __lg(r - l);
     return op(st[b][l], st[b][r - (1 << b)]);
   }

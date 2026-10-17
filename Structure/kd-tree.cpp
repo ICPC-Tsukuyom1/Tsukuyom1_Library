@@ -33,7 +33,7 @@ struct kDTree {
   }
   // optional
   T prod(ll x1, ll x2, ll y1, ll y2) const {
-    if (x2 <= xmin || xmax < x1 || y2 <= ymin || ymax < y1) return 0;
+    if (x2 <= xmin || xmax < x1 || y2 <= ymin || ymax < y1) return e;
     if (x1 <= xmin && xmax < x2 && y1 <= ymin && ymax < y2) return sum;
     return op(l->prod(x1, x2, y1, y2), r->prod(x1, x2, y1, y2));
   }
@@ -47,7 +47,7 @@ struct kDTree {
       f(idx);
       return;
     }
-    l->get(x, y, R, f);
-    r->get(x, y, R, f);
+    l->foreach(x, y, R, f);
+    r->foreach(x, y, R, f);
   }
 };

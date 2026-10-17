@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/modint.cpp */
 // "mod" should be prime
 template <int MOD> 
 struct modint {

@@ -8,7 +8,7 @@ struct BIT {
   BIT(vec<T> &v) : BIT(sz(v)) { build(v); }
 
   void build(vector<T> &v) {
-    rep(i, N) data[i + 1] = v[i];
+    rep(i, sz(v)) data[i + 1] = v[i];
     reps(i, 1, N + 1) {
       ll j = i + (i & -i);
       if (j <= N) data[j] += data[i];
@@ -29,7 +29,7 @@ struct BIT {
 
   ll lower_bound(T x) {
     ll i = 0;
-    for (ll k = 1 << (__lg(N) + 1); k > 0; k >>= 1) {
+    for (ll k = 1LL << (__lg(N) + 1); k > 0; k >>= 1) {
       if (i + k <= N && data[i + k] < x) {
         x -= data[i + k];
         i += k;
@@ -40,7 +40,7 @@ struct BIT {
 
   ll upper_bound(T x) {
     ll i = 0;
-    for (ll k = 1 << (__lg(N) + 1); k > 0; k >>= 1) {
+    for (ll k = 1LL << (__lg(N) + 1); k > 0; k >>= 1) {
       if (i + k <= N && data[i + k] <= x) {
         x -= data[i + k];
         i += k;

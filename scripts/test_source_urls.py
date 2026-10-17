@@ -36,6 +36,13 @@ class SourceUrlTests(unittest.TestCase):
         source_urls.fix(self.root, self.files())
         self.assertEqual(source_urls.check(self.root, self.files()), [])
 
+    def test_check_rejects_duplicate_url_headers(self):
+        header = source_urls.header(Path("a.cpp")).encode()
+        self.write_tracked({"a.cpp": header + b"\n" + header + b"\nint a;\n"})
+        self.assertEqual(len(source_urls.check(self.root, self.files())), 1)
+        source_urls.fix(self.root, self.files())
+        self.assertEqual(source_urls.check(self.root, self.files()), [])
+
     def test_fix_is_idempotent_and_preserves_source(self):
         body = b"/* Existing license notice. */\nint main() {}\n"
         self.write_tracked({"Graph/a.cpp": body})

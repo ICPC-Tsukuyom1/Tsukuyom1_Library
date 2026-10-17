@@ -10,12 +10,17 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE_URL = "https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/"
+SOURCE_URL_PREFIX = f"/* {BASE_URL}".encode()
 EXTENSIONS = {".cpp", ".cc", ".cxx", ".c", ".h", ".hh", ".hpp", ".hxx", ".ipp", ".tpp"}
 
 
 def is_library_source(path):
     path = Path(path)
     return path.suffix in EXTENSIONS and path.parts[0] != "verify"
+
+
+def is_source_url_line(line):
+    return line.startswith(SOURCE_URL_PREFIX)
 
 
 def source_files(root):
@@ -41,7 +46,7 @@ def check(root, files):
         actual = lines[0].decode("utf-8", errors="replace") if lines else ""
         if actual != header(path):
             errors.append(f"{path}: first line must be {header(path)}")
-        elif len(lines) > 1 and lines[1].startswith(b"/* https://github.com/ICPC-Tsukuyom1/"):
+        elif any(is_source_url_line(line) for line in lines[1:]):
             errors.append(f"{path}: duplicate source URL headers")
     return errors
 
@@ -54,7 +59,7 @@ def fix(root, files):
         data = file.read_bytes()
         lines = data.splitlines(keepends=True)
         newline = b"\r\n" if lines and lines[0].endswith(b"\r\n") else b"\n"
-        while lines and lines[0].startswith(b"/* https://github.com/ICPC-Tsukuyom1/"):
+        while lines and is_source_url_line(lines[0]):
             del lines[0]
         file.write_bytes(header(path).encode() + newline + b"".join(lines))
 
@@ -98,7 +103,7 @@ def main():
         files = source_files(ROOT)
         if args.command == "fix":
             fix(ROOT, files)
-        if args.command == "prepare-pdf":
+        elif args.command == "prepare-pdf":
             prepare_pdf(ROOT, files, args.output)
         else:
             errors = check(ROOT, files)

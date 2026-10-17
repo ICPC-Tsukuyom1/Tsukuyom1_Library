@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/wavelet-matrix.cpp */
 template <class T = ll>
 struct WaveletMatrix {
  private:

@@ -2,5 +2,5 @@
 
 
 == Projection
-`reflect` が `true` なら点から直線へ下した垂線の足、`false` なら直線に関して対称な点を返す。
+`reflect` が `false` なら点から直線へ下した垂線の足、`true` なら直線に関して対称な点を返す。
 #sourcefile(read("../Geometry/projection.cpp"), lang: "cpp")

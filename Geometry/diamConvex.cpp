@@ -2,7 +2,9 @@
 // depends on: convex_hull
 pair<Point, Point> diamConvex(Polygon S) {
   Polygon Q = convex_hull(S);
-  ll n = sz(Q), j = n >= 2;
+  ll n = sz(Q);
+  if (n == 0) return {Point(), Point()};
+  ll j = n >= 2;
   pair<ld,pair<Point,Point>> ans({(ld)0,{Q[0],Q[0]}});
   rep(i, j) {
     for (;; j = (j + 1) % n) {

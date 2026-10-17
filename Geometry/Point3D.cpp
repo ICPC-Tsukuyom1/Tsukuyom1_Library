@@ -1,9 +1,9 @@
 /* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/Point3D.cpp */
-struct Point {
-  typedef Point P;
+struct Point3D {
+  typedef Point3D P;
   typedef const P& R;
   ld x, y, z;
-  explicit Point(ld x = 0, ld y = 0, ld z = 0) : x(x), y(y), z(z) {}
+  explicit Point3D(ld x = 0, ld y = 0, ld z = 0) : x(x), y(y), z(z) {}
   bool operator<(R p) const { return tie(x, y, z) < tie(p.x, p.y, p.z); }
   bool operator==(R p) const { return tie(x, y, z) == tie(p.x, p.y, p.z); }
   P operator+(R p) const { return P(x + p.x, y + p.y, z + p.z); }
@@ -16,12 +16,12 @@ struct Point {
   }
   ld norm() const { return x * x + y * y + z * z; }
   ld abs() const { return sqrtl(norm()); }
-  double phi() const { return atan2(y, x); }
-  double theta() const { return atan2(sqrtl(x * x + y * y), z); }
-  P unit() const { return *this / abs(); }
+  ld phi() const { return atan2l(y, x); }
+  ld theta() const { return atan2l(sqrtl(x * x + y * y), z); }
+  P unit() const { ld a = abs(); return a ? P(x / a, y / a, z / a) : P(); }
   P normal(P p) const { return cross(p).unit(); }
   P rotate(ld angle, P axis) const {
-    double s = sinl(angle), c = cosl(angle);
+    ld s = sinl(angle), c = cosl(angle);
     P u = axis.unit();
     return u * dot(u) * (1 - c) + (*this) * c - cross(u) * s;
   }

@@ -77,19 +77,18 @@ struct WaveletMatrix {
 
     ll range_freq(const T& upper) const { return query(w->index(upper))[0]; }
 
+    // Precondition: lower < upper; otherwise undefined behavior.
     ll range_freq(const T& lower, const T& upper) const {
-      return lower < upper ? range_freq(upper) - range_freq(lower) : 0;
+      return range_freq(upper) - range_freq(lower);
     }
 
     // Precondition: range_freq(upper) > 0; otherwise undefined behavior.
-    T prev_value(const T& upper) const {
+    T max_lt(const T& upper) const {
       return kth_smallest(range_freq(upper) - 1);
     }
 
     // Precondition: range_freq(lower) < size(); otherwise undefined behavior.
-    T next_value(const T& lower) const {
-      return kth_smallest(range_freq(lower));
-    }
+    T min_ge(const T& lower) const { return kth_smallest(range_freq(lower)); }
   };
 
   Span operator()(ll l, ll r) const { return {this, l, r}; }

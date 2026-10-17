@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/topological.cpp */
 vl toposort(vv<ll>& G) {
   vl ans;
   ll N = sz(G);

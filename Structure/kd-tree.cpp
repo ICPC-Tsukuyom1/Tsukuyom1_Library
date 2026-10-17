@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/kd-tree.cpp */
 template<class T=ll>
 struct kDTree {
   using I = vec<tuple<ll, ll, T>>::iterator;

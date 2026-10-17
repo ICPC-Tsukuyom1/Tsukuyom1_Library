@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/floorsum.cpp */
 // sum of floor((a * i + b) / c) (i = 0, ..., n - 1)
 // a, c > 0, b >= 0
 ll floorsum(ll n, ll a, ll b, ll c) {

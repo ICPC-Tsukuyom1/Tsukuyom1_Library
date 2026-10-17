@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/LiChaoTree.cpp */
 struct LCTree {
   struct line {
     ll a, b;

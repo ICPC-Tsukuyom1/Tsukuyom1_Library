@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/segInter.cpp */
 // depends on: Point, onSegment
 vec<Point> segInter(Point a, Point b, Point c, Point d) {
   ld oa=c.cross(d,a),ob=c.cross(d,b);

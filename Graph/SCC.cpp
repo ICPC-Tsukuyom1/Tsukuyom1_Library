@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/SCC.cpp */
 struct SCC {
   vv<ll>& g;
   vv<ll> dag, rg;

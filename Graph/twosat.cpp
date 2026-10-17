@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/twosat.cpp */
 struct Twosat {
   ll N;
   vv<ll> gr;

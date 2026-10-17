@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/golden_section_search.cpp */
 ld golden_section_search(ld l, ld r, auto f) {
   ld g = (sqrtl(5) - 1) / 2, eps = 1e-7;
   ld x1 = r - (r - l) * g, x2 = l + (r - l) * g;

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/disjoint-sparsetable.cpp */
 struct DisjointSparseTable {
   vv<T> st;
 

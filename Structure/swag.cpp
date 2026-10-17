@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/swag.cpp */
 struct SWAG {
 #define get(v) (sz(v) ? v.back().second : (e))
   using vp = vec<pair<T, T>>;

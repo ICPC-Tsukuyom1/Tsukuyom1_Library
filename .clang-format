@@ -1,4 +1,5 @@
 BasedOnStyle: Google
+CommentPragmas: '^ https://'
 AllowShortBlocksOnASingleLine: Always
 AllowShortFunctionsOnASingleLine: All
 BreakBeforeBraces: Attach

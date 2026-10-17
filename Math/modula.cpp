@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/modula.cpp */
 ll modmul(ll a, ll b, ll mod) { return __int128(a) * b % mod; }
 ll modpow(ll a, ll b, ll mod) {
   ll ans = 1;

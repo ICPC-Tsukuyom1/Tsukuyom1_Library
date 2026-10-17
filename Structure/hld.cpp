@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/hld.cpp */
 template <class T, bool onEdge = false>
 struct HLD {
   vv<ll> g;

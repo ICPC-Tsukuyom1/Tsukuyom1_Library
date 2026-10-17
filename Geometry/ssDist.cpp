@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/ssDist.cpp */
 // depends on: Point, segDistance, segInter
 
 ld ssDist(Segment S1, Segment S2) {

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/skew-heap.cpp */
 template <class T>
 struct SkewHeap {
   using H = SkewHeap<T>;

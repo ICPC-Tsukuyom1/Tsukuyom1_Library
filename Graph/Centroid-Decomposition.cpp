@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/Centroid-Decomposition.cpp */
 template <class G>
 struct CentroidDecomposition {
   const G &g;   // Graph

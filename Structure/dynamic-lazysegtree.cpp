@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/dynamic-lazysegtree.cpp */
 struct DynamicLazySeg;
 // 必ず vec でなく deque で
 deque<DynamicLazySeg> alloc;

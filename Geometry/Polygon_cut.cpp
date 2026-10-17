@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/Polygon_cut.cpp */
 // depends on: Point, lineInter
 Polygon polygonCut(Polygon &p, Point s, Point e) {
   Polygon res;

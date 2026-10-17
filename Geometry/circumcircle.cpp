@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/circumcircle.cpp */
 // depends on: Point
 Circle ccCircle(Point &A, Point &B, Point &C) {
   Point b=C-A, c=B-A;

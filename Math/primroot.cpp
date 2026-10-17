@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/primroot.cpp */
 // depends on modula 演算, MillerRabin, FastFactorize
 
 ll rnd(ll l, ll r) {  //[l, r)

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/circleTangents.cpp */
 // depends on: Point
 pair<Point, Point> circTangents(Circle c, Point p) {
   ld theta = acosl(c.r / (p - c.c).abs());

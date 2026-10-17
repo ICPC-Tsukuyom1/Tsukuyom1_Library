@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/fps.cpp */
 // depends on modula 演算
 
 template <typename T = ll>

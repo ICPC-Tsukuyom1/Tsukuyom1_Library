@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/SparseTable.cpp */
 struct SparseTable {
   vv<T> st;
 

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/FastFactorize.cpp */
 // depends on modula 演算, MillerRabin
 
 ll pollard(ll n) {

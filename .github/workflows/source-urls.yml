@@ -1,0 +1,20 @@
+name: Check Source URLs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  source-urls:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Test source URL tooling
+        run: python3 -B -m unittest discover -s scripts -p 'test_source_urls.py'
+
+      - name: Check C/C++ source URLs
+        run: python3 -B scripts/source_urls.py check

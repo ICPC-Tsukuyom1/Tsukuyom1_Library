@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/segDistance.cpp */
 // depends on: Point
 ld segDist(Point s, Point e, Point p) {
   if (s==e) return(p-s).abs();

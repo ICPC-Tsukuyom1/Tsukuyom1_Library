@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Strings/Manacher.cpp */
 array<vl, 2> Manacher(const string &s) {
   ll n = sz(s);
   array<vl, 2> p = {vl(n + 1), vl(n)};

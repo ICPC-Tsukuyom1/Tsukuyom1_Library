@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/RollingHash.cpp */
 struct RollingHash {
   ll base = 150, Hash = (1LL << 61) - 1;
   string S;

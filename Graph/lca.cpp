@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/lca.cpp */
 struct LCA {
   ll Log;
   vl dep;

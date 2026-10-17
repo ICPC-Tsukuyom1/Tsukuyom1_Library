@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Strings/ZAlgorithm.cpp */
 vl Zalgo(string& s) {
   ll n = sz(s), l = -1, r = -1;
   vl z(n, n);

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/modint.cpp */
 struct mint {
   ll x;
   mint(ll y = 0) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}

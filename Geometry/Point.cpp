@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/Point.cpp */
 #define EPS (1e-10)
 #define eq(a, b) (fabs((a) - (b)) < EPS)
 ll sign(ld x) { return (x >= EPS) - (x <= -EPS); }

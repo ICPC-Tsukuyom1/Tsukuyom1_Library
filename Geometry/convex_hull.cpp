@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/convex_hull.cpp */
 // depends on: Point
 // strict = true => NOT include points on edge
 // strict = false => include points on edge

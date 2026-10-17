@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/rerooting.cpp */
 template <class T = ll>
 struct Edge {
   ll from, to;

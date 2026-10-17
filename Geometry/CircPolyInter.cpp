@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/CircPolyInter.cpp */
 // depends on: Point
 ld arg(Point p, Point q) { return atan2(p.cross(q), p.dot(q)); }
 ld fac(Circle c, Polygon ps) {

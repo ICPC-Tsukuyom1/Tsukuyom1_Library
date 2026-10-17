@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/segtree.cpp */
 struct SegTree {
   int n = 1;
   vec<T> v;

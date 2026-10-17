@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/LIS.cpp */
 
 template <typename T = ll>
 ll LIS(vector<T> &A, bool strict) {

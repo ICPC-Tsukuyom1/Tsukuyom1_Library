@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/lineInter.cpp */
 // depends on: Point
 pair<bool, Point> lineInter(Line l1, Line l2) {
   auto d = (l1.e - l1.s).cross(l2.e - l2.s);

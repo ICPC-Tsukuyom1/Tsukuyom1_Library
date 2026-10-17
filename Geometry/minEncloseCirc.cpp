@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/minEncloseCirc.cpp */
 // depends on: Point, ccCircle
 Circle mec(Polygon ps) {
   shuffle(all(ps),mt19937(time(0)));

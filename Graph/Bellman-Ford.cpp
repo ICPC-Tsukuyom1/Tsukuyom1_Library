@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Graph/Bellman-Ford.cpp */
 struct Edge {
   ll from, to, cost;
 };

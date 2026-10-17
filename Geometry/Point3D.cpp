@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/Point3D.cpp */
 struct Point {
   typedef Point P;
   typedef const P& R;

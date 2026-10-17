@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Geometry/trincircle.cpp */
 // depends on: Point, area
 Circle trinCircle(Polygon p) {
   assert(sz(p) == 3);

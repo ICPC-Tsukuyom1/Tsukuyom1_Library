@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/unionfind.cpp */
 struct UnionFind {
   vl info;
   UnionFind(ll n) : info(n, -1LL) {}

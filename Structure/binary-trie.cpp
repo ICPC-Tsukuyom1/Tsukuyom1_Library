@@ -1,6 +1,8 @@
 // T / op / e(): 可換モノイド
+// op, e は省略可。既定では常に T{} を返す意味のないダミーを使う。
 // B: ビット数 (デフォルト 63)
-template <class T, auto op, auto e, ll B = 63>
+template <class T, auto op = [](const T&, const T&) { return T{}; },
+          auto e = [] { return T{}; }, ll B = 63>
 struct BinaryTrie {
   struct Node {
     array<Node*, 2> ch{};

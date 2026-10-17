@@ -127,8 +127,12 @@ struct poly : vec<mint> {
   }
   P integral() const {
     const ll n = (ll)this->size();
+    assert(n < mint::mod()); // 1..n の逆元を前計算するため (mod は素数)
+    vec<mint> inv(n + 1);
+    if (n >= 1) inv[1] = mint(1);
+    reps(i, 2, n + 1) inv[i] = mint(-(mint::mod() / i)) * inv[mint::mod() % i];
     P ret(n + 1);
-    rep(i, n) ret[i + 1] = freq(i) * mint(i + 1).inv();
+    rep(i, n) ret[i + 1] = freq(i) * inv[i + 1];
     return ret;
   }
   // 形式的逆元 (deg 項まで、既定は自身の長さ)

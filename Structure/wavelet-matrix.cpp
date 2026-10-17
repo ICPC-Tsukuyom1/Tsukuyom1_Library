@@ -81,16 +81,14 @@ struct WaveletMatrix {
       return lower < upper ? range_freq(upper) - range_freq(lower) : 0;
     }
 
-    optional<T> prev_value(const T& upper) const {
-      ll k = range_freq(upper);
-      if (k == 0) return {};
-      return kth_smallest(k - 1);
+    // Precondition: range_freq(upper) > 0; otherwise undefined behavior.
+    T prev_value(const T& upper) const {
+      return kth_smallest(range_freq(upper) - 1);
     }
 
-    optional<T> next_value(const T& lower) const {
-      ll k = range_freq(lower);
-      if (k == size()) return {};
-      return kth_smallest(k);
+    // Precondition: range_freq(lower) < size(); otherwise undefined behavior.
+    T next_value(const T& lower) const {
+      return kth_smallest(range_freq(lower));
     }
   };
 

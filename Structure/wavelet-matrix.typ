@@ -18,7 +18,7 @@ C++20 と `template.cpp` が必要. `WaveletMatrix<T>` の既定型は `ll`; `T`
 - `s.prev_value(upper)`: `upper` 未満の最大値.
 - `s.next_value(lower)`: `lower` 以上の最小値.
 
-直前・直後の値は `optional<T>` を返し, 存在しなければ `nullopt`. 空配列・空区間も扱えるが, 空区間への `kth_smallest` は不可.
+`prev_value`・`next_value` は対象の値が存在しない場合の動作は未定義 (利用者が保証する): 呼ぶ前に `prev_value` は `s.range_freq(upper) > 0`, `next_value` は `s.range_freq(lower) < s.size()` を確認する. 空配列・空区間も扱えるが, 空区間への `kth_smallest` は不可.
 
 引数の範囲は利用者が保証する (`assert` は置かない): $0 <= l <= r <= N$, `access` は $0 <= i < N$, `kth_smallest` は `0 <= k < s.size()`.
 ビューの使用中は元の WM を生存させ, 移動・再代入しないこと. 一時 WM から作ったビューを保存してはならない.
@@ -35,7 +35,7 @@ WaveletMatrix wm(a);
 auto s = wm(0, 4);
 auto x = s.kth_smallest(1);         // 2
 ll c = s.range_freq(2LL, 8LL);     // 3
-auto p = s.prev_value(2LL);        // optional<ll>(-3)
+ll p = s.prev_value(2LL);          // -3
 ll d = wm(1, 3).count(7LL);        // 2
 ```)
 

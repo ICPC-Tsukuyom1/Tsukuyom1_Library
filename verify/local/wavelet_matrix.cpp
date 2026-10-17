@@ -61,11 +61,16 @@ void check_range(const WaveletMatrix<T>& wm, const vec<T>& a,
     require(span.count(x) == hi - lo, "count", n, l, r);
     require(span.range_freq(x) == lo - sorted.begin(), "range_freq(<)", n, l,
             r);
-    const optional<T> prev =
-        lo == sorted.begin() ? nullopt : optional<T>(*std::prev(lo));
-    const optional<T> next = lo == sorted.end() ? nullopt : optional<T>(*lo);
-    require(span.prev_value(x) == prev, "prev_value", n, l, r);
-    require(span.next_value(x) == next, "next_value", n, l, r);
+    const bool has_prev = lo != sorted.begin();
+    const bool has_next = lo != sorted.end();
+    // prev_value/next_value are undefined when no such value exists, so only
+    // call them when the precondition (checkable via range_freq) holds.
+    require(has_prev ? span.prev_value(x) == *std::prev(lo)
+                     : span.range_freq(x) == 0,
+            "prev_value", n, l, r);
+    require(has_next ? span.next_value(x) == *lo
+                     : span.range_freq(x) == int(sorted.size()),
+            "next_value", n, l, r);
     for (T upper : probes) {
       const int expected =
           upper <= x ? 0 : int(lower_bound(all(sorted), upper) - lo);
@@ -74,7 +79,8 @@ void check_range(const WaveletMatrix<T>& wm, const vec<T>& a,
     }
     require(span.size() == r - l && span.count(x) == hi - lo &&
                 span.range_freq(x) == lo - sorted.begin() &&
-                span.prev_value(x) == prev && span.next_value(x) == next,
+                (!has_prev || span.prev_value(x) == *std::prev(lo)) &&
+                (!has_next || span.next_value(x) == *lo),
             "span stable after interleaved queries", n, l, r);
     if (!sorted.empty())
       require(span.kth_smallest(0) == sorted.front() &&
@@ -149,13 +155,15 @@ void check_stored_views() {
     require(right.size() == 2 && right.kth_smallest(0) == 1 &&
                 right.kth_smallest(1) == 8 && right.count(5) == 0 &&
                 right.range_freq(5) == 1 && right.range_freq(1, 8) == 1 &&
-                right.prev_value(8) == T(1) && !right.next_value(9),
+                right.range_freq(9) == 2 && right.prev_value(8) == T(1) &&
+                right.next_value(8) == T(8),
             "simultaneous different view", 6, 4, 6);
     check_left(copied);
     require(returned.size() == 2 && returned.kth_smallest(0) == -2 &&
                 returned.kth_smallest(1) == 9 && returned.count(9) == 1 &&
-                returned.range_freq(9) == 1 &&
-                returned.range_freq(-2, 10) == 2 && !returned.prev_value(-2) &&
+                returned.range_freq(9) == 1 && returned.range_freq(-2) == 0 &&
+                returned.range_freq(-2, 10) == 2 &&
+                returned.prev_value(0) == T(-2) &&
                 returned.next_value(0) == T(9),
             "helper-returned view with live owner", 6, 0, 2);
     check_left(left);

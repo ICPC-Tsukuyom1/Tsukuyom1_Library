@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/binary-trie.cpp */
 // T / op / e(): 可換モノイド
 // op, e は省略可。既定では常に T{} を返す意味のないダミーを使う。
 // B: ビット数 (デフォルト 63)

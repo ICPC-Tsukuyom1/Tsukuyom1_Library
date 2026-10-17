@@ -10,6 +10,7 @@
   - 初版: commit `4412a56` 時点（PR #159 マージ後）
   - **本版: main `eec8998` 時点（PR #160 幾何修正 / #161 幾何 6 機能追加 のマージ後）に全項目を現行コードと再照合し、状態を付与**
   - **追補: main `53bc47c` 時点（PR #163 fps リファクタ / #164 fps 性能改善 のマージ後）に fps 関連項目を再照合し、状態を更新**
+  - **追補: main `aee6653` 時点（PR #168 で AOJ verify 42 問を追加）に、AOJ 検証で判明した事項を [§13](#13-aoj-verify-追加で判明した事項pr-168--issue-166) として追記し、§7・§9・§11・§12 を更新**
 
 ---
 
@@ -27,6 +28,7 @@
 10. [前版からの撤回（誤検出だった項目）](#10-前版からの撤回誤検出だった項目)
 11. [優先度付き修正リスト](#11-優先度付き修正リスト)
 12. [追加が望ましいライブラリ（機能拡充候補）](#12-追加が望ましいライブラリ機能拡充候補)
+13. [AOJ verify 追加で判明した事項（PR #168 / Issue #166）](#13-aoj-verify-追加で判明した事項pr-168--issue-166)
 
 ---
 
@@ -175,7 +177,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **修正済み** `Geometry/projection.typ:5` — `reflect` の説明が実装と一致。
 - **修正済み** `Geometry/LineDistance.cpp:5` — **符号付き**距離（左側が正）である旨を明記。
 - **修正済み** `Geometry/lineInter.typ:4` / `ccInter.typ:3-4` — 平行・非交差の返り値が実装と一致。`inf` が真の無限大である旨も明記。
-- **未修正** `Graph/hopcroftKarp.typ` — 返り値が**2倍**であること（呼び出し側の `/2` 必須）が未記載。右側の `btoa` が非対称になり得る点も未記載。
+- **一部修正** `Graph/hopcroftKarp.typ` — 「返り値が **2倍**（呼び出し側の `/2` 必須）」という記述は**誤り**で、実際はマッチングサイズそのもの（`#80`）。`hopcroftKarp.cpp:2` の usage コメントは PR #168 で修正済み。`.typ` 側の訂正と「右側の `btoa` が非対称になり得る点」の記載は未対応。
 - **未修正** `Graph/kruskal.typ:5` — `O(E log V)` は誤り（`O(E log E)`）。非連結時に全域**森**になる旨も未記載。
 - **未修正** `Graph/PushRelabel.typ` — 使用法（`rcap`、再入不可）が皆無。
 - **修正済み** `Graph/bellman-ford.typ` — ソース側のコンパイル不能が解消。
@@ -208,9 +210,10 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **未修正** `.cpp` ↔ `.typ` のベース名不一致が多数: `isinpolygon`↔`isinPolygon`、`LineDistance`↔`lineDistance`、`Bellman-Ford`↔`bellman-ford`、`Kruskal`↔`kruskal`、`SCC`↔`scc`、`Euler_phi`↔`euler_phi`、`BIT`↔`bit`、`BIT2d`↔`bit2d`、`RollingHash`↔`rollinghash`、`SparseTable`↔`sparsetable`、`UnionFind-rollback`↔`unionfind-rollback`、`binomial_coefficients.typ`↔`binomial-coefficients.cpp`。
 - **未修正** 関数名の不一致 / タイポ: `circleTangents.cpp`→`circTangents`、`trincircle.cpp`→`trinCircle`、`ZAlgorithm.cpp`→`Zalgo`、`Structure/LiChaoTree.cpp`→`LCTree`。
 - **未修正** セグメント木系の命名が 6 通り（`SegTree` / `LazySeg` / `DualSeg` / `DynamicSeg` / `DynamicLazySeg` / `DynamicDualSeg`）。
-- **一部修正** **verify に include されていないライブラリ `.cpp` が 20 件**（旧 27 件）: `io.cpp` / `dump.cpp` / `LIS.cpp`、`Graph/{Bellman-Ford,flow,PushRelabel,Centroid-Decomposition,LowLink,topological}.cpp`、`Geometry/{LineDistance,Point3D,halfPlaneInter,isinConvexPolygon}.cpp`、`Math/{extgcd,garner,Euler_phi,binomial-coefficients}.cpp`、`Strings/KMP.cpp`、`Structure/{BIT2d,RollingHash}.cpp`。
+- **一部修正** **verify に include されていないライブラリ `.cpp` が 11 件**（旧 27 → 20 → PR #168 で 11）: `io.cpp` / `dump.cpp` / `Graph/{PushRelabel,Centroid-Decomposition}.cpp` / `Geometry/{LineDistance,Point3D,halfPlaneInter,isinConvexPolygon}.cpp` / `Math/{garner,binomial-coefficients}.cpp` / `Structure/BIT2d.cpp`。
   - 旧リストの `Geometry/{circleTangents,clInter,ccInter,commonTangents,isconvex,Polygon_cut,CircCircInter,CircPolyInter,trincircle}.cpp` は AOJ verify 追加などで解消。
-  - 一方で `Geometry/{halfPlaneInter,isinConvexPolygon}.cpp` が新たに未カバー（#161 で追加したが verify 未整備）。§1〜§3 のバグが生き延びた原因。
+  - PR #168（AOJ verify 42 問）で `LIS.cpp`、`Graph/{Bellman-Ford,flow,LowLink,topological}.cpp`、`Math/{extgcd,Euler_phi}.cpp`、`Strings/KMP.cpp`、`Structure/RollingHash.cpp` の 9 件が解消。あわせて `Graph/{Kruskal,SCC,rerooting,hopcroftKarp,mincostflow}.cpp`、`Math/{modint,MillerRabin,FastFactorize,BigInt}.cpp`、`Structure/{unionfind,weightedunionfind,segtree,BIT,kd-tree,dualsegtree,lazysegtree,swag}.cpp` も AOJ verify から include されるようになった。
+  - 残る `Geometry/{halfPlaneInter,isinConvexPolygon}.cpp` は #161 追加分で verify 未整備のまま。§1〜§3 のバグが生き延びた原因。
 
 ## 10. 前版からの撤回（誤検出だった項目）
 
@@ -229,7 +232,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 
 ## 11. 優先度付き修正リスト
 
-> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。fps 関連は main `53bc47c`（#163・#164 マージ後）で追記更新。
+> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。fps 関連は main `53bc47c`（#163・#164 マージ後）で追記更新。AOJ verify 追加（PR #168）の知見は [§13](#13-aoj-verify-追加で判明した事項pr-168--issue-166) を参照。
 
 ### 完了（本更新で確認）
 
@@ -242,6 +245,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - `Math/fps.cpp` の `%=` / `div_mod` の破壊（§5）。
 - **（fps リファクタ / 性能改善 #163・#164 で追加解消）** `operator()` の非還元（#42）、NTT 長 2 倍（§5）、`integral` の `O(n log mod)`（#2 / §5）、`T rev`・`sz` の隠蔽（§5）、`fps.typ` の散文ゼロ（§7）。
 - ドキュメント: `projection` / `LineDistance` / `lineInter` / `ccInter` / `bellman-ford`（§7）。
+- **（PR #168 で追加解消）** AOJ verify 42 問の追加で `LIS.cpp`・`Graph/{Bellman-Ford,flow,LowLink,topological}.cpp`・`Math/{extgcd,Euler_phi}.cpp`・`Strings/KMP.cpp`・`Structure/RollingHash.cpp` の 9 件がカバーされ、未カバーは 11 件に（§9）。`Graph/hopcroftKarp.cpp:2` の usage コメントの誤り（`/ 2`）を修正（#80）。
 
 ### 最優先（コンパイル不能 + メモリ安全）
 
@@ -275,9 +279,12 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 22. `scripts/expander.py` の循環対策と重複排除（§8）。
 23. ルート `.gitignore` 追加と `.pyc` の untrack（§8）。
 24. `format.sh` の堅牢化 + CI への format チェック追加（§8）。
-25. verify 未カバー 20 件の解消（§9）。
-26. `io.cpp` / `dump.cpp` / `LIS.cpp` の削除、または正式に documentation・テスト対象へ追加（§5）。
+25. verify 未カバー 11 件の解消（§9）。
+26. `io.cpp` / `dump.cpp` / `LIS.cpp` の削除、または正式に documentation・テスト対象へ追加（§5。`LIS.cpp` は PR #168 の AOJ `DPL_1_D` でカバー済み）。
 27. ドキュメント未整備分（§7）の是正。
+28. CI の `aoj-verify` ジョブに `ulimit -s unlimited` を追加（#78）。
+29. `Structure/{kd-tree,lazysegtree,dualsegtree}.typ` / `Strings/Manacher.typ` に §13（#71〜#75）の契約・戻り値の意味を記載。
+30. `Graph/hopcroftKarp.typ` の「2 倍」記述を訂正（§7・#80）。
 
 ## 12. 追加が望ましいライブラリ（機能拡充候補）
 
@@ -319,6 +326,39 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - 多角形の三角形分割。
 - 線分アレンジメント / 平面走査（AOJ CGL_6_A: Manhattan 線分の交差数え上げ）。
 
+### グラフ・その他（AOJ verify 追加時に判明 / PR #168）
+
+§12 は元々幾何中心だが、AOJ verify の追加で以下も欠落が判明した。
+
+| 機能 | 理由 | 状態 |
+|---|---|---|
+| Dijkstra（非負単一始点最短路） | `Bellman-Ford` は負辺用。非負は `O((V+E) log V)` が定番 | 未追加（AOJ `GRL_1_A` の verify が作れない） |
+| Floyd–Warshall（全点対最短路） | `GRL_1_C` は現状 全始点 Bellman-Ford で代用（#79） | 未追加 |
+| 木の直径 | `GRL_5_A` の verify 不可。`rerooting` の応用で実装可 | 未追加 |
+| 平面走査（線分交差 / 長方形和） | `CGL_6_A` / `DSL_4_A` 等。幾何とデータ構造の橋渡し | 未追加 |
+
+---
+
+## 13. AOJ verify 追加で判明した事項（PR #168 / Issue #166）
+
+main `aee6653` 時点。AOJ の問題 42 問を verify として追加する作業で、実システムテストを通して確認した事項。**ライブラリのバグではなく「仕様・契約・ドキュメント」の不足が中心。**
+
+| # | 位置 | 内容 | 状態 |
+|---|---|---|---|
+| 71 | ⚠ `Structure/kd-tree.cpp` | `T = ll` 固定で部分木の点集合を集約できない（`foreach` は点を 1 つずつ渡すのみ）。`DSL_2_C`（長方形内の点の ID 列挙）は「外接円で `foreach` して長方形でふるい分け」という回避策が必要。最悪ケースでも 0.6s 程度で制限内。 | 仕様 |
+| 72 | ⚠ `Structure/lazysegtree.cpp` | 全要素を単位元 `e` で初期化する。初期値が `e` でない問題（`DSL_2_H` の 0 など）では葉を手で書き換える必要がある。契約が `.typ` に未記載。 | 設計 / 要注記 |
+| 73 | ⚠ `Structure/dualsegtree.cpp` | `merge` が `id` を考慮しないと assign 系（RUQ）で保留が潰れる。`DSL_2_D` は `merge(a,b) = (b==id ? a : b)` が必要。`.typ` に記載なし（`#16` の `get` 境界も同時に踏む）。 | 設計 / 要注記 |
+| 74 | ⚠ `Strings/Manacher.cpp` | 戻り値は「半径」ではなく、奇数長 `p[1][i]` = 一致ペア数、偶数長 `p[0][i]` = 半分の長さ。コメントが無く誤用しやすい（AOJ `0063` の verify で確認）。 | ドキュメント欠陥 |
+| 75 | ⚠ `Structure/RollingHash.cpp` | 1 次元のみ。2 次元（`ALDS1_14_C`）は縦方向ハッシュの自作が必要（`#67` の符号付き `char` も未修正）。 | 制約 |
+| 76 | ⚠ `Graph/rerooting.cpp` | `#13` のマクロ依存のため、verify 側で `V` / `E` / `ee` / `op` / `put_edge` / `put_vert` を `#define` してから include する必要がある。 | #13 と同一 |
+| 77 | ⚠ `Graph/{Bellman-Ford,Kruskal,rerooting}.cpp` | それぞれ独立した `struct Edge` を定義し、1 ファイルで併用できない（`#12`）。verify でも併用不可。 | #12 と同一 |
+| 78 | ✅ `.github/workflows/verify.yml` | `aoj-verify` ジョブに `ulimit -s unlimited` が無い（`yosupo-verify` にはある）。AOJ で深い再帰を要する問題を verify 化する際に必要（[§4](#4-スタックオーバーフロー再帰) の再帰問題と同根）。 | 未修正 |
+| 79 | ⚠ `Graph/Bellman-Ford.cpp` | `GRL_1_C`（全点対最短路）用の Floyd–Warshall が無く、全始点 Bellman-Ford で代用（`V<=100` かつ負閉路検出も全始点で回るため可）。 | §12 候補 |
+| 80 | ✅ `Graph/hopcroftKarp.cpp:2` / `hopcroftKarp.typ` | usage コメントの `hopcroftKarp(g, btoa) / 2` が誤りで、実際はマッチングサイズそのもの。`.typ` の「2 倍」記述も同根。 | 修正済み（PR #168 でコメント修正。`.typ` は §7 に残） |
+
+> AOJ verify を見送った問題のうち、`GRL_4_B`（Topological Sort）は解が複数あり特殊ジャッジのため `oj test` の単純比較では通らない（ライブラリの問題ではなく検証ツールの制約）。`GRL_1_A` は Dijkstra 未実装（§12）、`GRL_5_A` は深いパスで再帰が 8MiB スタックを超えるため（[§4](#4-スタックオーバーフロー再帰) / `#78`）。
+> `DSL_2_C` の出力は ID 昇順・クエリごとに空行で、`kd-tree` の列挙順はそのままでは使えない（verify 側でソート）。`DSL_2_C` の入力に `n = 0`（点なし）が含まれる点にも注意。
+
 ---
 
 ## 付録: 検証方法
@@ -330,3 +370,4 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - `git ls-files` / `git ls-files -s` で追跡一覧・実行ビットを確認。
 - 再帰の深さは大きなパス / 閉路入力でスタック枯渇を実測。
 - 本版の状態列は、main `eec8998` の作業ツリーに対して各項目を再検証して付与（検証スクリプトは `Geometry` 追加作業時のローカル環境を再利用）。fps 関連は main `53bc47c` で再検証（yosupo verify 8 問全ケース通過＋ランダム総当たり）。
+- §13 は AOJ verify 42 問（PR #168）の追加作業で判明した事項。`oj download --system` で取得した AOJ の実システムテストに対し、`g++ -std=c++20 -O2`（ローカル Windows では判定環境に合わせ 8MiB スタック）でビルドし、`oj test -c ./a.out -d <tc> -t 10 --error 1e-6`（CI と同条件）で判定。追加 42 + 既存 CGL 23 の計 65 ファイルすべて通過、CI も全ジョブ success。

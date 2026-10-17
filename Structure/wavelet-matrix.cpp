@@ -40,7 +40,7 @@ struct WaveletMatrix {
 
   struct Span {
    private:
-    friend struct WaveletMatrix;
+    friend class WaveletMatrix;
     Span(const WaveletMatrix* w, ll l, ll r) : w(w), l(l), r(r) {}
     const WaveletMatrix* w;
     ll l, r;

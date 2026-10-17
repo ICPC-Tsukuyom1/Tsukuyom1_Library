@@ -12,7 +12,6 @@ struct Query {
 };
 
 int main() {
-
   ll n, q;
   in >> n >> q;
 

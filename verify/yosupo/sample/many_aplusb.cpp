@@ -3,9 +3,10 @@
 #include "../../../template.cpp"
 #include "../../fastio.hpp"
 
+FastIn in;
+FastOut out;
+
 int main() {
-  FastIn in;
-  FastOut out;
   ll t;
   in >> t;
   while (t--) {

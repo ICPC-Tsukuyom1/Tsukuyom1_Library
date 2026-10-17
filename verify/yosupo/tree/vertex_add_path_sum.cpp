@@ -46,9 +46,9 @@ int main() {
       ll u, v;
       in >> u >> v;
       out << hld.queryPath(
-                  u, v, 0LL, [&](ll l, ll r) { return bit.prod(l, r); },
-                  [](ll a, ll b) { return a + b; })
-           << '\n';
+                 u, v, 0LL, [&](ll l, ll r) { return bit.prod(l, r); },
+                 [](ll a, ll b) { return a + b; })
+          << '\n';
     }
   }
 }

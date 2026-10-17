@@ -143,6 +143,10 @@ public:
   }
   void write(char value) { put(value); }
   void write(bool value) { put(value ? '1' : '0'); }
+  // Floating-point output is unsupported: fail clearly instead of reporting an
+  // ambiguous overload between write(char) and write(bool).
+  void write(double) = delete;
+  void write(long double) = delete;
   void write(string_view value) {
     if (!good_ || value.empty()) return;
     if (value.size() >= BufferSize) {

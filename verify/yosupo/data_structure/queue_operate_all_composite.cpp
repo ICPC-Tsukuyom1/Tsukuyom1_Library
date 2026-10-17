@@ -18,7 +18,6 @@ const T e = pair{1, 0};
 #include "../../../Structure/swag.cpp"
 
 int main() {
-
   ll q;
   in >> q;
   SWAG s;

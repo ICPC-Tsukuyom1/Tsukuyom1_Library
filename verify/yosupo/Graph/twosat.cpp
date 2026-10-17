@@ -23,11 +23,11 @@ int main() {
   auto ans = ts.satisfy();
   if (!sz(ans)) {
     out << "s "
-         << "UNSATISFIABLE" << '\n';
+        << "UNSATISFIABLE" << '\n';
     return 0;
   }
   out << "s "
-       << "SATISFIABLE" << '\n';
+      << "SATISFIABLE" << '\n';
   out << "v ";
   rep(i, N) { out << (i + 1) * ((ans[i]) ? 1 : -1) << " "; }
   out << 0 << '\n';

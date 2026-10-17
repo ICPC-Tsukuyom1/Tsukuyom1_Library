@@ -23,7 +23,9 @@ C++20 と `template.cpp` が必要. `WaveletMatrix<T>` の既定型は `ll`; `T`
 引数の範囲は利用者が保証する (`assert` は置かない): $0 <= l <= r <= N$, `access` は $0 <= i < N$, `kth_smallest` は `0 <= k < s.size()`.
 ビューの使用中は元の WM を生存させ, 移動・再代入しないこと. 一時 WM から作ったビューを保存してはならない.
 
-異なる値の数を $sigma$, $B = ceil(log_2(max(1, sigma)))$ とすると, 構築は通常 $O(N log N)$, 各クエリは $O(1+B)$.
+配列に現れる相異なる値の個数 (座標圧縮辞書のサイズ) を $sigma$, $B = ceil(log_2(max(1, sigma)))$ とすると, 構築は通常 $O(N log N)$.
+`kth_smallest` と `access` は $O(B)$; 値を受け取る `count`・`range_freq`・`prev_value`・`next_value` は辞書の二分探索を含め $O(log sigma + B)$.
+`wm(l, r)` は $O(1)$.
 `stable_partition` の補助メモリを確保できない場合, 構築は最悪 $O(N log N + N B log N)$.
 各段は 64 bit のビット列とブロック累積和で約 $12 ceil(N/64)$ byte と管理領域を使用し, 圧縮辞書と構築時の $O(N)$ 作業領域が加わる.
 

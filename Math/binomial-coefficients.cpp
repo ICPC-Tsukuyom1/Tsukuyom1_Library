@@ -1,5 +1,5 @@
 /* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/binomial-coefficients.cpp */
-vec<mint> fac, inv;
+vec<mint> binom_fac, binom_inv;
 vv<mint> pascal;
 void init(ll n) {
   if (n <= 4500) {
@@ -12,16 +12,16 @@ void init(ll n) {
     }
     return;
   }
-  fac.assign(n + 1, 1);
-  inv.assign(n + 1, 1);
+  binom_fac.assign(n + 1, 1);
+  binom_inv.assign(n + 1, 1);
   reps(i, 1, n + 1) {
-    fac[i] = fac[i - 1] * i;
-    inv[i] = inv[i - 1] / i;
+    binom_fac[i] = binom_fac[i - 1] * i;
+    binom_inv[i] = binom_inv[i - 1] / i;
   }
 }
 mint com(int n, int k) {
   if (n < k) return 0;
   if (n < 0 || k < 0) return 0;
   if (pascal.size()) { return pascal[n][k]; }
-  return fac[n] * inv[k] * inv[n - k];
+  return binom_fac[n] * binom_inv[k] * binom_inv[n - k];
 }

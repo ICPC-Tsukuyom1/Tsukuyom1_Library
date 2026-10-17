@@ -194,6 +194,7 @@ public:
 	P sqrt(ll deg = -1) const {
 		const ll n = (ll)this->size();
 		if (deg == -1) deg = n;
+		if (n == 0) return {};
 		if ((*this)[0] == T(0)) {
 			reps(i, 1, n) {
 				if ((*this)[i] != T(0)) {
@@ -221,7 +222,7 @@ public:
 		if (n == -1) n = (ll)this->size();
 		if (k == 0) {
 			P res(n);
-			res[0] = T(1);
+			if (n > 0) res[0] = T(1);
 			return res;
 		}
 		rep(i, (ll)this->size()) {
@@ -248,6 +249,7 @@ public:
 	}
 	P shift(T c) const {
 		ll n = this->size();
+		if (n == 0) return {};
 		vec<T> fact(n), rfact(n);
 		fact[0] = rfact[0] = T(1);
 		reps(i, 1, n) fact[i] = modmul(fact[i - 1], T(i), mod);

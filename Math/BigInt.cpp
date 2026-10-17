@@ -165,6 +165,8 @@ class BigInt {
   }
   auto& operator*=(const I& b) { return *this = *this * b; }
   auto divmod(const I& b) const {
+    assert(!b.zero());
+    if (b.zero()) return pair{I(0), *this};
     if (cmp_abs(b) < 0) return pair{I(0), *this};
     auto a = *this, y = b;
     a.sign = y.sign = 1;

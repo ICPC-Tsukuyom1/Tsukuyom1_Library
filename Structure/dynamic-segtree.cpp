@@ -1,7 +1,7 @@
 /* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/dynamic-segtree.cpp */
 struct DynamicSeg;
 // 必ず vec でなく deque で
-deque<DynamicSeg> alloc;
+deque<DynamicSeg> alloc_seg;
 
 struct DynamicSeg {
   DynamicSeg *lc = 0, *rc = 0;
@@ -14,10 +14,10 @@ struct DynamicSeg {
   void _() {
     if (!lc) {
       ll m = (l + r) / 2;
-      alloc.emplace_back(l, m);
-      lc = &alloc.back();
-      alloc.emplace_back(m, r);
-      rc = &alloc.back();
+      alloc_seg.emplace_back(l, m);
+      lc = &alloc_seg.back();
+      alloc_seg.emplace_back(m, r);
+      rc = &alloc_seg.back();
     }
   }
 

@@ -1,3 +1,4 @@
+/* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Math/LucasBinom.cpp */
 template <class Mint>
 struct LucasBinom {
     Binom<Mint> small;

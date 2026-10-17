@@ -20,6 +20,7 @@ struct DisjointSparseTable {
 
   // 0-indexed, [l, r)
   T fold(ll l, ll r) {
+    assert(l < r);
     --r;
     if (l == r) return st[0][l];
     ll b = __lg(l ^ r);

@@ -9,10 +9,11 @@ struct LCTree {
   };
   vl x;
   vec<line> seg;
-  ll n;
+  ll n = 0;
   LCTree() {}
   LCTree(const vector<ll>& _x) : x(_x) {
     sort(all(x));
+    if (x.empty()) x.push_back(0);
     n = 1;
     while (n < sz(x)) n <<= 1;
     while (sz(x) < n) x.push_back(x.back());
@@ -54,6 +55,7 @@ struct LCTree {
   }
   ll query(ll t) {
     ll p = lower_bound(all(x), t) - x.begin();
+    if (p >= n) p = n - 1;
     p += n;
     ll res = seg[p].get(t);
     while (p > 1) {

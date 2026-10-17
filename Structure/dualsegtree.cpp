@@ -33,6 +33,7 @@ struct DualSeg {
 
   // 点取得 O(log N)
   F get(int i) {
+    assert(0 <= i && i < n);
     i += n;
     rrep(j, 0, bit_width((unsigned)i)) { _(i >> j); }
     return m[i];

@@ -1,7 +1,7 @@
 /* https://github.com/ICPC-Tsukuyom1/Tsukuyom1_Library/blob/main/Structure/dynamic-lazysegtree.cpp */
 struct DynamicLazySeg;
 // 必ず vec でなく deque で
-deque<DynamicLazySeg> alloc;
+deque<DynamicLazySeg> alloc_lazy;
 
 struct DynamicLazySeg {
   DynamicLazySeg *lc = 0, *rc = 0;
@@ -17,10 +17,10 @@ struct DynamicLazySeg {
   void _() {
     if (!lc) {
       ll m = l + (r - l) / 2;
-      alloc.emplace_back(l, m);
-      lc = &alloc.back();
-      alloc.emplace_back(m, r);
-      rc = &alloc.back();
+      alloc_lazy.emplace_back(l, m);
+      lc = &alloc_lazy.back();
+      alloc_lazy.emplace_back(m, r);
+      rc = &alloc_lazy.back();
     }
     if (m != id) lc->effect(l, r, m), rc->effect(l, r, m), m = id;
   }

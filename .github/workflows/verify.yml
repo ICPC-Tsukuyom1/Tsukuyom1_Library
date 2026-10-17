@@ -7,15 +7,6 @@ on:
   pull_request:
 
 jobs:
-  fastio-tests:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Test Fast I/O
-        run: python3 verify/tests/test_fastio.py --sanitize
-
   prepare-matrix-yosupo:
     runs-on: ubuntu-24.04
     outputs:

@@ -19,3 +19,14 @@ Library Checker、yukicoder、AOJの問題を使い、GitHub Actionsで自動Ver
 
 `./scripts/expander.py {cppファイル}` を実行することで、指定したcppファイルのincludeを展開したコードを標準出力に出力します
 オンラインジャッジに提出する際などにご利用ください。
+
+## Source URL
+
+各ソースファイルの先頭行には、そのファイル自身のURLを `/* {URL} */` の形式で記載しています（verifyフォルダ以下のファイルは除く）
+
+- `python3 scripts/source_urls.py check` で記載漏れ・重複をチェックできます
+- `python3 scripts/source_urls.py fix` で先頭行を自動で付与・修正できます
+
+## License
+
+[CC0 1.0 Universal](LICENSE) の下で公開しています

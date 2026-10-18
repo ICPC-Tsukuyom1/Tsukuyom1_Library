@@ -141,6 +141,7 @@ jobs:
       - name: Run oj test
         run: |
           set -eu
+          ulimit -s unlimited
           BASE_DIR="testcases/${PROBLEM}"
           if [ ! -d "$BASE_DIR" ]; then
             echo "error: testcases not found under $BASE_DIR" >&2
@@ -219,6 +220,7 @@ jobs:
       - name: Run oj test
         run: |
           set -eu
+          ulimit -s unlimited
           BASE_DIR="testcases/${PROBLEM}"
           TEST_DIR=""
           while IFS= read -r -d '' candidate; do

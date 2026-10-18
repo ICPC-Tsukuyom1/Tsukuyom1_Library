@@ -21,7 +21,7 @@ struct Dinic {
     queue<int> que;
     min_cost[s] = 0;
     que.push(s);
-    while (!que.empty() && min_cost[t] == -1) {
+    while (!que.empty()) {
       int p = que.front();
       que.pop();
       for (auto &e : graph[p]) {
@@ -52,7 +52,7 @@ struct Dinic {
       bool advanced = false;
       for (ll &i = iter[v]; i < sz(graph[v]); i++) {
         edge &e = graph[v][i];
-        if (e.cap > 0 && min_cost[v] < min_cost[e.to]) {
+        if (e.cap > 0 && min_cost[v] + 1 == min_cost[e.to]) {
           es.push_back(i);
           vs.push_back(e.to);
           advanced = true;

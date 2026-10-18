@@ -7,7 +7,7 @@ struct Dinic {
   };
 
   vv<edge> graph;
-  vl min_cost, iter;
+  vl min_cost, iter, vs, es;  // vs, es は find() の明示スタック
 
   Dinic(int V) : graph(V) {}
 
@@ -33,17 +33,37 @@ struct Dinic {
     }
     return min_cost[t] != -1;
   }
+  // 増加パスを 1 本探して流す。再帰せず明示スタックで辿る。
   ll find(ll idx, const ll t, ll flow) {
-    if (idx == t) return flow;
-    for (ll &i = iter[idx]; i < sz(graph[idx]); i++) {
-      edge &e = graph[idx][i];
-      if (e.cap > 0 && min_cost[idx] < min_cost[e.to]) {
-        ll d = find(e.to, t, min(flow, e.cap));
-        if (d > 0) {
-          e.cap -= d;
-          graph[e.to][e.rev].cap += d;
-          return d;
+    vs.assign(1, idx);
+    es.clear();
+    while (!vs.empty()) {
+      ll v = vs.back();
+      if (v == t) {
+        ll f = flow;
+        rep(i, sz(es)) f = min(f, graph[vs[i]][es[i]].cap);
+        rep(i, sz(es)) {
+          edge &e = graph[vs[i]][es[i]];
+          e.cap -= f;
+          graph[e.to][e.rev].cap += f;
         }
+        return f;
+      }
+      bool advanced = false;
+      for (ll &i = iter[v]; i < sz(graph[v]); i++) {
+        edge &e = graph[v][i];
+        if (e.cap > 0 && min_cost[v] < min_cost[e.to]) {
+          es.push_back(i);
+          vs.push_back(e.to);
+          advanced = true;
+          break;
+        }
+      }
+      if (!advanced) {
+        // 行き止まり。順方向の容量は以後増えないので、この phase では再訪不要
+        min_cost[v] = -1;
+        vs.pop_back();
+        if (!es.empty()) es.pop_back();
       }
     }
     return 0;

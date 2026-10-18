@@ -125,7 +125,7 @@
 
 CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャッジ / `run.sh` では落ちる。✅ 実測で `0xC00000FD` を確認:
 
-- **未修正** `Graph/flow.cpp:36-50`（Dinic `find`、パス 10^6 ノードで落ちる）
+- **修正済み**（PR #169・#171）`Graph/flow.cpp:36-70`（Dinic `find` を明示スタック `vs`/`es` に非再帰化。#171 で増加パス探索を `min_cost[v] + 1 == min_cost[e.to]` の層グラフに限定し、BFS も sink 発見で打ち切らず全 level を確定する教科書実装に標準化。n=300000 のパスで `0xC00000FD` が出ないことを確認）
 - **未修正** `Graph/SCC.cpp:15-26`
 - **未修正** `Graph/LowLink.cpp:16-36`
 - **未修正** `Graph/lca.cpp:10-16`（パス約 5万〜10万で落ちる）
@@ -179,7 +179,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **修正済み** `Geometry/lineInter.typ:4` / `ccInter.typ:3-4` — 平行・非交差の返り値が実装と一致。`inf` が真の無限大である旨も明記。
 - **一部修正** `Graph/hopcroftKarp.typ` — 「返り値が **2倍**（呼び出し側の `/2` 必須）」という記述は**誤り**で、実際はマッチングサイズそのもの（`#80`）。`hopcroftKarp.cpp:2` の usage コメントは PR #168 で修正済み。`.typ` 側の訂正と「右側の `btoa` が非対称になり得る点」の記載は未対応。
 - **未修正** `Graph/kruskal.typ:5` — `O(E log V)` は誤り（`O(E log E)`）。非連結時に全域**森**になる旨も未記載。
-- **未修正** `Graph/PushRelabel.typ` — 使用法（`rcap`、再入不可）が皆無。
+- **修正済み**（PR #169 でファイルごと削除）`Graph/PushRelabel.typ` — 使用法（`rcap`、再入不可）が皆無だった。最大流は `Graph/flow.cpp`（Dinic）に一本化。
 - **修正済み** `Graph/bellman-ford.typ` — ソース側のコンパイル不能が解消。
 - **未修正** `Graph/{lca,LowLink,topological,twosat,Centroid-Decomposition}.typ` — 見出し＋1行のみ。`twosat.typ` に誤字。
 - **未修正** `Graph/rerooting.typ` — `mint` 前提を書くが modint 依存が不明。
@@ -210,8 +210,9 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **未修正** `.cpp` ↔ `.typ` のベース名不一致が多数: `isinpolygon`↔`isinPolygon`、`LineDistance`↔`lineDistance`、`Bellman-Ford`↔`bellman-ford`、`Kruskal`↔`kruskal`、`SCC`↔`scc`、`Euler_phi`↔`euler_phi`、`BIT`↔`bit`、`BIT2d`↔`bit2d`、`RollingHash`↔`rollinghash`、`SparseTable`↔`sparsetable`、`UnionFind-rollback`↔`unionfind-rollback`、`binomial_coefficients.typ`↔`binomial-coefficients.cpp`。
 - **未修正** 関数名の不一致 / タイポ: `circleTangents.cpp`→`circTangents`、`trincircle.cpp`→`trinCircle`、`ZAlgorithm.cpp`→`Zalgo`、`Structure/LiChaoTree.cpp`→`LCTree`。
 - **未修正** セグメント木系の命名が 6 通り（`SegTree` / `LazySeg` / `DualSeg` / `DynamicSeg` / `DynamicLazySeg` / `DynamicDualSeg`）。
-- **一部修正** **verify に include されていないライブラリ `.cpp` が 11 件**（旧 27 → 20 → PR #168 で 11）: `io.cpp` / `dump.cpp` / `Graph/{PushRelabel,Centroid-Decomposition}.cpp` / `Geometry/{LineDistance,Point3D,halfPlaneInter,isinConvexPolygon}.cpp` / `Math/{garner,binomial-coefficients}.cpp` / `Structure/BIT2d.cpp`。
+- **一部修正** **verify に include されていないライブラリ `.cpp` が 10 件**（旧 27 → 20 → PR #168 で 11 → PR #169 で 10）: `io.cpp` / `dump.cpp` / `Graph/Centroid-Decomposition.cpp` / `Geometry/{LineDistance,Point3D,halfPlaneInter,isinConvexPolygon}.cpp` / `Math/{garner,binomial-coefficients}.cpp` / `Structure/BIT2d.cpp`。
   - 旧リストの `Geometry/{circleTangents,clInter,ccInter,commonTangents,isconvex,Polygon_cut,CircCircInter,CircPolyInter,trincircle}.cpp` は AOJ verify 追加などで解消。
+  - PR #169 で `Graph/PushRelabel.cpp` を削除（`PushRelabel.typ` も削除。未検証・`.typ` に使用法なしのため最大流は Dinic に一本化）。
   - PR #168（AOJ verify 42 問）で `LIS.cpp`、`Graph/{Bellman-Ford,flow,LowLink,topological}.cpp`、`Math/{extgcd,Euler_phi}.cpp`、`Strings/KMP.cpp`、`Structure/RollingHash.cpp` の 9 件が解消。あわせて `Graph/{Kruskal,SCC,rerooting,hopcroftKarp,mincostflow}.cpp`、`Math/{modint,MillerRabin,FastFactorize,BigInt}.cpp`、`Structure/{unionfind,weightedunionfind,segtree,BIT,kd-tree,dualsegtree,lazysegtree,swag}.cpp` も AOJ verify から include されるようになった。
   - 残る `Geometry/{halfPlaneInter,isinConvexPolygon}.cpp` は #161 追加分で verify 未整備のまま。§1〜§3 のバグが生き延びた原因。
 
@@ -219,7 +220,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 
 前版 `LIBRARY_ISSUES.md` の一部は過大な断定でした。今回の検証で**バグではない**と確認したもの:
 
-- **PushRelabel の最大流が壊れている（前版 #21）** — 誤り。`H[u]=1e9` 番兵は必ず上書きされ範囲外にならない。Edmonds–Karp / Dinic と 20 万ケース以上一致（`_GLIBCXX_DEBUG` でも OOB 無し）。
+- **PushRelabel の最大流が壊れている（前版 #21）** — 誤り。`H[u]=1e9` 番兵は必ず上書きされ範囲外にならない。Edmonds–Karp / Dinic と 20 万ケース以上一致（`_GLIBCXX_DEBUG` でも OOB 無し）。※当該ファイルは PR #169 で削除（未検証・`.typ` に使用法なし）。
 - **mincostflow のダングリングポインタ（前版 #83,#86）** — 通常使用では再確保されず問題なし。
 - **`maxMatching.cpp` の `gr[-1]`（前版 #20）** — 到達不能。20 万ケースで非再現。
 - **`kd-tree.cpp:10` の `sum=e`（前版 #17）** — メンバ初期化順序的に問題なし（`e` は先に初期化済み）。
@@ -232,7 +233,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 
 ## 11. 優先度付き修正リスト
 
-> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。fps 関連は main `53bc47c`（#163・#164 マージ後）で追記更新。AOJ verify 追加（PR #168）の知見は [§13](#13-aoj-verify-追加で判明した事項pr-168--issue-166) を参照。
+> 本更新（main `eec8998` 再照合）を反映。解消済みの項目は「完了」へ移動した。fps 関連は main `53bc47c`（#163・#164 マージ後）で追記更新。AOJ verify 追加（PR #168）の知見は [§13](#13-aoj-verify-追加で判明した事項pr-168--issue-166) を参照。PR #169（Dinic 非再帰化 / PushRelabel 削除）と PR #171（Dinic 層グラフ標準化）は main `691212a` 以降に追記。
 
 ### 完了（本更新で確認）
 
@@ -246,6 +247,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 - **（fps リファクタ / 性能改善 #163・#164 で追加解消）** `operator()` の非還元（#42）、NTT 長 2 倍（§5）、`integral` の `O(n log mod)`（#2 / §5）、`T rev`・`sz` の隠蔽（§5）、`fps.typ` の散文ゼロ（§7）。
 - ドキュメント: `projection` / `LineDistance` / `lineInter` / `ccInter` / `bellman-ford`（§7）。
 - **（PR #168 で追加解消）** AOJ verify 42 問の追加で `LIS.cpp`・`Graph/{Bellman-Ford,flow,LowLink,topological}.cpp`・`Math/{extgcd,Euler_phi}.cpp`・`Strings/KMP.cpp`・`Structure/RollingHash.cpp` の 9 件がカバーされ、未カバーは 11 件に（§9）。`Graph/hopcroftKarp.cpp:2` の usage コメントの誤り（`/ 2`）を修正（#80）。
+- **（PR #169・#171 で追加解消）** `Graph/flow.cpp` の増加パス探索を非再帰化（§4・#169）し、層グラフ制限＋全 BFS に標準化（#139 item 4・#171）。未検証だった `Graph/PushRelabel.cpp` / `PushRelabel.typ` を削除して最大流は Dinic に一本化（§9 の未カバーは 10 件に）。
 
 ### 最優先（コンパイル不能 + メモリ安全）
 
@@ -274,12 +276,12 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 
 ### 中（設計 / インフラ）
 
-20. 再帰の深い実装を非再帰化（§4）。
+20. 再帰の深い実装を非再帰化（§4。`Graph/flow.cpp` は PR #169 で完了。`Graph/{SCC,LowLink,lca,Centroid-Decomposition,rerooting}.cpp` 等は未着手）。
 21. `#define` 依存（`op`/`merge`/`apply`/`id`/`e`/`get`/`P`/`T`）の撤廃と namespace 隔離（§6）。
 22. `scripts/expander.py` の循環対策と重複排除（§8）。
 23. ルート `.gitignore` 追加と `.pyc` の untrack（§8）。
 24. `format.sh` の堅牢化 + CI への format チェック追加（§8）。
-25. verify 未カバー 11 件の解消（§9）。
+25. verify 未カバー 10 件の解消（§9）。
 26. `io.cpp` / `dump.cpp` / `LIS.cpp` の削除、または正式に documentation・テスト対象へ追加（§5。`LIS.cpp` は PR #168 の AOJ `DPL_1_D` でカバー済み）。
 27. ドキュメント未整備分（§7）の是正。
 28. CI の `aoj-verify` ジョブに `ulimit -s unlimited` を追加（#78）。
@@ -336,6 +338,7 @@ CI が `ulimit -s unlimited` を付けるため露見しにくいが、実ジャ
 | Floyd–Warshall（全点対最短路） | `GRL_1_C` は現状 全始点 Bellman-Ford で代用（#79） | 未追加 |
 | 木の直径 | `GRL_5_A` の verify 不可。`rerooting` の応用で実装可 | 未追加 |
 | 平面走査（線分交差 / 長方形和） | `CGL_6_A` / `DSL_4_A` 等。幾何とデータ構造の橋渡し | 未追加 |
+| 密・大容量で高速な最大流（PushRelabel 等） | 密グラフでは Dinic より速いが、疎な単位容量二部では 15〜90 倍遅く、verify も `.typ` 使用法も無い | PR #169 で削除済み（最大流は Dinic 一本化） |
 
 ---
 
@@ -371,3 +374,4 @@ main `aee6653` 時点。AOJ の問題 42 問を verify として追加する作�
 - 再帰の深さは大きなパス / 閉路入力でスタック枯渇を実測。
 - 本版の状態列は、main `eec8998` の作業ツリーに対して各項目を再検証して付与（検証スクリプトは `Geometry` 追加作業時のローカル環境を再利用）。fps 関連は main `53bc47c` で再検証（yosupo verify 8 問全ケース通過＋ランダム総当たり）。
 - §13 は AOJ verify 42 問（PR #168）の追加作業で判明した事項。`oj download --system` で取得した AOJ の実システムテストに対し、`g++ -std=c++20 -O2`（ローカル Windows では判定環境に合わせ 8MiB スタック）でビルドし、`oj test -c ./a.out -d <tc> -t 10 --error 1e-6`（CI と同条件）で判定。追加 42 + 既存 CGL 23 の計 65 ファイルすべて通過、CI も全ジョブ success。
+- PR #169・#171（`Graph/flow.cpp`）の検証: 素朴最小カット（全 $2^n$ カット列挙）と 20000 ケース、旧・再帰版／非再帰版 Dinic と 3000 ケースを照合し不一致 0（`min_cut` の値・`-D_GLIBCXX_DEBUG` の OOB 無しも確認）。深いパス $n=300000$ で $10^9$ を実測。AOJ `GRL_6_A` 40 / `GRL_6_B` 32 ケース PASS。速度は密 $n=2000$ で 405→461 ms、疎単位容量二部 100k で 186→222 ms（BFS 全探索分の小幅増、判定時間内）。

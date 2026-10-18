@@ -7,6 +7,7 @@
 #include "directed-mst.typ"
 #include "lca.typ"
 #include "rerooting.typ"
+#include "tree-diameter.typ"
 #include "scc.typ"
 #include "topological.typ"
 #include "twosat.typ"

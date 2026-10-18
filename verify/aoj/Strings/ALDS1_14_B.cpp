@@ -1,14 +1,12 @@
 //@aoj ALDS1_14_B
 
 #include "../../../template.cpp"
-#include "../../../Structure/RollingHash.cpp"
+#include "../../../Strings/KMP.cpp"
 
 int main() {
-  string s, p;
-  cin >> s >> p;
-  RollingHash rs(s), rp(p);
-  ll m = p.size();
-  for (ll i = 0; i + m <= (ll)s.size(); i++) {
-    if (rs.get(i, i + m) == rp.get(0, m)) cout << i << "\n";
-  }
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  string t, p;
+  cin >> t >> p;
+  for (ll idx : match(t, p)) cout << idx << '\n';
 }

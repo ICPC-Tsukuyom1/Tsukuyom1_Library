@@ -21,34 +21,16 @@ int main() {
     else in >> ops[i][1] >> ops[i][2] >> ops[i][3] >> ops[i][4];
   }
 
-  map<ll, int> ix, iy;
-  rep(i, n) { ix[pts[i][0]]; iy[pts[i][1]]; }
-  rep(i, q) {
-    if (ops[i][0] == 0) { ix[ops[i][1]]; iy[ops[i][2]]; }
-    else { ix[ops[i][1]]; ix[ops[i][3]]; iy[ops[i][2]]; iy[ops[i][4]]; }
-  }
-  int nx = 0, ny = 0;
-  for (auto &[k, v] : ix) v = nx++;
-  for (auto &[k, v] : iy) v = ny++;
+  // 加算する点を元の座標値で集めて渡す (座圧は内部で行われる).
+  vec<pll> points(n);
+  rep(i, n) points[i] = {pts[i][0], pts[i][1]};
+  rep(i, q) if (ops[i][0] == 0) points.push_back({ops[i][1], ops[i][2]});
 
-  BIT2dSparse<ll> b(nx);
+  BIT2dSparse<ll> b(points);
 
-  // 事前登録: 点更新の座標と、矩形和に使う prefix 境界
-  rep(i, n) b.request(ix[pts[i][0]], iy[pts[i][1]]);
+  rep(i, n) b.add(pts[i][0], pts[i][1], pts[i][2]);
   rep(i, q) {
-    if (ops[i][0] == 0) b.request(ix[ops[i][1]], iy[ops[i][2]]);
-    else {
-      b.request_prefix(ix[ops[i][3]], iy[ops[i][4]]);
-      b.request_prefix(ix[ops[i][3]], iy[ops[i][2]]);
-      b.request_prefix(ix[ops[i][1]], iy[ops[i][4]]);
-      b.request_prefix(ix[ops[i][1]], iy[ops[i][2]]);
-    }
-  }
-  b.build();
-
-  rep(i, n) b.add(ix[pts[i][0]], iy[pts[i][1]], pts[i][2]);
-  rep(i, q) {
-    if (ops[i][0] == 0) b.add(ix[ops[i][1]], iy[ops[i][2]], ops[i][3]);
-    else out << b.sum(ix[ops[i][1]], ix[ops[i][3]], iy[ops[i][2]], iy[ops[i][4]]) << '\n';
+    if (ops[i][0] == 0) b.add(ops[i][1], ops[i][2], ops[i][3]);
+    else out << b.sum(ops[i][1], ops[i][3], ops[i][2], ops[i][4]) << '\n';
   }
 }
